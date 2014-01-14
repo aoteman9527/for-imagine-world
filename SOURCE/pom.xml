@@ -55,7 +55,8 @@
 	</build>
 	
 	<modules>
-		<module>webview</module>
+		<module>web</module>
+		<module>dao</module>
 	</modules>	
 	<repositories>
 		<repository>
