@@ -29,12 +29,6 @@
 	</repositories>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.entertainment.musicpage</groupId>
-			<artifactId>musicpage-commons</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-
 		<!-- ORACLE JDBC driver, need install yourself -->
 
 
