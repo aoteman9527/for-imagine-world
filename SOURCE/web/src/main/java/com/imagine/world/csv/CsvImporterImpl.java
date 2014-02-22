@@ -2,12 +2,17 @@ package com.imagine.world.csv;
 
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
+import com.imagine.world.dao.ProductDAO;
+import com.imagine.world.dao.impl.ProductDAOImpl;
+import com.imagine.world.mapper.ProductMapper;
+import com.imagine.world.models.Product;
 import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,13 +39,13 @@ public class CsvImporterImpl extends CsvImporter{
         String[] rowCsv = null;
         try {
             while((rowCsv = csvParser.readNext())!=null){
-                //TODO : call add to database
                 System.out.println(Arrays.toString(rowCsv));
+                this.importDatabase(rowCsv);
             }
         } catch (IOException e) {
             LOGGER.error("Reading each line of csv file previous row ".concat(Arrays.toString(rowCsv)));
         }
-
+    //TODO : run unit test :D
     }
 
     /**
@@ -48,8 +53,21 @@ public class CsvImporterImpl extends CsvImporter{
      * @param record is each product need to be imported
      */
     private void importDatabase(String[] record){
-        
+        ProductDAO productDAO = new ProductDAOImpl();
+        Product convertedProduct = ProductMapper.convertProductCsvToDao(record);
+        List<Product> foundProducts = productDAO.getProductByProductCode(convertedProduct.getProductCode());
+        int lastUpdateTime = new Long(System.currentTimeMillis()/1000).intValue();
+        convertedProduct.setLastUpdateDate(new Date(lastUpdateTime));
+
+        if(foundProducts.size()>0){
+            convertedProduct.setIdProduct(foundProducts.get(0).getIdProduct());
+            productDAO.update(convertedProduct);
+        }else{
+            productDAO.save(convertedProduct);
+
+        }
     }
+
 
 
 
