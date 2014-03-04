@@ -18,7 +18,7 @@ public class ProductMapper {
         output.setDescription(rowCsv[Elements.ROW_DESCRIPTION]);
         //output.setIdProduct();// -skip
         //output.setLastUpdateDate();//-skip
-        return null;
+        return output;
     }
 
 }

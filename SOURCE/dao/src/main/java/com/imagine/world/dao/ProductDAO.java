@@ -179,8 +179,14 @@
  * @See Product
  */
 	public List<Product> getProductByLastUpdateDate(Date lastUpdateDate, int startPosition, int maxResult);
- 
- 
+
+     /**
+      *
+      * @param productCode of course it is productCode
+      *
+      * @return
+      */
+    public int deleteByProductCode(String productCode);
  
  
  }

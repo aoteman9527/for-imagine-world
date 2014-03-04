@@ -33,17 +33,22 @@ public class CsvImporterImpl extends CsvImporter{
             reader = new FileReader(pathToCsvFile);
         } catch (FileNotFoundException e) {
             LOGGER.error("Reading file csv path ".concat(pathToCsvFile));
+            return ;
         }
 
         CSVReader<String[]> csvParser = CSVReaderBuilder.newDefaultReader(reader);
         String[] rowCsv = null;
+        Integer firstIndex = 0;
         try {
             while((rowCsv = csvParser.readNext())!=null){
-                System.out.println(Arrays.toString(rowCsv));
-                this.importDatabase(rowCsv);
+//                System.out.println(Arrays.toString(rowCsv));
+
+                LOGGER.info("import this row ".concat(Arrays.toString(rowCsv)));
+                this.importDatabase(rowCsv[firstIndex].split(","));
             }
         } catch (IOException e) {
             LOGGER.error("Reading each line of csv file previous row ".concat(Arrays.toString(rowCsv)));
+            return;
         }
     //TODO : run unit test :D
     }
@@ -57,9 +62,9 @@ public class CsvImporterImpl extends CsvImporter{
         Product convertedProduct = ProductMapper.convertProductCsvToDao(record);
         List<Product> foundProducts = productDAO.getProductByProductCode(convertedProduct.getProductCode());
         int lastUpdateTime = new Long(System.currentTimeMillis()/1000).intValue();
-        convertedProduct.setLastUpdateDate(new Date(lastUpdateTime));
+        convertedProduct.setLastUpdateDate(lastUpdateTime);
 
-        if(foundProducts.size()>0){
+        if(foundProducts!=null && foundProducts.size()>0){
             convertedProduct.setIdProduct(foundProducts.get(0).getIdProduct());
             productDAO.update(convertedProduct);
         }else{

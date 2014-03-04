@@ -1,9 +1,6 @@
 package com.imagine.world.models;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -18,11 +15,12 @@ public class Product {
     private String price;
     private String productCode;
     private Integer productAmount;
-    private Date lastUpdateDate;
+    private Integer lastUpdateDate;
     private List<ProductTag> tags;
 
     @Id
     @Column(name = "id_product", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getIdProduct() {
         return idProduct;
     }
@@ -83,11 +81,11 @@ public class Product {
 
     @Basic
     @Column(name = "last_update_date", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    public Date getLastUpdateDate() {
+    public Integer getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Date lastUpdateDate) {
+    public void setLastUpdateDate(Integer lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
 

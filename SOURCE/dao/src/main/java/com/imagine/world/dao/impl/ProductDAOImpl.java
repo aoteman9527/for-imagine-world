@@ -64,8 +64,9 @@
  * @See Product
  */
 	public void update(Product arg0){
-
+        getDAOManager().beginTransaction();
 		getDAOManager().merge(arg0);
+        getDAOManager().getTransaction().commit();
 
 	}
  
@@ -76,8 +77,9 @@
  * @See Product
  */
 	public void delete(Product arg0){
-
+        getDAOManager().beginTransaction();
 		getDAOManager().delete(arg0);
+        getDAOManager().getTransaction().commit();
 
 	}
  
@@ -89,9 +91,9 @@
  */
 	public List<Product> getProductByIdProduct(Integer idProduct){
 
-		Query query = getDAOManager().createQuery(" select t from Product t where t.idProduct = ?1 ");
+		Query query = getDAOManager().createQuery(" select t from Product t where t.idProduct = :idProduct ");
 
-		query.setParameter(1, idProduct);
+		query.setParameter("idProduct", idProduct);
 
 
 		List<Product> results = query.list();
@@ -293,9 +295,9 @@
  */
 	public List<Product> getProductByProductCode(String productCode){
 
-		Query query = getDAOManager().createQuery(" select t from Product t where t.productCode = ?1 ");
+		Query query = getDAOManager().createQuery(" select t from Product t where t.productCode = :productCode ");
 
-		query.setParameter(1, productCode);
+		query.setParameter("productCode", productCode);
 
 
 		List<Product> results = query.list();
@@ -437,8 +439,21 @@
 
 		return null;
 	}
- 
- 
- 
- 
+
+     @Override
+     public int deleteByProductCode(String productCode) {
+         getDAOManager().beginTransaction();
+
+         Query query = getDAOManager().createQuery(" delete from Product t where t.productCode  = :productCode ");
+
+         query.setParameter("productCode", productCode);
+
+
+         int results = query.executeUpdate();
+         getDAOManager().getTransaction().commit();
+
+         return results;
+     }
+
+
  }

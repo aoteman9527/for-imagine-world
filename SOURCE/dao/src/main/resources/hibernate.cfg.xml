@@ -20,6 +20,10 @@
         <property name="show_sql">true</property>
         <!--<property name="hbm2ddl.auto">update</property>-->
 
+        <!--Use auto commit mode, it will not need begin and commit transaction-->
+        <!--<property name="connection.autocommit">true</property>-->
+
+
         <mapping class="com.imagine.world.models.Product"/>
         <mapping class="com.imagine.world.models.ProductTag"/>
         <mapping class="com.imagine.world.models.Tag"/>

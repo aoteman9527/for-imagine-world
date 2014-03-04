@@ -17,7 +17,7 @@ public class DatabaseConnectionTest extends TestCase{
     public Product generateFakeProduct(){
         Product product = new Product();
         product.setDescription("DDDDD");
-        product.setLastUpdateDate(new Date(System.currentTimeMillis()));
+        product.setLastUpdateDate(new Long(System.currentTimeMillis()/1000).intValue());
         product.setName("NAME");
         product.setPrice("1234567");
         product.setProductAmount(1000);
