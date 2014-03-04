@@ -40,11 +40,11 @@ public class CsvImporterImplTest extends TestCase{
         Product product = null;
         while((rowCsv = csvParser.readNext())!=null){
 //                System.out.println(Arrays.toString(rowCsv));
-            rowCsv = rowCsv[0].split(","); // get firstRow of rowCsv then split it by comma to get data
+            rowCsv = rowCsv[firstIndex].split(","); // get firstRow of rowCsv then split it by comma to get data
             product = productDAO.getProductByProductCode(rowCsv[Elements.ROW_PRODUCT_CODE]).get(0);
             assertEquals(new Integer(lastUpdateDate-10000)<product.getLastUpdateDate(),true);
             count = productDAO.deleteByProductCode(rowCsv[Elements.ROW_PRODUCT_CODE]);
-
+            assertTrue(count>0);
         }
     }
 }
