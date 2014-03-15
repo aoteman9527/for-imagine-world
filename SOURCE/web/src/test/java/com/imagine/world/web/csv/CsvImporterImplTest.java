@@ -28,7 +28,7 @@ public class CsvImporterImplTest extends TestCase{
      * 2.run process() , check the database is data imported ?
      */
     public void testIntegrationImportToDB() throws IOException {
-        String pathToCsvFile =  ClassLoader.getSystemResource("template.csv").getPath();
+        String pathToCsvFile =  ClassLoader.getSystemResource("templates/csv/template.csv").getPath();
 
         CsvImporter importer = new CsvImporterImpl();
         importer.process(pathToCsvFile);

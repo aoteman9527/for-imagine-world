@@ -16,6 +16,7 @@ public class ProductMapper {
         output.setProductCode(rowCsv[Elements.ROW_PRODUCT_CODE]);
         output.setName(rowCsv[Elements.ROW_NAME]);
         output.setDescription(rowCsv[Elements.ROW_DESCRIPTION]);
+        output.setImageUrl(rowCsv[Elements.ROW_IMAGE_URL]);
         //output.setIdProduct();// -skip
         //output.setLastUpdateDate();//-skip
         return output;

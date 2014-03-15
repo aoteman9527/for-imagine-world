@@ -17,6 +17,7 @@ public class Product {
     private Integer productAmount;
     private Integer lastUpdateDate;
     private List<ProductTag> tags;
+    private String imageUrl;
 
     @Id
     @Column(name = "id_product", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
@@ -128,5 +129,15 @@ public class Product {
 
     public void setTags(List<ProductTag> tags) {
         this.tags = tags;
+    }
+
+    @Basic
+    @Column(name = "image_url", nullable = true, insertable = true, updatable = true, length = 65535, precision = 0, columnDefinition= "TEXT")
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -37,6 +37,7 @@ public class CsvImporterImpl extends CsvImporter{
         }
 
         CSVReader<String[]> csvParser = CSVReaderBuilder.newDefaultReader(reader);
+
         String[] rowCsv = null;
         Integer firstIndex = 0;
         try {
@@ -46,6 +47,7 @@ public class CsvImporterImpl extends CsvImporter{
                 LOGGER.info("import this row ".concat(Arrays.toString(rowCsv)));
                 this.importDatabase(rowCsv[firstIndex].split(","));
             }
+            csvParser.close();
         } catch (IOException e) {
             LOGGER.error("Reading each line of csv file previous row ".concat(Arrays.toString(rowCsv)));
             return;
