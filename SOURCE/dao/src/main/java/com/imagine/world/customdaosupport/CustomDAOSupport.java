@@ -29,6 +29,7 @@ public abstract class CustomDAOSupport implements Serializable {
         if(daoManager == null){
             daoManager = sessFac.openSession();
         }
+
         return daoManager;
     }
 }

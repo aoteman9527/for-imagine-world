@@ -31,7 +31,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 45, precision = 0)
+    @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 150, precision = 0)
     public String getName() {
         return name;
     }

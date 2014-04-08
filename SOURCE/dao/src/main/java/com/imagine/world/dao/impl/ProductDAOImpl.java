@@ -12,7 +12,9 @@
  import com.imagine.world.dao.ProductDAO;
  import com.imagine.world.models.Product;
  import org.hibernate.FlushMode;
+ import org.hibernate.HibernateException;
  import org.hibernate.Query;
+ import org.springframework.stereotype.Repository;
 
  import java.io.Serializable;
  import java.util.Date;
@@ -23,8 +25,8 @@
  *DAO class of PRODUCT table.
  *Generated on Wed Feb 05 18:09:02 ICT 2014
  ***************************************************/
- 
- 
+
+ @Repository
  public class ProductDAOImpl extends CustomDAOSupport implements Serializable, ProductDAO {
  
  /**
@@ -52,9 +54,14 @@
  * @See Product
  */
 	public void save(Product arg0){
-        getDAOManager().beginTransaction();
-		getDAOManager().persist(arg0);
-        getDAOManager().getTransaction().commit();
+        try {
+            getDAOManager().beginTransaction();
+            getDAOManager().persist(arg0);
+            getDAOManager().getTransaction().commit();
+        } catch (HibernateException e){
+            getDAOManager().getTransaction().rollback();
+            getDAOManager().flush();
+        }
 	}
  
  /**
@@ -64,9 +71,14 @@
  * @See Product
  */
 	public void update(Product arg0){
-        getDAOManager().beginTransaction();
-		getDAOManager().merge(arg0);
-        getDAOManager().getTransaction().commit();
+        try {
+            getDAOManager().beginTransaction();
+            getDAOManager().merge(arg0);
+            getDAOManager().getTransaction().commit();
+        } catch (HibernateException e){
+            getDAOManager().getTransaction().rollback();
+        }
+
 
 	}
  

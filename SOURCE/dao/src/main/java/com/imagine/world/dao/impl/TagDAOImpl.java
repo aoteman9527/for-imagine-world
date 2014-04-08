@@ -12,6 +12,7 @@
  import com.imagine.world.dao.TagDAO;
  import com.imagine.world.models.Tag;
  import org.hibernate.Query;
+ import org.springframework.stereotype.Repository;
 
  import java.io.Serializable;
  import java.util.List;
@@ -21,8 +22,8 @@
  *DAO class of TAG table.
  *Generated on Wed Feb 05 18:09:02 ICT 2014
  ***************************************************/
- 
- 
+
+ @Repository
  public class TagDAOImpl extends CustomDAOSupport implements Serializable, TagDAO {
  
  /**

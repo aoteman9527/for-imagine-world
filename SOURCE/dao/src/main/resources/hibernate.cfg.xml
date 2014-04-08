@@ -5,7 +5,7 @@
     <session-factory name="imageine_world">
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/imagine_world</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/imagine_world?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
         <!-- JDBC connection pool (use the built-in) -->

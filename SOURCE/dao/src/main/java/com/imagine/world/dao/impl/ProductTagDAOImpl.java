@@ -12,6 +12,7 @@
  import com.imagine.world.dao.ProductTagDAO;
  import com.imagine.world.models.ProductTag;
  import org.hibernate.Query;
+ import org.springframework.stereotype.Repository;
 
  import java.io.Serializable;
  import java.util.List;
@@ -21,8 +22,8 @@
  *DAO class of PRODUCT_TAG table.
  *Generated on Wed Feb 05 18:09:02 ICT 2014
  ***************************************************/
- 
- 
+
+ @Repository
  public class ProductTagDAOImpl extends CustomDAOSupport implements Serializable, ProductTagDAO {
  
  /**
