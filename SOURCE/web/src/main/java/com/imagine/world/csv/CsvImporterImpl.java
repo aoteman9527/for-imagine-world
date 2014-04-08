@@ -2,6 +2,7 @@ package com.imagine.world.csv;
 
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
+import com.imagine.world.customdaosupport.CustomDAOSupport;
 import com.imagine.world.dao.ProductDAO;
 import com.imagine.world.dao.impl.ProductDAOImpl;
 import com.imagine.world.mapper.ProductMapper;
@@ -45,7 +46,7 @@ public class CsvImporterImpl extends CsvImporter{
 //                System.out.println(Arrays.toString(rowCsv));
 
                 LOGGER.info("import this row ".concat(Arrays.toString(rowCsv)));
-                this.importDatabase(rowCsv[firstIndex].split(","));
+                this.importDatabase(rowCsv[firstIndex].split("\t"));
             }
             csvParser.close();
         } catch (IOException e) {
