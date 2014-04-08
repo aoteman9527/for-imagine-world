@@ -1,4 +1,4 @@
-package com.hello;
+package com.imagine.world.service;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
