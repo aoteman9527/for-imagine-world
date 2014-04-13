@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.2 - Licence Number VBFRD8D65H
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2013 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2013 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -519,7 +519,7 @@ class vB_BbCodeParser_Wysiwyg extends vB_BbCodeParser
 		}
 
 		// need to display smilies in code/php/html tags as literals
-		$text = preg_replace('#\[(code|php|html)\](.*)\[/\\1\]#siUe', "\$this->strip_smilies(str_replace('\\\"', '\"', '\\0'), true)", $text);
+		$text = preg_replace_callback('#\[(code|php|html)\](.*)\[/\\1\]#siUe', "\$this->strip_smilies(str_replace('\\\"', '\"', '\\0'), true)", $text);
 
 		return $text;
 	}
@@ -589,9 +589,9 @@ class vB_BbCodeParser_Wysiwyg extends vB_BbCodeParser
 		{
 			$styleattr[] = "text-align: {$align}";
 		}
-		
+
 		$style = ' style="' . implode("; ", $styleattr) . '"';
-			
+
 		if ($style)
 		{
 			return "<li{$style}>$output</li>\n";
@@ -600,9 +600,9 @@ class vB_BbCodeParser_Wysiwyg extends vB_BbCodeParser
 		{
 			return "<li>$output</li>\n";
 		}
-	}	
-	
-	
+	}
+
+
 	/**
 	* Returns whether this parser is a WYSIWYG parser if no type is specified.
 	* If a type is specified, it checks whether our type matches
@@ -990,8 +990,8 @@ class vB_BbCodeParser_PlainText extends vB_BbCodeParser
 
 		if (strpos($forum_path_full, '://') === false)
 		{
-			$forum_path_full =  rtrim($registry->options['bburl'], '/') . '/' . $forum_path_full; 
-		}	
+			$forum_path_full =  rtrim($registry->options['bburl'], '/') . '/' . $forum_path_full;
+		}
 
 		// add thread and post tags as parsed -- this can't be done above
 		// because I need to use a variable in $registry

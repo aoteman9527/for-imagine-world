@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.2 - Licence Number VBFRD8D65H
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2013 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2013 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -298,7 +298,7 @@ class vB_WysiwygHtmlParser
 	*/
 	protected function filter_html_tags($text)
 	{
-		$text =  preg_replace(array(
+		$text =  preg_replace_callback(array(
 				'#<pre(.*)>(.*)</pre>#esiU',
 				'#<a href="([^"]*)\[([^"]+)"(.*)>(.*)\[\\2</a>#siU', // check for the WYSIWYG editor being lame with URL tags followed by bbcode tags
 				'#(<[^<>]+ (src|href))=(\'|"|)??(.*)(\\3)#esiU'  // make < and > safe in inside URL/IMG tags so they don't get stripped by strip_tags
@@ -370,10 +370,10 @@ class vB_WysiwygHtmlParser
 		// deal with newline characters
 		if (is_browser('mozilla'))
 		{
-			$text = preg_replace('#(?<!<br>|<br />|\r)(\r\n|\n|\r)#', ' ', $text);
+			$text = preg_replace_callback('#(?<!<br>|<br />|\r)(\r\n|\n|\r)#', ' ', $text);
 		}
 
-		$text = preg_replace('#(\r\n|\n|\r)#', '', $text);
+		$text = preg_replace_callback('#(\r\n|\n|\r)#', '', $text);
 
 		return $text;
 	}
@@ -399,7 +399,7 @@ class vB_WysiwygHtmlParser
 			"\$this->strip_html_from_bbcode('\\0')",								// strip html from php tags
 			'[URL=$1$2'											//`strip linked URLs from manually entered [url] tags (generic)
 		);
-		$text = preg_replace($pregfind, $pregreplace, $text);
+		$text = preg_replace_callback($pregfind, $pregreplace, $text);
 
 		return $text;
 	}
@@ -459,7 +459,7 @@ class vB_WysiwygHtmlParser
 			'[PRBREAK][/PRBREAK]',
 			'[HR][/HR]',
 		);
-		$text = preg_replace($pregfind, $pregreplace, $text);
+		$text = preg_replace_callback($pregfind, $pregreplace, $text);
 
 		return $text;
 	}
@@ -666,10 +666,10 @@ class vB_WysiwygHtmlParser
 			'',                                // kill empty <p> tags
 			"\n",                              // kill any extra <p> tags
 		);
-		$text = preg_replace($pregfind, $pregreplace, $text);
+		$text = preg_replace_callback($pregfind, $pregreplace, $text);
 
 		// simple tag removals; mainly using PCRE for case insensitivity and /?
-		$text = preg_replace('#</?(A|LI|FONT|IMG)>#siU', '', $text);
+		$text = preg_replace_callback('#</?(A|LI|FONT|IMG)>#siU', '', $text);
 
 		if (!$this->allow_html)
 		{
@@ -705,8 +705,8 @@ class vB_WysiwygHtmlParser
 	*/
 	protected function cleanup_disallowed_html($text)
 	{
-		$text = preg_replace('#<script[^>]*>(.*)</script>#siU', '', $text);
-		$text = preg_replace('#<style[^>]*>(.*)</style>#siU', '', $text);
+		$text = preg_replace_callback('#<script[^>]*>(.*)</script>#siU', '', $text);
+		$text = preg_replace_callback('#<style[^>]*>(.*)</style>#siU', '', $text);
 		$text = strip_tags($text);
 
 		return $text;
@@ -756,14 +756,14 @@ class vB_WysiwygHtmlParser
 		//if (is_browser('mozilla'))
 		//{
 		// mozilla treats line breaks before/after lists a little differently from IE (see #5774)
-			$text = preg_replace('#\[(list)#i', "\n[\\1", $text);
-			$text = preg_replace('#\[(/list)\]#i', "[\\1]\n", $text);
+			$text = preg_replace_callback('#\[(list)#i', "\n[\\1", $text);
+			$text = preg_replace_callback('#\[(/list)\]#i', "[\\1]\n", $text);
 		//}
 
-		$text = preg_replace('#(?<!\r|\n|^)\[(/list|list|\*)\]#i', "\n[\\1]", $text);
+		$text = preg_replace_callback('#(?<!\r|\n|^)\[(/list|list|\*)\]#i', "\n[\\1]", $text);
 
 		// replace advanced URL tags that should actually be basic ones
-		$text = preg_replace('#\[URL=("|\'|)(.*)\\1\]\\2\[/URL\]#siU', '[URL]$2[/URL]', $text);
+		$text = preg_replace_callback('#\[URL=("|\'|)(.*)\\1\]\\2\[/URL\]#siU', '[URL]$2[/URL]', $text);
 
 		return $text;
 	}
@@ -791,7 +791,7 @@ class vB_WysiwygHtmlParser
 		);
 
 		$style = $this->parse_wysiwyg_tag_attribute('style=', $tagoptions);
-		$style = preg_replace(
+		$style = preg_replace_callback(
 			'#(?<![a-z0-9-])color:\s*rgb\((\d+),\s*(\d+),\s*(\d+)\)(;?)#ie',
 			'sprintf("color: #%02X%02X%02X$4", $1, $2, $3)',
 			$style
@@ -1076,7 +1076,7 @@ class vB_WysiwygHtmlParser
 	protected function parse_tag_list($listoptions, $text, $tagname, $args)
 	{
 		$longtype = $this->parse_wysiwyg_tag_attribute('class=', $listoptions);
-		$listtype = trim(preg_replace('#"?LIST-STYLE-TYPE:\s*([a-z0-9_-]+);?"?#si', '\\1', $longtype));
+		$listtype = trim(preg_replace_callback('#"?LIST-STYLE-TYPE:\s*([a-z0-9_-]+);?"?#si', '\\1', $longtype));
 		if (empty($listtype) AND $tagname == 'ol')
 		{
 			$listtype = 'decimal';
@@ -1090,7 +1090,7 @@ class vB_WysiwygHtmlParser
 		}
 
 		$this->push_state('list');
-		$text = preg_replace('#<li([^>]*)>((?'.'>[^[<]+?|(?!</li).)*)(?=</?ol|</?ul|<li|\[list|\[/list)#siU', '<li\\1>\\2</li>', $text);
+		$text = preg_replace_callback('#<li([^>]*)>((?'.'>[^[<]+?|(?!</li).)*)(?=</?ol|</?ul|<li|\[list|\[/list)#siU', '<li\\1>\\2</li>', $text);
 		$text = $this->parse_tag_by_name('li', $text);
 
 		if (!$this->is_bbcode_tag_allowed('list'))
@@ -1272,7 +1272,7 @@ class vB_WysiwygHtmlParser
 				continue;
 			}
 
-			$class = preg_replace(
+			$class = preg_replace_callback(
 				array(
 					'#' . preg_quote($suffix, '#') . '$#',
 					'#^wysiwyg_cms_table_#'
@@ -1357,7 +1357,7 @@ class vB_WysiwygHtmlParser
 		$options = array();
 
 		$style = $this->parse_wysiwyg_tag_attribute('style=', $attributes);
-		$style = preg_replace(
+		$style = preg_replace_callback(
 			'#color:\s*rgb\((\d+),\s*(\d+),\s*(\d+)\)(;?)#ie',
 			'sprintf("color: #%02X%02X%02X$4", $1, $2, $3)',
 			$style
@@ -1420,7 +1420,7 @@ class vB_WysiwygHtmlParser
 		$options = array();
 
 		$style = $this->parse_wysiwyg_tag_attribute('style=', $attributes);
-		$style = preg_replace(
+		$style = preg_replace_callback(
 			'#color:\s*rgb\((\d+),\s*(\d+),\s*(\d+)\)(;?)#ie',
 			'sprintf("color: #%02X%02X%02X$4", $1, $2, $3)',
 			$style

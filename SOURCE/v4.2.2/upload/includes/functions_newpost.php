@@ -3,7 +3,7 @@
 || #################################################################### ||
 || # vBulletin 4.2.2 - Licence Number VBFRD8D65H
 || # ---------------------------------------------------------------- # ||
-|| # Copyright ©2000-2013 vBulletin Solutions Inc. All Rights Reserved. ||
+|| # Copyright ï¿½2000-2013 vBulletin Solutions Inc. All Rights Reserved. ||
 || # This file may not be redistributed in whole or significant part. # ||
 || # ---------------- VBULLETIN IS NOT FREE SOFTWARE ---------------- # ||
 || # http://www.vbulletin.com | http://www.vbulletin.com/license.html # ||
@@ -193,7 +193,7 @@ function convert_url_to_bbcode($messagetext)
 
 	($hook = vBulletinHook::fetch_hook('url_to_bbcode')) ? eval($hook) : false;
 
-	return preg_replace(
+	return preg_replace_callback(
 		'#(^|\[/(' . $skiptaglist . ')\])(.*(\[(' . $skiptaglist . ')\]|$))#siUe',
 		"convert_url_to_bbcode_callback('\\3', '\\1')",
 		$messagetext
@@ -244,10 +244,10 @@ function convert_url_to_bbcode_callback($messagetext, $prepend)
 		$emailReplaceArray[] = "[email]\\0[/email]";
 	}
 
-	$text = preg_replace($urlSearchArray, $urlReplaceArray, $messagetext);
+	$text = preg_replace_callback($urlSearchArray, $urlReplaceArray, $messagetext);
 	if (strpos($text, "@"))
 	{
-		$text = preg_replace($emailSearchArray, $emailReplaceArray, $text);
+		$text = preg_replace_callback($emailSearchArray, $emailReplaceArray, $text);
 	}
 
 	$text = convert_url_to_bbcode_parenreplace($text);
@@ -277,7 +277,7 @@ function convert_url_to_bbcode_parenreplace($text)
 	foreach ($matches as $match)
 	{
 		$paren_count = substr_count($match[1], '(');
-		$new_url = preg_replace('#\[url\]('.preg_quote($match[1]).')\[/url\]([\)]{'.$paren_count.'})#siU', "[url]\\1\\2[/url]", $match[0]);
+		$new_url = preg_replace_callback('#\[url\]('.preg_quote($match[1]).')\[/url\]([\)]{'.$paren_count.'})#siU', "[url]\\1\\2[/url]", $match[0]);
 		$text = str_replace($match[0], $new_url, $text);
 	}
 
@@ -1077,7 +1077,7 @@ function fetch_no_shouting_text($text)
 {
 	global $vbulletin;
 
-	$effective_string = preg_replace('#[^a-z0-9\s]#i', '\2', strip_bbcode($text, true, false));
+	$effective_string = preg_replace_callback('#[^a-z0-9\s]#i', '\2', strip_bbcode($text, true, false));
 
 	if ($vbulletin->options['stopshouting'] AND vbstrlen($effective_string) >= $vbulletin->options['stopshouting'] AND $effective_string == strtoupper($effective_string) AND !preg_match('#^[\x20-\x40\x5B-\x60\x7B-\x7E\s]+$#', $effective_string)/* string does not consist entirely of non-alpha ascii chars #32591 */)
 	{
