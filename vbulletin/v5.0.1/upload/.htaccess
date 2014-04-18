@@ -8,7 +8,7 @@
 	RewriteCond %{REQUEST_URI} !\.(gif|jpg|jpeg|png)$
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^(.*)$ index.php?routestring=$1 [L,QSA]
+	RewriteRule ^(.*)$ index.php?routestring=$1 [L,QSA] #example /forum/upload/index.php?routestring=forum/main-category/products
 
 	# Because admincp is an actual directory.
 	RewriteRule ^(admincp/)$ index.php?routestring=$1 [L,QSA]

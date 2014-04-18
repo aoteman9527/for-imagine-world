@@ -1,0 +1,37 @@
+Remote Address:127.0.0.1:80
+Request URL:http://localhost/forum/upload/auth/login
+Request Method:POST
+Status Code:200 OK
+Request Headersview source
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:vi,fr;q=0.8,en-US;q=0.6,en;q=0.4
+Cache-Control:max-age=0
+Connection:keep-alive
+Content-Length:180
+Content-Type:application/x-www-form-urlencoded
+Cookie:sessionhash=636903eaa599edfe3080551268681e7a; lastvisit=1397812278; lastactivity=1397812281; userstyleid=3
+DNT:1
+Host:localhost
+Origin:http://localhost
+Referer:http://localhost/forum/upload/auth/login-form?url=http%3A%2F%2Flocalhost%2Fforum%2Fupload%2F
+User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36
+Form Dataview sourceview URL encoded
+url:aHR0cDovL2xvY2FsaG9zdC9mb3J1bS91cGxvYWQv
+username:root
+password:
+vb_login_md5password:e10adc3949ba59abbe56e057f20f883e
+vb_login_md5password_utf:e10adc3949ba59abbe56e057f20f883e
+Response Headersview source
+Connection:keep-alive, Keep-Alive
+Content-Encoding:gzip
+Content-Length:782
+Content-Type:text/html
+Date:Fri, 18 Apr 2014 09:12:37 GMT
+Keep-Alive:timeout=5, max=100
+Server:Apache/2.4.9 (Unix) OpenSSL/1.0.1g PHP/5.4.27 mod_perl/2.0.8-dev Perl/v5.16.3
+Set-Cookie:lastactivity=1397812357; path=/; httponly
+Set-Cookie:sessionhash=cf3de94e00b361d40f9c548199177d59; path=/; httponly
+Vary:Accept-Encoding
+X-Powered-By:PHP/5.4.27
+X-UA-Compatible:IE=edge,chrome=1
