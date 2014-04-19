@@ -108,6 +108,13 @@
             <version>1.4.0</version>
         </dependency>
 
+        <!-- Apache, HTTP components for request post get to other server -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.0-alpha4</version>
+        </dependency>
+
     </dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>
