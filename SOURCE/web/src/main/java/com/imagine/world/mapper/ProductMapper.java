@@ -1,6 +1,6 @@
 package com.imagine.world.mapper;
 
-import com.imagine.world.common.Elements;
+import com.imagine.world.config.Elements;
 import com.imagine.world.models.Product;
 
 /**
