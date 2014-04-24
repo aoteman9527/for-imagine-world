@@ -2,7 +2,7 @@ package com.imagine.world.web.csv;
 
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
-import com.imagine.world.common.Elements;
+import com.imagine.world.config.Elements;
 import com.imagine.world.csv.CsvImporter;
 import com.imagine.world.csv.CsvImporterImpl;
 import com.imagine.world.dao.ProductDAO;
@@ -12,7 +12,6 @@ import junit.framework.TestCase;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created by letuan on 2/27/14.
