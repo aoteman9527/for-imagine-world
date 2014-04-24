@@ -112,9 +112,16 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.0-alpha4</version>
+            <version>4.3.3</version>
         </dependency>
 
+        <!-- http servlet-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>
@@ -142,7 +149,8 @@
 	<modules>
 		<module>web</module>
 		<module>dao</module>
-	</modules>	
+		<module>common</module>
+	</modules>
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>
