@@ -37,6 +37,6 @@
     <mvc:annotation-driven />
 
     <!--Bean for loading properties-->
-    <context:property-placeholder location="classpath:imagine-world-web.properties"></context:property-placeholder>
-    <context:property-placeholder location="classpath:imagine-world-web-vbb.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:imagine-world-web.properties" ignore-unresolvable="true"></context:property-placeholder>
+    <context:property-placeholder location="classpath:imagine-world-web-vbb.properties" ignore-unresolvable="true"></context:property-placeholder>
 </beans>

@@ -1,9 +1,9 @@
 package com.imagine.world;
 
+import com.imagine.world.config.PropertiesValue;
 import junit.framework.TestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * Created by letuan on 4/21/14.
