@@ -1,6 +1,6 @@
 package com.imagine.world.mapper;
 
-import com.imagine.world.config.Elements;
+import com.imagine.world.config.ElementsCsvImporter;
 import com.imagine.world.models.Product;
 
 /**
@@ -8,15 +8,14 @@ import com.imagine.world.models.Product;
  */
 public class ProductMapper {
 
-
     public static Product convertProductCsvToDao(String[] rowCsv){
         Product output = new Product();
-        output.setProductAmount(Integer.parseInt(rowCsv[Elements.ROW_PRODUCT_AMOUNT]));
-        output.setPrice(rowCsv[Elements.ROW_PRICE]);
-        output.setProductCode(rowCsv[Elements.ROW_PRODUCT_CODE]);
-        output.setName(rowCsv[Elements.ROW_NAME]);
-        output.setDescription(rowCsv[Elements.ROW_DESCRIPTION]);
-        output.setImageUrl(rowCsv[Elements.ROW_IMAGE_URL]);
+        output.setProductAmount(Integer.parseInt(rowCsv[ElementsCsvImporter.ROW_PRODUCT_AMOUNT.getValueInt()]));
+        output.setPrice(rowCsv[ElementsCsvImporter.ROW_PRICE.getValueInt()]);
+        output.setProductCode(rowCsv[ElementsCsvImporter.ROW_PRODUCT_CODE.getValueInt()]);
+        output.setName(rowCsv[ElementsCsvImporter.ROW_NAME.getValueInt()]);
+        output.setDescription(rowCsv[ElementsCsvImporter.ROW_DESCRIPTION.getValueInt()]);
+        output.setImageUrl(rowCsv[ElementsCsvImporter.ROW_IMAGE_URL.getValueInt()]);
         //output.setIdProduct();// -skip
         //output.setLastUpdateDate();//-skip
         return output;

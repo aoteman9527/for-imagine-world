@@ -2,7 +2,7 @@ package com.imagine.world.web.csv;
 
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
-import com.imagine.world.config.Elements;
+import com.imagine.world.config.ElementsCsvImporter;
 import com.imagine.world.csv.CsvImporter;
 import com.imagine.world.csv.CsvImporterImpl;
 import com.imagine.world.dao.ProductDAO;
@@ -40,9 +40,9 @@ public class CsvImporterImplTest extends TestCase{
         while((rowCsv = csvParser.readNext())!=null){
 //                System.out.println(Arrays.toString(rowCsv));
             rowCsv = rowCsv[firstIndex].split(","); // get firstRow of rowCsv then split it by comma to get data
-            product = productDAO.getProductByProductCode(rowCsv[Elements.ROW_PRODUCT_CODE]).get(0);
+            product = productDAO.getProductByProductCode(rowCsv[ElementsCsvImporter.ROW_PRODUCT_CODE.getValueInt()]).get(0);
             assertEquals(new Integer(lastUpdateDate-10000)<product.getLastUpdateDate(),true);
-            count = productDAO.deleteByProductCode(rowCsv[Elements.ROW_PRODUCT_CODE]);
+            count = productDAO.deleteByProductCode(rowCsv[ElementsCsvImporter.ROW_PRODUCT_CODE.getValueInt()]);
             assertTrue(count>0);
         }
     }
