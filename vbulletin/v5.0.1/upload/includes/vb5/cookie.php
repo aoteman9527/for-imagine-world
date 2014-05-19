@@ -82,6 +82,7 @@ class vB5_Cookie
 		$prefix_length = strlen(self::$cookiePrefix);
 		foreach ($_COOKIE AS $key => $val)
 		{
+            print_r( $key.self::$cookiePrefix);
 			$index = strpos($key, self::$cookiePrefix);
 			if ($index == 0 AND $index !== false)
 			{

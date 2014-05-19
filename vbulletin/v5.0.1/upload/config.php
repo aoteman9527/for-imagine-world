@@ -47,7 +47,7 @@ $config['admincpdir'] = 'admincp';
     //    ****** Cookie Settings ******
     // These are cookie related settings.
     // This Setting allows you to change the cookie prefix
-$config['cookie_prefix'] = '';
+$config['cookie_prefix'] = 'tuanle_';
 
 
 
@@ -65,7 +65,7 @@ $config['no_template_notices'] = true;
 $config['no_js_bundles'] = false;
 
 // This setting enables debug mode, it should NEVER be used on a live site
-$config['debug'] = false;
+$config['debug'] = true;
 
 // Assumes default location of core. 
 // These are the system paths and folders for your vBulletin files

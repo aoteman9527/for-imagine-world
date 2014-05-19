@@ -13,6 +13,6 @@ public class TestPropertiesUtil extends TestCase{
     public void testLoading(){
         ApplicationContext context = new ClassPathXmlApplicationContext( "myspring-servlet.xml" );// TOTO : it use file name only
         PropertiesValue v = (PropertiesValue) context.getBean("propertiesValue");//equivalent to @Autowire
-        System.out.println(v.VBB_REQUEST_CREATE_CONTEXT);
+//        System.out.println(v.VBB_REQUEST_CREATE_CONTEXT);
     }
 }

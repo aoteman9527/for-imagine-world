@@ -1,0 +1,19 @@
+Request URL:http://localhost/forum/upload/create-content/text/
+Request Headers CAUTION: Provisional headers are shown.
+Accept:application/json, text/javascript, */*; q=0.01
+Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+Origin:http://localhost
+Referer:http://localhost/forum/upload/new-content/15
+User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36
+X-Requested-With:XMLHttpRequest
+Form Dataview sourceview URL encoded
+nodeid:
+parentid:15
+channelid:
+ret:http://localhost/forum/upload/forum/main-category/products
+title:ashgdhasgjasgdhagsjd
+text:jhagsdashgdjasgdsajdgajhasgjdsa
+autocompleteHelper:
+tags:
+tags:
+btnSubmit:

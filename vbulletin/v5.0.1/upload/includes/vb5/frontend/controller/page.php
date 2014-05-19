@@ -100,7 +100,7 @@ class vB5_Frontend_Controller_Page extends vB5_Frontend_Controller
 				{
 					$url .= '#post' . $goToNodeId;
 					if (headers_sent())
-					{
+					{print_r($userAction);
 						echo '<script type="text/javascript">window.location = "' . $url . '";</script>';
 					}
 					else
@@ -168,7 +168,7 @@ class vB5_Frontend_Controller_Page extends vB5_Frontend_Controller
 		$fullPage = $top . $page;
 
 		if (!empty($fullPageKey) and is_string($fullPageKey))
-		{
+		{print_r($userAction);
 			vB_Cache::instance(vB_Cache::CACHE_LARGE)->write($fullPageKey, $fullPage, vB5_Request::get('cachePageForGuestTime'));
 		}
 
@@ -185,7 +185,7 @@ class vB5_Frontend_Controller_Page extends vB5_Frontend_Controller
 		}
 		else
 		{
-			echo $page;
+//			echo $page;
 		}
 	}
 

@@ -122,6 +122,14 @@
             <version>2.5</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- HTTP Mail client-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>

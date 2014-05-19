@@ -47,7 +47,6 @@ $routing = $app->getRouter();
 $controller = $routing->getController();
 $method = $routing->getAction();
 $template = $routing->getTemplate();
-
 switch ($controller) {
 	case 'activity':
 		$class = 'Activity';
