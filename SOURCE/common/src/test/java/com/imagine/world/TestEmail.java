@@ -31,7 +31,7 @@ public class TestEmail extends TestCase {
         String fromAlias = "CLOUD TV";
         String fromEmail = "dang.capchemgio@gmail.com";
 
-        URL url = Resources.getResource("email.html");
+        URL url = Resources.getResource("email.html");// the emailHtml is only accept for inline css
         String body = Resources.toString(url,Charsets.UTF_8);
         HtmlEmail mail = new HtmlEmail();
 
