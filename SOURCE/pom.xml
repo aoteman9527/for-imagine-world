@@ -87,6 +87,13 @@
             <version>${org.springframework.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+
         <!-- jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -130,12 +137,23 @@
             <version>1.2</version>
         </dependency>
 
+        <!--
+        Guava is a suite of core and expanded libraries that include utility classes, google's collections, io classes, and much much more. Guava has only one code dependency - javax.annotation, per the JSR-305 spec.
+        -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+
+
     </dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>
 		<project.oauth.version>1.15.0-rc</project.oauth.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+        <!--<org.springframework.version>3.0.5.RELEASE</org.springframework.version>-->
+        <org.springframework.version>4.0.4.RELEASE</org.springframework.version>
 
     </properties>
 
