@@ -82,11 +82,11 @@ public class VbbClient {
     }
 
     public void createNewThread(String requestUrl,
-                                String nodeId, String parentId, String channelId, String ret, String title,
-                                String text, String autocompleteHelper,
-                                String tags,
-                                String btnSubmit,
-                                String vUrl
+                                String parentId,
+                                String ret,
+                                String title,
+                                String text
+
     ) throws HttpException, IOException, URISyntaxException {
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("nodeid", ""));
