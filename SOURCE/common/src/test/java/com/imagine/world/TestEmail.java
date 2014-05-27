@@ -22,14 +22,14 @@ public class TestEmail extends TestCase {
 
     @Test
     public void testSendMailHtml() throws EmailException, IOException {
-        String host = "smtp.gmail.com";
+        String host = "email-smtp.us-east-1.amazonaws.com";
         int port = 465;
-        String username = "dang.capchemgio@gmail.com";
-        String password = "soicodon!@#";
+        String username = "AKIAIZ5B7OTDFACZFJ2Q";
+        String password = "Au9nGs4iXUXSI1Jv6QANYZ2fytTlNj2LLmaArGfSeUcV";
         boolean useTls = true;
         boolean useSsl = true;
         String fromAlias = "CLOUD TV";
-        String fromEmail = "dang.capchemgio@gmail.com";
+        String fromEmail = "no-reply@tsbctv.com";
 
         URL url = Resources.getResource("email.html");// the emailHtml is only accept for inline css
         String body = Resources.toString(url,Charsets.UTF_8);

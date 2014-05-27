@@ -7,7 +7,7 @@ import java.util.List;
  * Created by letuan on 2/5/14.
  */
 @Entity
-@Table(name = "PRODUCT", schema = "", catalog = "imagine_world")
+@Table(name = "MYPRODUCT", schema = "", catalog = "imagine_world")
 public class Product {
     private int idProduct;
     private String name;

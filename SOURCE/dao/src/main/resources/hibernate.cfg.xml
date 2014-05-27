@@ -5,9 +5,9 @@
     <session-factory name="imageine_world">
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url"><![CDATA[jdbc:mysql://localhost:3306/imagine_world?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8]]></property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">root</property>
+        <property name="connection.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/imagine_world?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8]]></property>
+        <property name="connection.username">letuan</property>
+        <property name="connection.password">sieunhan</property>
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
         <!-- SQL dialect -->
@@ -19,6 +19,10 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <mapping class="com.imagine.world.models.TextEntity"/>
+        <mapping class="com.imagine.world.models.MyorderEntity"/>
+        <mapping class="com.imagine.world.models.MyshoppingcartEntity"/>
+        <mapping class="com.imagine.world.models.MytagEntity"/>
+        <mapping class="com.imagine.world.models.MyproductEntity"/>
         <!--<property name="hbm2ddl.auto">update</property>-->
 
         <!--Use auto commit mode, it will not need begin and commit transaction-->

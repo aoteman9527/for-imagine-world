@@ -1,6 +1,7 @@
 package com.imagine.world.mapper;
 
 import com.imagine.world.config.ElementsCsvImporter;
+import com.imagine.world.models.MyproductEntity;
 import com.imagine.world.models.Product;
 
 /**
@@ -8,10 +9,10 @@ import com.imagine.world.models.Product;
  */
 public class ProductMapper {
 
-    public static Product convertProductCsvToDao(String[] rowCsv){
-        Product output = new Product();
+    public static MyproductEntity convertProductCsvToDao(String[] rowCsv){
+        MyproductEntity output = new MyproductEntity();
         output.setProductAmount(Integer.parseInt(rowCsv[ElementsCsvImporter.ROW_PRODUCT_AMOUNT.getValueInt()]));
-        output.setPrice(rowCsv[ElementsCsvImporter.ROW_PRICE.getValueInt()]);
+        output.setPrice(Double.parseDouble(rowCsv[ElementsCsvImporter.ROW_PRICE.getValueInt()]));
         output.setProductCode(rowCsv[ElementsCsvImporter.ROW_PRODUCT_CODE.getValueInt()]);
         output.setName(rowCsv[ElementsCsvImporter.ROW_NAME.getValueInt()]);
         output.setDescription(rowCsv[ElementsCsvImporter.ROW_DESCRIPTION.getValueInt()]);

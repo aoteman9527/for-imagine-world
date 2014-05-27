@@ -11,7 +11,6 @@
  import com.imagine.world.customdaosupport.CustomDAOSupport;
  import com.imagine.world.dao.ProductDAO;
  import com.imagine.world.models.Product;
- import org.hibernate.FlushMode;
  import org.hibernate.HibernateException;
  import org.hibernate.Query;
  import org.springframework.stereotype.Repository;
