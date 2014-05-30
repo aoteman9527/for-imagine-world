@@ -10,6 +10,7 @@ import com.imagine.world.dao.impl.ProductDAOImpl;
 import com.imagine.world.models.Product;
 import junit.framework.TestCase;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -27,8 +28,7 @@ public class CsvImporterImplTest extends TestCase{
      * 2.run process() , check the database is data imported ?
      */
     public void testIntegrationImportToDB() throws IOException {
-        String pathToCsvFile =  ClassLoader.getSystemResource("templates/csv/template.csv").getPath();
-
+        String pathToCsvFile = this.getClass().getResource("/templates/csv/template.csv").getPath()  ;
         CsvImporter importer = new CsvImporterImpl();
         importer.process(pathToCsvFile);
         int lastUpdateDate = new Long(System.currentTimeMillis()/1000).intValue();
