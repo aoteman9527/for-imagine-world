@@ -31,9 +31,10 @@
         </property>
     </bean>
 
-    <mvc:resources mapping="/images/**" location="/WEB-INF/classes/templates/images/" />
-    <mvc:resources mapping="/js/**" location="/WEB-INF/classes/templates/js" />
-    <mvc:resources mapping="/**" location="/WEB-INF/classes/templates/" />
+    <!--The resources for image loading other public access-->
+    <mvc:resources mapping="/images/**" location="classpath:/templates/images/" />
+    <mvc:resources mapping="/js/**" location="classpath:/templates/js" />
+    <mvc:resources mapping="/**" location="classpath:/templates/" />
     <mvc:annotation-driven />
 
     <!--Bean for loading properties-->
