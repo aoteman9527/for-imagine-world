@@ -120,8 +120,8 @@ public class JJCodes extends TestCase {
     * This test should be run only if the Unicode filter is present
     */
   public void testText() {
-  	check("Hello\nThere","Hello<br />There");
-  	check("ñ","&#241;");
+    check("Hello\nThere","Hello<br />There");
+    check("ï¿½","&#241;");
   }
   
   public void testColor() {
