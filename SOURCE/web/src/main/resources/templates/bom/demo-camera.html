@@ -29,58 +29,21 @@
   <link rel="shortcut icon" href="img/favicon.png">
   
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript" src="js/headtrackr.js"></script>
 </head>
 
 <body>
-
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<form role="form">
-                <div class="form-group">
-                    <label for="code">Code </label><input type="text" class="form-control" id="code">
-                </div>
-				<div class="form-group">
-					 <label for="name">Name</label><input type="email" class="form-control" id="name">
-				</div>
-				<div class="form-group">
-					 <label for="price">Price </label><input type="text" class="form-control" id="price">
-				</div>
-
-                <div class="form-group">
-                    <label for="description">Description </label> <textarea class="form-control" name="summernote" id="description" rows="10"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="amount">Amount </label><input type="text" class="form-control" id="amount">
-                </div>
-
-                <%-- Camera --%>
-                <canvas id="compare" width="320" height="240" style="display:none"></canvas>
-                <video id="vid" autoplay="" loop="" width="320" height="240" src=""></video>
-                <canvas id="overlay" width="320" height="240" style="position: absolute; top: 0px; z-index: 100001; display: block;"></canvas>
-                <canvas id="debug" width="320" height="240" style="position: absolute; top: 0px; z-index: 100002; display: none;"></canvas>
-                <p id="gUMMessage"></p>
-                <span id="headtrackerMessage">Tracking face</span>
-                <%----%>
-
-                <div class="checkbox">
-					 <label><input type="checkbox"> Check me out</label>
-				</div>
-                <div class="form-group">
-                    <label for="exampleInputFile">Images upload</label><input type="file" id="exampleInputFile">
-                    <p class="help-block">
-                    Example block-level help text here.
-                    </p>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-			</form>
-		</div>
-	</div>
-</div>
+<!--CAMERA-->
+<canvas id="compare" width="320" height="240" style="display:none"></canvas>
+<video id="vid" autoplay="" loop="" width="320" height="240" src=""></video>
+<canvas id="overlay" width="320" height="240" style="position: absolute; top: 0px; z-index: 100001; display: block;"></canvas>
+<canvas id="debug" width="320" height="240" style="position: absolute; top: 0px; z-index: 100002; display: none;"></canvas>
+<p id="gUMMessage"></p>
+<span id="headtrackerMessage">Tracking face</span>
+<!---->
+<p></p>
+<iframe src="https://www.digitalocean.com/?refcode=ee897d68bace" width="1000" height="1000"></iframe>
 </body>
 <footer>
     <script>
@@ -88,7 +51,7 @@
 
         var videoInput = document.getElementById('vid');
         var canvasInput = document.getElementById('compare');
-        var canvasOverlay = document.getElementById('overlay')
+        var canvasOverlay = document.getElementById('overlay');
         var debugOverlay = document.getElementById('debug');
         var overlayContext = canvasOverlay.getContext('2d');
         canvasOverlay.style.position = "absolute";
