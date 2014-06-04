@@ -44,7 +44,6 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	<script type="text/javascript" src="js/headtrackr.js"></script>
 </head>
 
 <body>
@@ -60,116 +59,50 @@
 					 <label for="name">Name</label><input type="email" class="form-control" id="name">
 				</div>
 				<div class="form-group">
-					 <label for="price">Price </label><input type="text" class="form-control" id="price">
+					 <label for="price">Price </label>
+                     <div class="input-group">
+                         <span class="input-group-addon">$</span>
+                         <input type="text" class="form-control" id="price">
+                         <span class="input-group-addon">.00</span>
+                     </div>
 				</div>
 
                 <div class="form-group">
-                    <label for="description">Description </label> <textarea class="form-control" name="summernote" id="description" rows="10"></textarea>
+                    <label for="description">Description </label> <textarea class="form-control" name="description" id="description" rows="10"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="amount">Amount </label><input type="text" class="form-control" id="amount">
+                    <label for="amount">Amount </label>
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">Select <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">1000</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <input id="amount" type="text" class="form-control">
+                    </div>
                 </div>
 
-                <%-- Camera --%>
-                <canvas id="compare" width="320" height="240" style="display:none"></canvas>
-                <video id="vid" autoplay="" loop="" width="320" height="240" src=""></video>
-                <canvas id="overlay" width="320" height="240" style="position: absolute; top: 0px; z-index: 100001; display: block;"></canvas>
-                <canvas id="debug" width="320" height="240" style="position: absolute; top: 0px; z-index: 100002; display: none;"></canvas>
-                <p id="gUMMessage"></p>
-                <span id="headtrackerMessage">Tracking face</span>
-                <%----%>
-
-                <div class="checkbox">
-					 <label><input type="checkbox"> Check me out</label>
-				</div>
                 <div class="form-group">
                     <label for="exampleInputFile">Images upload</label><input type="file" id="exampleInputFile">
                     <p class="help-block">
                     Example block-level help text here.
                     </p>
                 </div>
+
                 <button type="submit" class="btn btn-default">Submit</button>
 			</form>
+
 		</div>
 	</div>
 </div>
 </body>
 <footer>
-    <script>
-        // set up video and canvas elements needed
 
-        var videoInput = document.getElementById('vid');
-        var canvasInput = document.getElementById('compare');
-        var canvasOverlay = document.getElementById('overlay')
-        var debugOverlay = document.getElementById('debug');
-        var overlayContext = canvasOverlay.getContext('2d');
-        canvasOverlay.style.position = "absolute";
-        canvasOverlay.style.top = '0px';
-        canvasOverlay.style.zIndex = '100001';
-        canvasOverlay.style.display = 'block';
-        debugOverlay.style.position = "absolute";
-        debugOverlay.style.top = '0px';
-        debugOverlay.style.zIndex = '100002';
-        debugOverlay.style.display = 'none';
-
-        // add some custom messaging
-
-        statusMessages = {
-            "whitebalance" : "checking for stability of camera whitebalance",
-            "detecting" : "Detecting face",
-            "hints" : "Hmm. Detecting the face is taking a long time",
-            "redetecting" : "Lost track of face, redetecting",
-            "lost" : "Lost track of face",
-            "found" : "Tracking face"
-        };
-
-        supportMessages = {
-            "no getUserMedia" : "Unfortunately, <a href='http://dev.w3.org/2011/webrtc/editor/getusermedia.html'>getUserMedia</a> is not supported in your browser. Try <a href='http://www.opera.com/browser/'>downloading Opera 12</a> or <a href='http://caniuse.com/stream'>another browser that supports getUserMedia</a>. Now using fallback video for facedetection.",
-            "no camera" : "No camera found. Using fallback video for facedetection."
-        };
-
-        document.addEventListener("headtrackrStatus", function(event) {
-            if (event.status in supportMessages) {
-                var messagep = document.getElementById('gUMMessage');
-                messagep.innerHTML = supportMessages[event.status];
-            } else if (event.status in statusMessages) {
-                var messagep = document.getElementById('headtrackerMessage');
-                messagep.innerHTML = statusMessages[event.status];
-            }
-        }, true);
-
-        // the face tracking setup
-
-        var htracker = new headtrackr.Tracker({altVideo : {ogv : "./media/capture5.ogv", mp4 : "./media/capture5.mp4"}, calcAngles : true, ui : false, headPosition : false, debug : debugOverlay});
-        htracker.init(videoInput, canvasInput);
-        htracker.start();
-
-        // for each facetracking event received draw rectangle around tracked face on canvas
-
-        document.addEventListener("facetrackingEvent", function( event ) {
-            // clear canvas
-            overlayContext.clearRect(0,0,320,240);
-            // once we have stable tracking, draw rectangle
-            if (event.detection == "CS") {
-                overlayContext.translate(event.x, event.y)
-                overlayContext.rotate(event.angle-(Math.PI/2));
-                overlayContext.strokeStyle = "#00FF00";
-                overlayContext.strokeRect((-(event.width/2)) >> 0, (-(event.height/2)) >> 0, event.width, event.height);
-                overlayContext.rotate((Math.PI/2)-event.angle);
-                overlayContext.translate(-event.x, -event.y);
-            }
-        });
-
-        // turn off or on the canvas showing probability
-        function showProbabilityCanvas() {
-            var debugCanvas = document.getElementById('debug');
-            if (debugCanvas.style.display == 'none') {
-                debugCanvas.style.display = 'block';
-            } else {
-                debugCanvas.style.display = 'none';
-            }
-        }
-    </script>
 </footer>
 </html>

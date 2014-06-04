@@ -18,7 +18,7 @@ public class ShopBOMController {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String displayForm(Model attributes) {
 
 //        attributes.addAttribute(ElementsCsvImporter.FORM_ACTION_UPLOAD.getValue(), ElementsCsvImporter.PATH_NAME_CSV.getValue().concat(ElementsCsvImporter.PATH_NAME_SAVE.getValue()));
