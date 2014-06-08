@@ -103,6 +103,10 @@
 </div>
 </body>
 <footer>
+<script>
+    $('input[type=file]').on('change', prepareUpload);
+    $('form').on('submit', uploadFiles);
 
+</script>
 </footer>
 </html>
