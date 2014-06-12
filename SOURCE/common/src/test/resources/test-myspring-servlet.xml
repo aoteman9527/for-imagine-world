@@ -33,15 +33,4 @@
             <value>.jsp</value>
         </property>
     </bean>
-
-    <!--The resources for image loading other public access-->
-    <mvc:resources mapping="/images/**" location="classpath:/templates/images/" />
-    <mvc:resources mapping="/js/**" location="classpath:/templates/js" />
-    <mvc:resources mapping="/**" location="classpath:/templates/" />
-    <mvc:annotation-driven />
-
-    <!--Bean for loading properties-->
-    <context:property-placeholder location="classpath:imagine-world-web.properties" ignore-unresolvable="true"></context:property-placeholder>
-    <context:property-placeholder location="classpath:imagine-world-web-vbb.properties" ignore-unresolvable="true"></context:property-placeholder>
-
 </beans>

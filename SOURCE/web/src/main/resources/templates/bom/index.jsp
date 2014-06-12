@@ -43,11 +43,13 @@
   
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/bootstrap.file-input.js"></script>
+	<%--<script type="text/javascript" src="js/uploading.js"></script>--%>
+	<script type="text/javascript" src="js/BaseFileUpload.js"></script>
 </head>
 
 <body>
-
+<h1 class="text-center">New Product</h1>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
@@ -89,9 +91,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputFile">Images upload</label><input type="file" id="exampleInputFile">
+                    <label for="exampleInputFile">Images upload</label>
+                    <div class="input-group">
+                        <input id="exampleInputFile" type="file" title="Browse ... " class="btn btn-default" style="left: -141.5px; top: 2px;">
+                    </div>
                     <p class="help-block">
-                    Example block-level help text here.
+                        Example block-level help text here.
                     </p>
                 </div>
 
@@ -104,9 +109,13 @@
 </body>
 <footer>
 <script>
-    $('input[type=file]').on('change', prepareUpload);
-    $('form').on('submit', uploadFiles);
-
+    $(document).ready(function(){
+//        $('input[type=file]').on('change', prepareUpload);
+//        $('form').on('submit', uploadFiles);
+        $('input[type=file]').bootstrapFileInput();
+        $('.file-inputs').bootstrapFileInput();
+        
+    });
 </script>
 </footer>
 </html>

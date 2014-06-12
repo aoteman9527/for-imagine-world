@@ -54,6 +54,7 @@ function uploadFiles(event)
             // Handle errors here
             console.log('ERRORS: ' + textStatus);
             // STOP LOADING SPINNER
+            $(".")
         }
     });
 }

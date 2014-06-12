@@ -17,7 +17,7 @@ import java.net.URL;
  * Created by letuan on 5/20/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"myspring-servlet.xml"})
+@ContextConfiguration(locations = {"/test-myspring-servlet.xml"})
 public class TestEmail extends TestCase {
 
     @Test
@@ -31,7 +31,7 @@ public class TestEmail extends TestCase {
         String fromAlias = "CLOUD TV";
         String fromEmail = "no-reply@tsbctv.com";
 
-        URL url = Resources.getResource("email.html");// the emailHtml is only accept for inline css
+        URL url = Resources.getResource("email2.html");// the emailHtml is only accept for inline css
         String body = Resources.toString(url,Charsets.UTF_8);
         HtmlEmail mail = new HtmlEmail();
 
@@ -46,8 +46,9 @@ public class TestEmail extends TestCase {
 
         mail.setFrom(fromEmail,fromAlias);
 
+        mail.addTo("hellotuan2@mail.com", "");
         mail.addTo("tuanlhdnl@gmail.com", "");
-        mail.setSubject(" effectiveSubject ");
+        mail.setSubject(" TEST HTML EMAIL ");
         mail.setHtmlMsg(body);
 
         mail.send();

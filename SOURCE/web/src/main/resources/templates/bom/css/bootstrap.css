@@ -6111,7 +6111,7 @@ button.close {
   margin-top: 3px;
 }
 
-.tooltip.left {
+.tooltip.tsbleft {
   padding: 0 5px;
   margin-left: -3px;
 }
@@ -6164,7 +6164,7 @@ button.close {
   border-width: 5px 5px 5px 0;
 }
 
-.tooltip.left .tooltip-arrow {
+.tooltip.tsbleft .tooltip-arrow {
   top: 50%;
   right: 0;
   margin-top: -5px;
@@ -6225,7 +6225,7 @@ button.close {
   margin-top: 10px;
 }
 
-.popover.left {
+.popover.tsbleft {
   margin-left: -10px;
 }
 
@@ -6314,7 +6314,7 @@ button.close {
   content: " ";
 }
 
-.popover.left .arrow {
+.popover.tsbleft .arrow {
   top: 50%;
   right: -11px;
   margin-top: -11px;
@@ -6323,7 +6323,7 @@ button.close {
   border-right-width: 0;
 }
 
-.popover.left .arrow:after {
+.popover.tsbleft .arrow:after {
   right: 1px;
   bottom: -10px;
   border-left-color: #ffffff;
@@ -6381,12 +6381,12 @@ button.close {
   left: -100%;
 }
 
-.carousel-inner > .next.left,
+.carousel-inner > .next.tsbleft,
 .carousel-inner > .prev.right {
   left: 0;
 }
 
-.carousel-inner > .active.left {
+.carousel-inner > .active.tsbleft {
   left: -100%;
 }
 
@@ -6408,7 +6408,7 @@ button.close {
   filter: alpha(opacity=50);
 }
 
-.carousel-control.left {
+.carousel-control.tsbleft {
   background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
   background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0), color-stop(rgba(0, 0, 0, 0.0001) 100%));
   background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
