@@ -1,0 +1,4 @@
+I want to store images of product, but what is the best storage way ?
+-I decide to store images in google drive
+-The storaged images will be seperated each folder by day
+
