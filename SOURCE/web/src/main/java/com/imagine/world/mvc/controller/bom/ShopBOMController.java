@@ -39,15 +39,15 @@ public class ShopBOMController extends BaseController{
     }
 
     @RequestMapping(value = "post", method = RequestMethod.POST)
-    public @ResponseBody Object processPost(
+    @ResponseBody
+    public Object processPost(
             Model attributes, //for reponse
             @RequestParam(value = BOM_REQUEST_FILE, required = false) MultipartFile file,//only one file each upload
             @RequestParam(value = BOM_REQUEST_CLEAR, required = false) String clear//only one file each upload
     ) {
         if(file!=null) {
             shopBOMModel.addMultipartFileList(file);
-
-            return shopBOMModel;
+            return shopBOMModel.getMultipartFileList().toString();
         }
 
         if(!StringUtils.isEmpty(clear)){
