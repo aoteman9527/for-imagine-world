@@ -1,6 +1,7 @@
 package com.imagine.world;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
 import com.google.common.io.Resources;
 import junit.framework.TestCase;
 import org.apache.commons.mail.EmailException;
@@ -31,7 +32,7 @@ public class TestEmail extends TestCase {
         String fromAlias = "CLOUD TV";
         String fromEmail = "no-reply@tsbctv.com";
 
-        URL url = Resources.getResource("email3.html");// the emailHtml is only accept for inline css
+        URL url = Resources.getResource("email5.html");// the emailHtml is only accept for inline css
         String body = Resources.toString(url,Charsets.UTF_8);
         HtmlEmail mail = new HtmlEmail();
 
@@ -49,7 +50,9 @@ public class TestEmail extends TestCase {
         mail.addTo("hellotuan2@mail.com", "");
         mail.addTo("tuanlhdnl@gmail.com", "");
         mail.addTo("nguoi_soivn@yahoo.com", "");
-        mail.setSubject(" TEST HTML EMAIL ");
+//        mail.addTo("nnhp010@yahoo.com", "");
+//        mail.addTo("hfuong9@gmail.com", "");
+        mail.setSubject(" TEST HTML EMAIL at ".concat(String.valueOf(System.currentTimeMillis())));
         mail.setHtmlMsg(body);
 
         mail.send();
