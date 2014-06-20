@@ -1,8 +1,19 @@
 package com.imagine.world;
 
+import com.imagine.world.exception.LoginInvalidUserException;
 import com.imagine.world.vbb.VbbClient;
 import junit.framework.TestCase;
 import org.apache.http.HttpException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,25 +21,29 @@ import java.net.URISyntaxException;
 /**
  * Created by letuan on 4/19/14.
  */
-public class VbbClientTest extends TestCase{
 
-    public void testLogin() throws URISyntaxException, IOException, HttpException {
-        VbbClient vbb = new VbbClient();
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= "classpath:test-myspring-servlet.xml")
+public class VbbClientTest extends MyAbstractTest {
+    @Autowired
+    VbbClient vbbClient;
 
-        String requestPathAuthLogin = "http://localhost/forum/upload/auth/login";
-        String vUrl = "aHR0cDovL2xvY2FsaG9zdC9mb3J1bS91cGxvYWQv";
-        String usernameAdmin = "root";
-        String passwordAdmin = "e10adc3949ba59abbe56e057f20f883e";
+    @Test
+    public void testLogin() throws URISyntaxException, IOException, HttpException, LoginInvalidUserException {
+        startSession();
+        startRequest();
+        vbbClient.login("root","1234456");
+        endRequest();
+        endSession();
+    }
 
-        vbb.login(requestPathAuthLogin,vUrl,usernameAdmin,passwordAdmin);
-
-        String requestUrl = "http://localhost/forum/upload/create-content/text/";
-        String parentId = "4";
-        String ret = "http://localhost/forum/upload/forum/main-category/main-forum";
-        String title = "new title killing me";
-        String text = "killing me softly lajdlksaj aljda lkdjaljdlajdalkd jalkdj a ld kj al kdj la ksjdlkajdl kaj s  d";
-
-        vbb.createNewThread(requestUrl,parentId,ret,title,text);
-
+    @Test
+    public void testLogout() throws HttpException, IOException, LoginInvalidUserException, URISyntaxException {
+        startSession();
+        startRequest();
+        vbbClient.login("root", "123456");
+        vbbClient.logout();
+        endRequest();
+        endSession();
     }
 }

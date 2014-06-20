@@ -1,7 +1,10 @@
 package com.imagine.world.mvc.controller.bom;
 
+import com.imagine.world.exception.LoginInvalidUserException;
 import com.imagine.world.mvc.controller.BaseController;
 import com.imagine.world.mvc.model.bom.ShopBOMModel;
+import com.imagine.world.vbb.VbbClient;
+import org.apache.http.HttpException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -29,6 +34,9 @@ public class ShopBOMController extends BaseController{
 
     @Autowired
     ShopBOMModel shopBOMModel;
+
+    @Autowired
+    VbbClient vbbClient;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String displayForm(Model attributes) {
@@ -54,5 +62,15 @@ public class ShopBOMController extends BaseController{
             shopBOMModel.clearMultipartFileList();
         }
         return "{}";
+    }
+
+    @RequestMapping(value = "testlogin", method = RequestMethod.GET)
+    @ResponseBody
+    public Object procesLogin(
+
+    ) throws HttpException, IOException, URISyntaxException, LoginInvalidUserException {
+        vbbClient.login("root","123456");
+        return "{success:true}";
+
     }
 }

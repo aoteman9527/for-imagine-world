@@ -1,12 +1,14 @@
 package com.imagine.world.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by letuan on 4/22/14.
  */
 @Component
+@Scope("singleton")
 public class PropertiesValue {
 
     @Value("${vbb.host}")
@@ -17,6 +19,9 @@ public class PropertiesValue {
 
     @Value("${vbb.request.path.auth.login}")
     public String VBB_REQUEST_PATH_AUTH_LOGIN;
+
+    @Value("${vbb.request.path.auth.logout}")
+    public String VBB_REQUEST_PATH_AUTH_LOGOUT;
 
     @Value("${vbb.username.admin}")
     public String VBB_USERNAME_ADMIN;
