@@ -1,21 +1,23 @@
 package com.imagine.world.vbb;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSortedSet;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
-import com.imagine.world.config.PropertiesValue;
+import com.google.common.io.LineReader;
 import com.imagine.world.exception.LoginInvalidUserException;
 import org.apache.http.HttpException;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,25 +27,21 @@ import java.util.List;
  * Created by letuan on 4/19/14.
  *
  */
-@Service("vbbClient")
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class VbbClient extends ServiceAbstract{
-    @Autowired
-    PropertiesValue propertiesValue;
+public class VbbClient extends ServiceAbstract {
 
     private static org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(VbbClient.class.getName());
 
     public void login(String requestUrl,String vUrl, String username, String vbLoginMd5password ) throws HttpException, IOException, URISyntaxException, LoginInvalidUserException {
 
-        List<NameValuePair> urlParameters = new ArrayList<>();
+        List<NameValuePair> urlParameters = Lists.newLinkedList();
         urlParameters.add(new BasicNameValuePair("url", vUrl));
         urlParameters.add(new BasicNameValuePair("username", username));
         urlParameters.add(new BasicNameValuePair("vb_login_md5password", vbLoginMd5password));
         urlParameters.add(new BasicNameValuePair("vb_login_md5password_utf", vbLoginMd5password));
         urlParameters.add(new BasicNameValuePair("password", ""));
 
-        String result = this.sendPost(requestUrl,urlParameters);
-        if(!result.contains("Logging in...")) {
+        ImmutableList<String> lines = this.sendPost(requestUrl,urlParameters);
+        if(!lines.toString().contains("Logging in...")) {
             throw new LoginInvalidUserException("invalid username and password");
         }
     }
@@ -74,7 +72,7 @@ public class VbbClient extends ServiceAbstract{
                                 String text
 
     ) throws HttpException, IOException, URISyntaxException {
-        List<NameValuePair> urlParameters = new ArrayList<>();
+        List<NameValuePair> urlParameters = Lists.newLinkedList();
         urlParameters.add(new BasicNameValuePair("nodeid", ""));
         urlParameters.add(new BasicNameValuePair("parentid", parentId));
         urlParameters.add(new BasicNameValuePair("channelid", ""));

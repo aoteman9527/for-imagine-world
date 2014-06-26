@@ -1,6 +1,9 @@
 package com.imagine.world;
 
+import com.imagine.world.exception.AuthorizationException;
+import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.LoginInvalidUserException;
+import com.imagine.world.vbb.VbbAdminClient;
 import com.imagine.world.vbb.VbbClient;
 import junit.framework.TestCase;
 import org.apache.http.HttpException;
@@ -25,14 +28,14 @@ import java.net.URISyntaxException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= "classpath:test-myspring-servlet.xml")
 public class VbbClientTest extends MyAbstractTest {
-    @Autowired
-    VbbClient vbbClient;
+    @Autowired(required = true)
+    VbbAdminClient vbbClient;
 
     @Test
     public void testLogin() throws URISyntaxException, IOException, HttpException, LoginInvalidUserException {
         startSession();
         startRequest();
-        vbbClient.login("root","1234456");
+        vbbClient.login("root","123456");
         endRequest();
         endSession();
     }
@@ -45,5 +48,28 @@ public class VbbClientTest extends MyAbstractTest {
         vbbClient.logout();
         endRequest();
         endSession();
+    }
+
+    @Test
+    public void testLoginAdmincp() throws HttpException, URISyntaxException, LoginInvalidUserException, IOException {
+        startSession();
+        startRequest();
+        vbbClient.loginAdmincp("root", "1233456");
+        endRequest();
+        endSession();
+
+    }
+
+    @Test
+    public void testCreateUser() throws HttpException, URISyntaxException, LoginInvalidUserException, IOException, AuthorizationException, InprocessException {
+        startSession();
+        startRequest();
+        vbbClient.loginAdmincp("root", "123456");
+        vbbClient.createUser("playernodie19", "this is password", "myEmailTest3@mail.com",0,"This is title", 0, "this is home page", 2,
+                12,12,1990, 1, "This is signature", 1, 1, null, null, null, null, null
+                );
+        endRequest();
+        endSession();
+
     }
 }

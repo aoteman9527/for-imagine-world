@@ -38,4 +38,10 @@ public class PropertiesValue {
     @Value("${vbb.request.param.create.content.parentid}")
     public String VBB_REQUEST_PARAM_CREATE_CONTENT_PARENTID;
 
+    @Value("${vbb.admincp.login.url}")
+    public String VBB_ADMIN_LOGIN_URL;
+
+    @Value("${vbb.admincp.user.update}")
+    public String VBB_ADMIN_USER_UPDATE;
+
 }
