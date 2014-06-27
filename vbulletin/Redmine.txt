@@ -1,2 +1,12 @@
 Copy simbol link to lampp
 - forum
+enable disable debug mode
+vbulletin/v5.0.1/upload/config.php
+
+Alias /forum "/home/tuanle/Documents/IMAGINE-WORLD/vbulletin/v5.0.1"
+<Directory "/home/tuanle/Documents/IMAGINE-WORLD/vbulletin/v5.0.1">
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+    Allow from all
+</Directory>
