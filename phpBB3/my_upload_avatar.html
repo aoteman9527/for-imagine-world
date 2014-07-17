@@ -1,0 +1,39 @@
+<form id="avatar_settings" method="post" action="http://localhost/phppp/my_upload_avatar.php" enctype="multipart/form-data">
+
+	<fieldset>
+		<legend>Avatar</legend>
+	<dl>
+		<dt><label>Current image:</label><br><span>Maximum dimensions; width: 90 pixels, height: 90 pixels, file size: 6000.00 KiB.</span></dt>
+		<dd><img src="" width="90" height="90" alt="User avatar"></dd>
+		<dd><label><input type="checkbox" class="radio" name="delete"> Delete image</label></dd>
+	</dl>
+	
+			<dl> 
+				<dt><label for="uploadfile">Upload from your machine:</label></dt>
+				<dd><input type="hidden" name="MAX_FILE_SIZE" value="6144000"><input type="file" id="uploadfile" name="uploadfile"></dd>
+			</dl>
+		
+			<dl>
+				<dt><label for="uploadurl">Upload from a URL:</label><br><span>Enter the URL of the location containing the image. The image will be copied to this site.</span></dt>
+				<dd><input name="uploadurl" type="text" id="uploadurl" value=""></dd>
+			</dl>
+		
+			<dl>
+				<dt><label for="remotelink">Link off-site:</label><br><span>Enter the URL of the location containing the avatar image you wish to link to.</span></dt>
+				<dd><input name="remotelink" type="text" id="remotelink" value=""></dd>
+			</dl>
+			<dl>
+				<dt><label for="width">Avatar dimensions:</label><br><span>Specify the width and height of the avatar, leave blank to attempt automatic verification.</span></dt>
+				<dd><input name="width" type="text" id="width" size="3" value="90"> <span>px × </span> <input type="text" name="height" size="3" value="90"> <span>px</span></dd>
+			</dl>
+		
+	</fieldset>
+
+	<fieldset class="quick">
+		<input class="button1" type="submit" name="update" value="Submit">
+		<input type="hidden" name="creation_time" value="1405406464">
+<input type="hidden" name="form_token" value="2b321eb5962ae72b31649092465ad5dadf7de884">
+
+	</fieldset>
+	
+	</form>
