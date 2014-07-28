@@ -1,0 +1,31 @@
+https://wiki.phpbb.com/REST_API
+https://wiki.phpbb.com/Category:API
+https://area51.phpbb.com/docs/30x/coding-guidelines.html#locations
+https://wiki.phpbb.com/Creating_modules
+http://wiki.phpbb.com/Tables
+http://ftp.phpbb-fr.com/cdd/phpbb3/3.0.10/nav.html?_functions/index.html
+https://wiki.phpbb.com/Tutorial.Non-PHP_integration -> for login
+https://wiki.phpbb.com/Tutorial.Permissions
+
+Tao file my_custom.php trong phppp .
+Tao user thanh cong roi. my_create_user.php
+Understanding Uploading avatar for user
+- Using code of my_upload_avatar.php and my_upload_avatar.html
+- Try testing - OK work like a charm
+
+Try Understanding login - 
+- try to use auth flow for authentication
+- use it for checking user . 
+- Success make logig code. also for logout
+
+Try Understanding Post a topic
+- Create new topic - success 
+- - the key is function add_form_key . :D - check file my_post_new_topic
+- - THe my_posting_2.php is a copy of posting.php removed redirect View Function.
+
+- Modify topic - mode=edit&f=2&p=59
+- Replay topic - mode=reply&f=2&t=49
+- Edit a relay - mode=edit&f=2&p=60 - I saw this mode same with modify topic
+=> Finally . we can understand a topic is just has a subject . then it content the first post. 
+- Need a SRS the way to using api forum. need refent to a ppt file. ex: using topic_icon, bbcode, smile face, attach file.
+- - How to make new topic. which is parameters, what is form key ? 
