@@ -53,4 +53,7 @@ public class PropertiesValue {
     @Value("${phppp.request.path.add.user}")
     public String PHPPP_REQUEST_PATH_ADD_USER;
 
+    @Value("${phppp.request.path.delete.user}")
+    public String PHPPP_REQUEST_PATH_DELETE_USER;
+
 }

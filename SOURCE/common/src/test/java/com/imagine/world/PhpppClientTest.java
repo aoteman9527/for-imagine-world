@@ -1,5 +1,6 @@
 package com.imagine.world;
 
+import com.imagine.world.config.UserType;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.LoginInvalidUserException;
 import com.imagine.world.phppp.PhpppBaseWrapper;
@@ -47,10 +48,12 @@ public class PhpppClientTest extends MyAbstractTest {
     }
 
     @Test
-    public void testAddNewUser() throws URISyntaxException, IOException, HttpException {
+    public void testAddNewUser() throws URISyntaxException, IOException, HttpException, InprocessException, InterruptedException {
         startSession();
         startRequest();
-        phpppBaseWrapper.addNewUser("playernodie1", "123456", "jjjj@lll.co", null, null, null, null);
+        phpppBaseWrapper.addNewUser("playernodie2", "123456", "jjjj@lll.co", null, null, null, UserType.INACTIVE_USER.getValue());
+        Thread.sleep(2000);
+        phpppBaseWrapper.deleteUser(null,null,"jjjj@lll.co");
         endRequest();
         endSession();
     }
