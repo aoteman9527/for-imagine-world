@@ -44,4 +44,13 @@ public class PropertiesValue {
     @Value("${vbb.admincp.user.update}")
     public String VBB_ADMIN_USER_UPDATE;
 
+    @Value("${vbb.admincp.user.kill}")
+    public String VBB_ADMIN_USER_KILL;
+
+    @Value("${phppp.request.path.auth}")
+    public String PHPPP_REQUEST_PATH_AUTH;
+
+    @Value("${phppp.request.path.add.user}")
+    public String PHPPP_REQUEST_PATH_ADD_USER;
+
 }

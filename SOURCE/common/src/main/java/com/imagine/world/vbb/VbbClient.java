@@ -2,24 +2,19 @@ package com.imagine.world.vbb;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
-import com.google.common.io.LineReader;
+import com.imagine.world.ServiceAbstract;
 import com.imagine.world.exception.LoginInvalidUserException;
 import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 

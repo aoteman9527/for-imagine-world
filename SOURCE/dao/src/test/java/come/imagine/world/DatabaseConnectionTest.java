@@ -1,11 +1,15 @@
 package come.imagine.world;
 
 import com.imagine.world.dao.ProductDAO;
+import com.imagine.world.dao.UserDAO;
 import com.imagine.world.dao.impl.ProductDAOImpl;
 import com.imagine.world.models.Product;
+import com.imagine.world.models.UserEntity;
 import junit.framework.TestCase;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +41,14 @@ public class DatabaseConnectionTest extends TestCase{
         List<Product> productList =  productDAO.findAll();
         assertTrue(productList.size()>0);
 
+    }
+
+    public void testFindUser() throws ParseException {
+        UserDAO userDAO = new UserDAO();
+        UserEntity userEntity= userDAO.getUserByUsername("playernodie19");
+        System.out.println(userEntity.getBirthday());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = simpleDateFormat.parse(userEntity.getBirthday());
     }
 
 }

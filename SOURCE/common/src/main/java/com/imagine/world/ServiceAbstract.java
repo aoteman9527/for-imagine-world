@@ -1,7 +1,6 @@
-package com.imagine.world.vbb;
+package com.imagine.world;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.io.LineReader;
 import com.imagine.world.config.PropertiesValue;
 import org.apache.http.HttpException;
@@ -32,7 +31,7 @@ public abstract class ServiceAbstract {
     private CloseableHttpClient client;
 
     @Autowired
-    PropertiesValue propertiesValue;
+    public PropertiesValue propertiesValue;
 
     protected ServiceAbstract(){
         HttpClientBuilder builder = HttpClientBuilder.create();
@@ -47,7 +46,7 @@ public abstract class ServiceAbstract {
      * @throws java.net.URISyntaxException
      * @throws org.apache.http.HttpException
      */
-    ImmutableList sendPost(String endPointUrl, List<NameValuePair> urlParameters)
+    public ImmutableList sendPost(String endPointUrl, List<NameValuePair> urlParameters)
             throws IOException, URISyntaxException, HttpException {
 
         HttpPost post = new HttpPost(endPointUrl);

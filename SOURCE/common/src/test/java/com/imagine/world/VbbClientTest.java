@@ -1,5 +1,6 @@
 package com.imagine.world;
 
+import com.imagine.world.dao.UserDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.LoginInvalidUserException;
@@ -63,12 +64,23 @@ public class VbbClientTest extends MyAbstractTest {
     @Test
     public void testCreateUser() throws HttpException, URISyntaxException, LoginInvalidUserException, IOException, AuthorizationException, InprocessException {
         startSession();
+
         startRequest();
         vbbClient.loginAdmincp("root", "123456");
-        vbbClient.createUser("playernodie19", "this is password", "myEmailTest3@mail.com",0,"This is title", 0, "this is home page", 2,
-                12,12,1990, 1, "This is signature", 1, 1, null, null, null, null, null
-                );
         endRequest();
+
+        startRequest();
+        vbbClient.createUser("playernodie20", "this is password", "myEmailTest3@mail.com",0,"This is title", 0, "this is home page", 2,
+                12,12,1990, 1, "This is signature", 1, 1, null, null, null, null, null
+        );
+        UserDAO userDAO = new UserDAO();
+        userDAO.getUserByUsername("playernodie20");
+        endRequest();
+
+        startRequest();
+        vbbClient.deleteUser(null,"playernodie20",null);
+        endRequest();
+
         endSession();
 
     }

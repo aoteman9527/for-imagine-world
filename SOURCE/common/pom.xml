@@ -29,6 +29,11 @@
 	</repositories>
 
 	<dependencies>
+        <dependency>
+            <groupId>imagine.world</groupId>
+            <artifactId>imagine-world-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>
