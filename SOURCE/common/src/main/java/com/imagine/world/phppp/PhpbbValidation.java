@@ -17,5 +17,6 @@ public class PhpbbValidation extends CommonValidation {
 
     public static boolean isExistedEmailAddress(String emailAddress){
         PhpbbUsersEntity user = phpbbUsersDAO.getUserByEmail(emailAddress);
-        return !(user == null);    }
+        return !(user == null);
+    }
 }

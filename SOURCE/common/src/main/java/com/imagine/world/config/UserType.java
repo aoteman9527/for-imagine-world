@@ -2,6 +2,8 @@ package com.imagine.world.config;
 
 /**
  * Created by tuanle on 7/31/14.
+ * This usertype used for PHPbb3
+ * this is discribed in phpbb wiki.
  */
 public enum UserType {
     NORMAL_USER(0),

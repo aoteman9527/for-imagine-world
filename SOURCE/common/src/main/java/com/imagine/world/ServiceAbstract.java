@@ -41,17 +41,17 @@ public abstract class ServiceAbstract {
     /**
      *
      * @param endPointUrl equavilent with request url
-     * @param urlParameters
+     * @param postParameters
      * @throws java.io.IOException
      * @throws java.net.URISyntaxException
      * @throws org.apache.http.HttpException
      */
-    public ImmutableList sendPost(String endPointUrl, List<NameValuePair> urlParameters)
+    public ImmutableList sendPost(String endPointUrl, List<NameValuePair> postParameters)
             throws IOException, URISyntaxException, HttpException {
 
         HttpPost post = new HttpPost(endPointUrl);
         post.setHeader("User-Agent", USER_AGENT);
-        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+        post.setEntity(new UrlEncodedFormEntity(postParameters));
 
         HttpResponse response = client.execute(post);
         System.out.println("\nSending 'POST' request to URL : " + endPointUrl);

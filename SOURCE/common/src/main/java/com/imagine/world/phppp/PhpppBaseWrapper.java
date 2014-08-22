@@ -140,4 +140,28 @@ public class PhpppBaseWrapper extends ServiceAbstract {
         LOGGER.info(lines);
     }
 
+    public void createNewTopic(String mode, String forumId, String icon, String subject,
+                               String addbbcode20, String message,
+                               String typePost, boolean attachSig, long creation_time) throws HttpException, IOException, URISyntaxException {
+        List<NameValuePair> postParameters = Lists.newLinkedList();
+        postParameters.add(new BasicNameValuePair("mode", "post"));//'post', 'reply', 'quote', 'edit', 'delete'
+        postParameters.add(new BasicNameValuePair("f", "2"));
+        postParameters.add(new BasicNameValuePair("icon", "0"));
+        postParameters.add(new BasicNameValuePair("subject", "subject"));
+        postParameters.add(new BasicNameValuePair("addbbcode20", "addbbcode20"));
+        postParameters.add(new BasicNameValuePair("message", "message"));
+        postParameters.add(new BasicNameValuePair("post", "Submit"));// Submit or not
+        postParameters.add(new BasicNameValuePair("attach_sig", true + ""));//boolean
+        postParameters.add(new BasicNameValuePair("creation_time", "creation_time"));// get from form key generation.
+        postParameters.add(new BasicNameValuePair("form_token", "form_token"));//get from form key generation.
+        postParameters.add(new BasicNameValuePair("filecomment", ""));
+        postParameters.add(new BasicNameValuePair("poll_title", "poll_title"));
+        postParameters.add(new BasicNameValuePair("poll_option_text", ""));
+        postParameters.add(new BasicNameValuePair("poll_max_options", "1"));
+        postParameters.add(new BasicNameValuePair("poll_length", "0"));
+
+
+        this.sendPost(propertiesValue.PHPPP_REQUEST_PATH_ADD_USER,postParameters);// make a request
+
+    }
 }
