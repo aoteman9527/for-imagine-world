@@ -1,0 +1,68 @@
+Đăng nhập
+- Dùng database  vbulentin
+- api login của vbulentin
+- Logout 
+
+Manage User
+- Add (permission)
+- Remove
+- Modify (permission)
+
+How to register user for nomarl way
+1. generate a token : use api vbulentin
+2. get image capcha : use api vbulentin
+3. register user + hashOfImageCapcha
+4. check response to know success registration
+
+Register user by admin.
+1. login by admincp then we will get "s"
+2. get redirectlink +do=head and go to .
+3. extract var SESSIONHASH, ADMINHASH , SECURITYTOKEN
+4. use these info to create user. modify user
+5. Handle existed user, invalid email, admin logged in or not
+VbbUserObject
+- user[username]
+- password
+- user[email]
+- user[languageid]
+    "0">Use Forum Default
+    "1">English (US)
+- user[usertitle]
+- user[customtitle]
+    "0">No
+    "2">Yes, user set
+    "1">Yes, admin set (HTML allowed)
+- user[homepage]
+- user[usergroupid]
+    "6">Administrators
+    "8">Banned Users
+    "11">Channel Member
+    "10">Channel Moderator
+    "9">Channel Owner
+    "7">Moderators
+    "2" >Registered Users
+    "5">Super Moderators
+    "1">Unregistered / Not Logged In
+    "3">Users Awaiting Email Confirmation
+    "4">Users Awaiting Moderation
+- user[birthday][month]
+- user[birthday][day]
+- user[birthday][year]
+- user[showbirthday]
+    "0" >Hide Age and Date of Birth
+    "1">Display Only Age
+    "3">Display Only Day and Month of Birth
+    "2">Display Age and Full Date of Birth
+- user[signature]
+- user[icq]
+- user[aim]
+- user[yahoo]
+- user[msn]	
+- user[skype]
+- options[showsignatures]
+      value="1" tabindex="1" >Yes
+      value="0" tabindex="1" >No
+- options[showavatars]
+      value="1" tabindex="1" >Yes
+      value="0" tabindex="1" >No
+

@@ -1,0 +1,16 @@
+Remote Address:127.0.0.1:80
+Request URL:http://localhost/forum/upload/registration/registration
+
+***Form Dataview sourceview URL encoded
+urlpath:aHR0cDovL2xvY2FsaG9zdC9mb3J1bS91cGxvYWQv
+username:playernodie11
+email:aaa@mail.com
+email_confirm:aaa@mail.com
+password:12345678
+confirmpassword:12345678
+humanverify[input]:ZQ6RBM
+humanverify[hash]:0f58ab9fe33ad9fec18ad44d12b420eb
+
+
+RESPONSE
+{"response":{"urlPath":"http:\/\/localhost\/forum\/upload\/","msg":"registration_complete","msg_params":["playernodie11","http:\/\/localhost\/forum\/upload\/member\/3-playernodie11?s=02c835ca84c61ac7358bfc64061f7615","http:\/\/localhost\/forum\/upload\/settings\/account?s=02c835ca84c61ac7358bfc64061f7615","http:\/\/localhost\/forum\/upload\/settings\/profile?s=02c835ca84c61ac7358bfc64061f7615","http:\/\/localhost\/forum\/upload"]}}

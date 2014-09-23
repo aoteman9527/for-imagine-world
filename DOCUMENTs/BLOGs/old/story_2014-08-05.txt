@@ -1,0 +1,16 @@
+Đăng nhập
+- Dùng phpbb module - done 
+- api login của pbpbb - done
+- Logout - done
+
+Manage User
+- Add (permission) - done
+- Remove - done
+- Modify (permission) - pedding this feature will be improve with DAO . does not use phpbb module.
+
+Manage Posts
+- new topics
+- remove topics
+- new post / this include for replay topic.
+- remove post
+- modify post - pls using DAO 
