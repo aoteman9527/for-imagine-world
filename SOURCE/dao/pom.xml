@@ -62,6 +62,12 @@
 			<version>3.0</version>
 		</dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+
 	</dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>

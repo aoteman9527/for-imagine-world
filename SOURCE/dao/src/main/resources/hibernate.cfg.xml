@@ -5,7 +5,7 @@
     <session-factory name="imagine_world">
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/letuan?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8]]></property>
+        <property name="connection.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/blogs?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8]]></property>
         <property name="connection.username">letuan</property>
         <property name="connection.password">sieunhan</property>
         <!-- JDBC connection pool (use the built-in) -->

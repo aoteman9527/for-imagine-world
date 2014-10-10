@@ -3,11 +3,11 @@ package com.imagine.world.vbb;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.*;
-import com.imagine.world.dao.UserDAO;
+import com.imagine.world.dao.UsersDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.LoginInvalidUserException;
-import com.imagine.world.models.UserEntity;
+import com.imagine.world.models.UsersEntity;
 import org.apache.http.HttpException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -31,7 +31,7 @@ public class VbbAdminClient extends VbbClient {
     protected String sessionhash = null;
     protected String adminhash = null;
     protected String securitytoken = null;
-    protected SimpleDateFormat BIRTHDAY_DATE_FORMAT = new SimpleDateFormat(UserDAO.BIRTHDAY_DATE_FORMAT);
+    protected SimpleDateFormat BIRTHDAY_DATE_FORMAT = new SimpleDateFormat(UsersDAO.BIRTHDAY_DATE_FORMAT);
 
 
     public void loginAdmincp(String username,String password) throws HttpException, IOException, URISyntaxException, LoginInvalidUserException {
@@ -174,12 +174,12 @@ public class VbbAdminClient extends VbbClient {
         // update information
         // save to database
 
-        UserDAO userDAO = new UserDAO();
-        UserEntity userEntity = null;
+        UsersDAO usersDAO = new UsersDAO();
+        UsersEntity userEntity = null;
         if(!Strings.isNullOrEmpty(username)){
-            userEntity = userDAO.getUserByUsername(username);
+            userEntity = usersDAO.getUserByUsername(username);
         } else if(!Strings.isNullOrEmpty(email)){
-            userEntity = userDAO.getUserByUsername(email);
+            userEntity = usersDAO.getUserByUsername(email);
         }
 
         if(userEntity==null){
@@ -187,70 +187,70 @@ public class VbbAdminClient extends VbbClient {
         }
 
         if(!Strings.isNullOrEmpty(password)){
-            userEntity.setPassword(password);
+            userEntity.setUserPassword(password);
         }
 
         if(!Strings.isNullOrEmpty(email)){
-            userEntity.setEmail(email);
+            userEntity.setUserEmail(email);
         }
 
-        if(!Strings.isNullOrEmpty(languageId)){
-            userEntity.setLanguageid(Short.valueOf(languageId));
-        }
-
-        if(!Strings.isNullOrEmpty(title)){
-            userEntity.setUsertitle(title);
-        }
-
-        if(!Strings.isNullOrEmpty(customTitle)){
-            userEntity.setCustomtitle(Short.valueOf(customTitle));
-        }
-
-        if(!Strings.isNullOrEmpty(homePage)){
-            userEntity.setHomepage(homePage);
-        }
-
-        if(!Strings.isNullOrEmpty(userGroupId)){
-            userEntity.setUsergroupid(Short.valueOf(userGroupId));
-        }
-
-        if(!Strings.isNullOrEmpty(birthMonth)|| !Strings.isNullOrEmpty(birthDay)|| !Strings.isNullOrEmpty(birthYear)){
-//            userEntity.setB(homePage);
-            Date bithday = BIRTHDAY_DATE_FORMAT.parse(userEntity.getBirthday());
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(bithday);
-            try {
-                calendar.set(Calendar.MONTH,Integer.valueOf(birthMonth));
-            }catch(NullPointerException e){}
-
-            try {
-                calendar.set(Calendar.MONTH,Integer.valueOf(birthDay));
-            }catch(NullPointerException e){}
-
-            try {
-                calendar.set(Calendar.MONTH,Integer.valueOf(birthYear));
-            }catch(NullPointerException e){}
-        }
-
-        if(!Strings.isNullOrEmpty(showbirthday)){
-            userEntity.setShowbirthday(Short.valueOf(showbirthday));
-        }
-
-        if(!Strings.isNullOrEmpty(signature)){
-//            userEntity.set(homePage);
-        }
-
-        if(!Strings.isNullOrEmpty(homePage)){
-            userEntity.setHomepage(homePage);
-        }
-
-        if(!Strings.isNullOrEmpty(homePage)){
-            userEntity.setHomepage(homePage);
-        }
-
-        if(!Strings.isNullOrEmpty(homePage)){
-            userEntity.setHomepage(homePage);
-        }
+//        if(!Strings.isNullOrEmpty(languageId)){
+//            userEntity.setLanguageid(Short.valueOf(languageId));
+//        }
+//
+//        if(!Strings.isNullOrEmpty(title)){
+//            userEntity.setUsertitle(title);
+//        }
+//
+//        if(!Strings.isNullOrEmpty(customTitle)){
+//            userEntity.setCustomtitle(Short.valueOf(customTitle));
+//        }
+//
+//        if(!Strings.isNullOrEmpty(homePage)){
+//            userEntity.setHomepage(homePage);
+//        }
+//
+//        if(!Strings.isNullOrEmpty(userGroupId)){
+//            userEntity.setUsergroupid(Short.valueOf(userGroupId));
+//        }
+//
+//        if(!Strings.isNullOrEmpty(birthMonth)|| !Strings.isNullOrEmpty(birthDay)|| !Strings.isNullOrEmpty(birthYear)){
+////            userEntity.setB(homePage);
+//            Date bithday = BIRTHDAY_DATE_FORMAT.parse(userEntity.getBirthday());
+//            Calendar calendar = new GregorianCalendar();
+//            calendar.setTime(bithday);
+//            try {
+//                calendar.set(Calendar.MONTH,Integer.valueOf(birthMonth));
+//            }catch(NullPointerException e){}
+//
+//            try {
+//                calendar.set(Calendar.MONTH,Integer.valueOf(birthDay));
+//            }catch(NullPointerException e){}
+//
+//            try {
+//                calendar.set(Calendar.MONTH,Integer.valueOf(birthYear));
+//            }catch(NullPointerException e){}
+//        }
+//
+//        if(!Strings.isNullOrEmpty(showbirthday)){
+//            userEntity.setShowbirthday(Short.valueOf(showbirthday));
+//        }
+//
+//        if(!Strings.isNullOrEmpty(signature)){
+////            userEntity.set(homePage);
+//        }
+//
+//        if(!Strings.isNullOrEmpty(homePage)){
+//            userEntity.setHomepage(homePage);
+//        }
+//
+//        if(!Strings.isNullOrEmpty(homePage)){
+//            userEntity.setHomepage(homePage);
+//        }
+//
+//        if(!Strings.isNullOrEmpty(homePage)){
+//            userEntity.setHomepage(homePage);
+//        }
 
     }
 
@@ -267,20 +267,20 @@ public class VbbAdminClient extends VbbClient {
      */
     public void deleteUser( String userId, String username, String email ) throws HttpException, URISyntaxException, AuthorizationException, InprocessException, IOException {
 
-
-        if(!Strings.isNullOrEmpty(userId)){
-            deleteUserByUserid(userId);
-        } else if(!Strings.isNullOrEmpty(username)){
-            UserDAO userDAO = new UserDAO();
-            UserEntity userEntity = userDAO.getUserByUsername(username);
-            deleteUserByUserid(String.valueOf(userEntity.getUserid()));
-        } else if(!Strings.isNullOrEmpty(email)){
-            UserDAO userDAO = new UserDAO();
-            UserEntity userEntity = userDAO.getUserByEmail(email);
-            deleteUserByUserid(String.valueOf(userEntity.getUserid()));
-        } else {
-            throw new NullPointerException("Invalid 3 parameters");
-        }
+//
+//        if(!Strings.isNullOrEmpty(userId)){
+//            deleteUserByUserid(userId);
+//        } else if(!Strings.isNullOrEmpty(username)){
+//            UsersDAO usersDAO = new UsersDAO();
+//            UsersEntity userEntity = usersDAO.getUserByUsername(username);
+//            deleteUserByUserid(String.valueOf(userEntity.getUserid()));
+//        } else if(!Strings.isNullOrEmpty(email)){
+//            UsersDAO usersDAO = new UsersDAO();
+//            UsersEntity userEntity = usersDAO.getUserByEmail(email);
+//            deleteUserByUserid(String.valueOf(userEntity.getUserid()));
+//        } else {
+//            throw new NullPointerException("Invalid 3 parameters");
+//        }
 
         System.out.println("Success delete user ".concat(Strings.nullToEmpty(username)).concat(Strings.nullToEmpty(userId)).concat(Strings.nullToEmpty(email)));
 

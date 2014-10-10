@@ -1,23 +1,16 @@
 package com.imagine.world;
 
-import com.imagine.world.dao.UserDAO;
+import com.imagine.world.dao.UsersDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.LoginInvalidUserException;
 import com.imagine.world.vbb.VbbAdminClient;
-import com.imagine.world.vbb.VbbClient;
-import junit.framework.TestCase;
 import org.apache.http.HttpException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -73,8 +66,8 @@ public class VbbClientTest extends MyAbstractTest {
         vbbClient.createUser("playernodie20", "this is password", "myEmailTest3@mail.com",0,"This is title", 0, "this is home page", 2,
                 12,12,1990, 1, "This is signature", 1, 1, null, null, null, null, null
         );
-        UserDAO userDAO = new UserDAO();
-        userDAO.getUserByUsername("playernodie20");
+        UsersDAO usersDAO = new UsersDAO();
+        usersDAO.getUserByUsername("playernodie20");
         endRequest();
 
         startRequest();

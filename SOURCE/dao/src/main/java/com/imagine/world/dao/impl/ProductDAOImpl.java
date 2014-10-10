@@ -13,7 +13,6 @@
  import com.imagine.world.models.Product;
  import org.hibernate.HibernateException;
  import org.hibernate.Query;
- import org.springframework.stereotype.Repository;
 
  import java.io.Serializable;
  import java.util.Date;
@@ -25,7 +24,6 @@
  *Generated on Wed Feb 05 18:09:02 ICT 2014
  ***************************************************/
 
- @Repository
  public class ProductDAOImpl extends CustomDAOSupport implements Serializable, ProductDAO {
  
  /**

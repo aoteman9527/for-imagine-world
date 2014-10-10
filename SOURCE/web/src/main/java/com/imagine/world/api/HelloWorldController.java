@@ -1,22 +1,22 @@
-package com.imagine.world.service;
+package com.imagine.world.api;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
-@RequestMapping("/")
-public class HelloWorldController {
+//@Controller
+//@RequestMapping("/")
+public class HelloWorldController extends BaseApi {
 
-    @RequestMapping(value = "welcome",method = RequestMethod.GET)
+//    @RequestMapping(value = "welcome",method = RequestMethod.GET)
 	public String helloWorld(ModelMap model) {
 
         model.addAttribute("message", "Spring 3 MVC Hello World");
         return "hello";
     }
 
-    @RequestMapping(value = "shop",method = RequestMethod.GET)
+//    @RequestMapping(value = "shop",method = RequestMethod.GET)
     public String goToShop(ModelMap model) {
 
         model.addAttribute("message", "Spring 3 MVC Hello World");

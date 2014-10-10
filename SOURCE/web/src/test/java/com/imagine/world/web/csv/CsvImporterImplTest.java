@@ -10,7 +10,6 @@ import com.imagine.world.dao.impl.ProductDAOImpl;
 import com.imagine.world.models.Product;
 import junit.framework.TestCase;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
