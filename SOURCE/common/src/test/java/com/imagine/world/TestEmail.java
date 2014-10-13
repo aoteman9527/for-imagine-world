@@ -1,7 +1,6 @@
 package com.imagine.world;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Strings;
 import com.google.common.io.Resources;
 import junit.framework.TestCase;
 import org.apache.commons.mail.EmailException;
@@ -18,15 +17,15 @@ import java.net.URL;
  * Created by letuan on 5/20/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-myspring-servlet.xml"})
+@ContextConfiguration(locations = {"/test2-myspring-servlet.xml"})
 public class TestEmail extends TestCase {
 
     @Test
     public void testSendMailHtml() throws EmailException, IOException {
         String host = "email-smtp.us-east-1.amazonaws.com";
         int port = 465;
-        String username = "AKIAIZ5B7OTDFACZFJ2Q";
-        String password = "Au9nGs4iXUXSI1Jv6QANYZ2fytTlNj2LLmaArGfSeUcV";
+        String username = "";
+        String password = "";
         boolean useTls = true;
         boolean useSsl = true;
         String fromAlias = "CLOUD TV";
