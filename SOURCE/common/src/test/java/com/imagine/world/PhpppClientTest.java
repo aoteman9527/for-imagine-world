@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= "classpath:test-myspring-servlet.xml")
+@ContextConfiguration(locations= "classpath:test2-myspring-servlet.xml")
 public class PhpppClientTest extends MyAbstractTest {
 
     @Autowired(required = true)

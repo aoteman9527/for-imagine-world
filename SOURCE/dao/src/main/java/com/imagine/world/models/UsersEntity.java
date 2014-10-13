@@ -1,20 +1,93 @@
 package com.imagine.world.models;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
  * Created by tuan on 10/9/14.
  */
 @Entity
-@javax.persistence.Table(name = "USERS", schema = "", catalog = "blogs")
+@Table(name = "USERS", schema = "", catalog = "blogs")
 public class UsersEntity {
     private int userId;
+    private byte userType;
+    private int groupId;
+    private String userPermissions;
+    private int userPermFrom;
+    private String userIp;
+    private int userRegdate;
+    private String username;
+    private String usernameClean;
+    private String userPassword;
+    private int userPasschg;
+    private byte userPassConvert;
+    private String userEmail;
+    private long userEmailHash;
+    private String userBirthday;
+    private int userLastvisit;
+    private int userLastmark;
+    private int userLastpostTime;
+    private String userLastpage;
+    private String userLastConfirmKey;
+    private int userLastSearch;
+    private byte userWarnings;
+    private int userLastWarning;
+    private byte userLoginAttempts;
+    private byte userInactiveReason;
+    private int userInactiveTime;
+    private int userPosts;
+    private String userLang;
+    private BigDecimal userTimezone;
+    private byte userDst;
+    private String userDateformat;
+    private int userStyle;
+    private int userRank;
+    private String userColour;
+    private int userNewPrivmsg;
+    private int userUnreadPrivmsg;
+    private int userLastPrivmsg;
+    private byte userMessageRules;
+    private int userFullFolder;
+    private int userEmailtime;
+    private short userTopicShowDays;
+    private String userTopicSortbyType;
+    private String userTopicSortbyDir;
+    private short userPostShowDays;
+    private String userPostSortbyType;
+    private String userPostSortbyDir;
+    private byte userNotify;
+    private byte userNotifyPm;
+    private byte userNotifyType;
+    private byte userAllowPm;
+    private byte userAllowViewonline;
+    private byte userAllowViewemail;
+    private byte userAllowMassemail;
+    private int userOptions;
+    private String userAvatar;
+    private byte userAvatarType;
+    private short userAvatarWidth;
+    private short userAvatarHeight;
+    private String userSig;
+    private String userSigBbcodeUid;
+    private String userSigBbcodeBitfield;
+    private String userFrom;
+    private String userIcq;
+    private String userAim;
+    private String userYim;
+    private String userMsnm;
+    private String userJabber;
+    private String userWebsite;
+    private String userOcc;
+    private String userInterests;
+    private String userActkey;
+    private String userNewpasswd;
+    private String userFormSalt;
+    private byte userNew;
+    private byte userReminded;
+    private int userRemindedTime;
 
     @Id
-    @javax.persistence.Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getUserId() {
         return userId;
     }
@@ -23,10 +96,8 @@ public class UsersEntity {
         this.userId = userId;
     }
 
-    private byte userType;
-
     @Basic
-    @javax.persistence.Column(name = "user_type")
+    @Column(name = "user_type", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserType() {
         return userType;
     }
@@ -35,10 +106,8 @@ public class UsersEntity {
         this.userType = userType;
     }
 
-    private int groupId;
-
     @Basic
-    @javax.persistence.Column(name = "group_id")
+    @Column(name = "group_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getGroupId() {
         return groupId;
     }
@@ -47,10 +116,8 @@ public class UsersEntity {
         this.groupId = groupId;
     }
 
-    private String userPermissions;
-
     @Basic
-    @javax.persistence.Column(name = "user_permissions")
+    @Column(name = "user_permissions", nullable = false, insertable = true, updatable = true, length = 16777215, precision = 0)
     public String getUserPermissions() {
         return userPermissions;
     }
@@ -59,10 +126,8 @@ public class UsersEntity {
         this.userPermissions = userPermissions;
     }
 
-    private int userPermFrom;
-
     @Basic
-    @javax.persistence.Column(name = "user_perm_from")
+    @Column(name = "user_perm_from", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getUserPermFrom() {
         return userPermFrom;
     }
@@ -71,10 +136,8 @@ public class UsersEntity {
         this.userPermFrom = userPermFrom;
     }
 
-    private String userIp;
-
     @Basic
-    @javax.persistence.Column(name = "user_ip")
+    @Column(name = "user_ip", nullable = false, insertable = true, updatable = true, length = 40, precision = 0)
     public String getUserIp() {
         return userIp;
     }
@@ -83,10 +146,8 @@ public class UsersEntity {
         this.userIp = userIp;
     }
 
-    private int userRegdate;
-
     @Basic
-    @javax.persistence.Column(name = "user_regdate")
+    @Column(name = "user_regdate", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserRegdate() {
         return userRegdate;
     }
@@ -95,10 +156,8 @@ public class UsersEntity {
         this.userRegdate = userRegdate;
     }
 
-    private String username;
-
     @Basic
-    @javax.persistence.Column(name = "username")
+    @Column(name = "username", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUsername() {
         return username;
     }
@@ -107,10 +166,8 @@ public class UsersEntity {
         this.username = username;
     }
 
-    private String usernameClean;
-
     @Basic
-    @javax.persistence.Column(name = "username_clean")
+    @Column(name = "username_clean", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUsernameClean() {
         return usernameClean;
     }
@@ -119,10 +176,8 @@ public class UsersEntity {
         this.usernameClean = usernameClean;
     }
 
-    private String userPassword;
-
     @Basic
-    @javax.persistence.Column(name = "user_password")
+    @Column(name = "user_password", nullable = false, insertable = true, updatable = true, length = 40, precision = 0)
     public String getUserPassword() {
         return userPassword;
     }
@@ -131,10 +186,8 @@ public class UsersEntity {
         this.userPassword = userPassword;
     }
 
-    private int userPasschg;
-
     @Basic
-    @javax.persistence.Column(name = "user_passchg")
+    @Column(name = "user_passchg", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserPasschg() {
         return userPasschg;
     }
@@ -143,10 +196,8 @@ public class UsersEntity {
         this.userPasschg = userPasschg;
     }
 
-    private byte userPassConvert;
-
     @Basic
-    @javax.persistence.Column(name = "user_pass_convert")
+    @Column(name = "user_pass_convert", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserPassConvert() {
         return userPassConvert;
     }
@@ -155,10 +206,8 @@ public class UsersEntity {
         this.userPassConvert = userPassConvert;
     }
 
-    private String userEmail;
-
     @Basic
-    @javax.persistence.Column(name = "user_email")
+    @Column(name = "user_email", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     public String getUserEmail() {
         return userEmail;
     }
@@ -167,10 +216,8 @@ public class UsersEntity {
         this.userEmail = userEmail;
     }
 
-    private long userEmailHash;
-
     @Basic
-    @javax.persistence.Column(name = "user_email_hash")
+    @Column(name = "user_email_hash", nullable = false, insertable = true, updatable = true, length = 19, precision = 0)
     public long getUserEmailHash() {
         return userEmailHash;
     }
@@ -179,10 +226,8 @@ public class UsersEntity {
         this.userEmailHash = userEmailHash;
     }
 
-    private String userBirthday;
-
     @Basic
-    @javax.persistence.Column(name = "user_birthday")
+    @Column(name = "user_birthday", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public String getUserBirthday() {
         return userBirthday;
     }
@@ -191,10 +236,8 @@ public class UsersEntity {
         this.userBirthday = userBirthday;
     }
 
-    private int userLastvisit;
-
     @Basic
-    @javax.persistence.Column(name = "user_lastvisit")
+    @Column(name = "user_lastvisit", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserLastvisit() {
         return userLastvisit;
     }
@@ -203,10 +246,8 @@ public class UsersEntity {
         this.userLastvisit = userLastvisit;
     }
 
-    private int userLastmark;
-
     @Basic
-    @javax.persistence.Column(name = "user_lastmark")
+    @Column(name = "user_lastmark", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserLastmark() {
         return userLastmark;
     }
@@ -215,10 +256,8 @@ public class UsersEntity {
         this.userLastmark = userLastmark;
     }
 
-    private int userLastpostTime;
-
     @Basic
-    @javax.persistence.Column(name = "user_lastpost_time")
+    @Column(name = "user_lastpost_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserLastpostTime() {
         return userLastpostTime;
     }
@@ -227,10 +266,8 @@ public class UsersEntity {
         this.userLastpostTime = userLastpostTime;
     }
 
-    private String userLastpage;
-
     @Basic
-    @javax.persistence.Column(name = "user_lastpage")
+    @Column(name = "user_lastpage", nullable = false, insertable = true, updatable = true, length = 200, precision = 0)
     public String getUserLastpage() {
         return userLastpage;
     }
@@ -239,10 +276,8 @@ public class UsersEntity {
         this.userLastpage = userLastpage;
     }
 
-    private String userLastConfirmKey;
-
     @Basic
-    @javax.persistence.Column(name = "user_last_confirm_key")
+    @Column(name = "user_last_confirm_key", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public String getUserLastConfirmKey() {
         return userLastConfirmKey;
     }
@@ -251,10 +286,8 @@ public class UsersEntity {
         this.userLastConfirmKey = userLastConfirmKey;
     }
 
-    private int userLastSearch;
-
     @Basic
-    @javax.persistence.Column(name = "user_last_search")
+    @Column(name = "user_last_search", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserLastSearch() {
         return userLastSearch;
     }
@@ -263,10 +296,8 @@ public class UsersEntity {
         this.userLastSearch = userLastSearch;
     }
 
-    private byte userWarnings;
-
     @Basic
-    @javax.persistence.Column(name = "user_warnings")
+    @Column(name = "user_warnings", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserWarnings() {
         return userWarnings;
     }
@@ -275,10 +306,8 @@ public class UsersEntity {
         this.userWarnings = userWarnings;
     }
 
-    private int userLastWarning;
-
     @Basic
-    @javax.persistence.Column(name = "user_last_warning")
+    @Column(name = "user_last_warning", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserLastWarning() {
         return userLastWarning;
     }
@@ -287,10 +316,8 @@ public class UsersEntity {
         this.userLastWarning = userLastWarning;
     }
 
-    private byte userLoginAttempts;
-
     @Basic
-    @javax.persistence.Column(name = "user_login_attempts")
+    @Column(name = "user_login_attempts", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserLoginAttempts() {
         return userLoginAttempts;
     }
@@ -299,10 +326,8 @@ public class UsersEntity {
         this.userLoginAttempts = userLoginAttempts;
     }
 
-    private byte userInactiveReason;
-
     @Basic
-    @javax.persistence.Column(name = "user_inactive_reason")
+    @Column(name = "user_inactive_reason", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserInactiveReason() {
         return userInactiveReason;
     }
@@ -311,10 +336,8 @@ public class UsersEntity {
         this.userInactiveReason = userInactiveReason;
     }
 
-    private int userInactiveTime;
-
     @Basic
-    @javax.persistence.Column(name = "user_inactive_time")
+    @Column(name = "user_inactive_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserInactiveTime() {
         return userInactiveTime;
     }
@@ -323,10 +346,8 @@ public class UsersEntity {
         this.userInactiveTime = userInactiveTime;
     }
 
-    private int userPosts;
-
     @Basic
-    @javax.persistence.Column(name = "user_posts")
+    @Column(name = "user_posts", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getUserPosts() {
         return userPosts;
     }
@@ -335,10 +356,8 @@ public class UsersEntity {
         this.userPosts = userPosts;
     }
 
-    private String userLang;
-
     @Basic
-    @javax.persistence.Column(name = "user_lang")
+    @Column(name = "user_lang", nullable = false, insertable = true, updatable = true, length = 30, precision = 0)
     public String getUserLang() {
         return userLang;
     }
@@ -347,10 +366,8 @@ public class UsersEntity {
         this.userLang = userLang;
     }
 
-    private BigDecimal userTimezone;
-
     @Basic
-    @javax.persistence.Column(name = "user_timezone")
+    @Column(name = "user_timezone", nullable = false, insertable = true, updatable = true, length = 5, precision = 2)
     public BigDecimal getUserTimezone() {
         return userTimezone;
     }
@@ -359,10 +376,8 @@ public class UsersEntity {
         this.userTimezone = userTimezone;
     }
 
-    private byte userDst;
-
     @Basic
-    @javax.persistence.Column(name = "user_dst")
+    @Column(name = "user_dst", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserDst() {
         return userDst;
     }
@@ -371,10 +386,8 @@ public class UsersEntity {
         this.userDst = userDst;
     }
 
-    private String userDateformat;
-
     @Basic
-    @javax.persistence.Column(name = "user_dateformat")
+    @Column(name = "user_dateformat", nullable = false, insertable = true, updatable = true, length = 30, precision = 0)
     public String getUserDateformat() {
         return userDateformat;
     }
@@ -383,10 +396,8 @@ public class UsersEntity {
         this.userDateformat = userDateformat;
     }
 
-    private int userStyle;
-
     @Basic
-    @javax.persistence.Column(name = "user_style")
+    @Column(name = "user_style", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getUserStyle() {
         return userStyle;
     }
@@ -395,10 +406,8 @@ public class UsersEntity {
         this.userStyle = userStyle;
     }
 
-    private int userRank;
-
     @Basic
-    @javax.persistence.Column(name = "user_rank")
+    @Column(name = "user_rank", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getUserRank() {
         return userRank;
     }
@@ -407,10 +416,8 @@ public class UsersEntity {
         this.userRank = userRank;
     }
 
-    private String userColour;
-
     @Basic
-    @javax.persistence.Column(name = "user_colour")
+    @Column(name = "user_colour", nullable = false, insertable = true, updatable = true, length = 6, precision = 0)
     public String getUserColour() {
         return userColour;
     }
@@ -419,10 +426,8 @@ public class UsersEntity {
         this.userColour = userColour;
     }
 
-    private int userNewPrivmsg;
-
     @Basic
-    @javax.persistence.Column(name = "user_new_privmsg")
+    @Column(name = "user_new_privmsg", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserNewPrivmsg() {
         return userNewPrivmsg;
     }
@@ -431,10 +436,8 @@ public class UsersEntity {
         this.userNewPrivmsg = userNewPrivmsg;
     }
 
-    private int userUnreadPrivmsg;
-
     @Basic
-    @javax.persistence.Column(name = "user_unread_privmsg")
+    @Column(name = "user_unread_privmsg", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserUnreadPrivmsg() {
         return userUnreadPrivmsg;
     }
@@ -443,10 +446,8 @@ public class UsersEntity {
         this.userUnreadPrivmsg = userUnreadPrivmsg;
     }
 
-    private int userLastPrivmsg;
-
     @Basic
-    @javax.persistence.Column(name = "user_last_privmsg")
+    @Column(name = "user_last_privmsg", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserLastPrivmsg() {
         return userLastPrivmsg;
     }
@@ -455,10 +456,8 @@ public class UsersEntity {
         this.userLastPrivmsg = userLastPrivmsg;
     }
 
-    private byte userMessageRules;
-
     @Basic
-    @javax.persistence.Column(name = "user_message_rules")
+    @Column(name = "user_message_rules", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserMessageRules() {
         return userMessageRules;
     }
@@ -467,10 +466,8 @@ public class UsersEntity {
         this.userMessageRules = userMessageRules;
     }
 
-    private int userFullFolder;
-
     @Basic
-    @javax.persistence.Column(name = "user_full_folder")
+    @Column(name = "user_full_folder", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserFullFolder() {
         return userFullFolder;
     }
@@ -479,10 +476,8 @@ public class UsersEntity {
         this.userFullFolder = userFullFolder;
     }
 
-    private int userEmailtime;
-
     @Basic
-    @javax.persistence.Column(name = "user_emailtime")
+    @Column(name = "user_emailtime", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserEmailtime() {
         return userEmailtime;
     }
@@ -491,10 +486,8 @@ public class UsersEntity {
         this.userEmailtime = userEmailtime;
     }
 
-    private short userTopicShowDays;
-
     @Basic
-    @javax.persistence.Column(name = "user_topic_show_days")
+    @Column(name = "user_topic_show_days", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
     public short getUserTopicShowDays() {
         return userTopicShowDays;
     }
@@ -503,10 +496,8 @@ public class UsersEntity {
         this.userTopicShowDays = userTopicShowDays;
     }
 
-    private String userTopicSortbyType;
-
     @Basic
-    @javax.persistence.Column(name = "user_topic_sortby_type")
+    @Column(name = "user_topic_sortby_type", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
     public String getUserTopicSortbyType() {
         return userTopicSortbyType;
     }
@@ -515,10 +506,8 @@ public class UsersEntity {
         this.userTopicSortbyType = userTopicSortbyType;
     }
 
-    private String userTopicSortbyDir;
-
     @Basic
-    @javax.persistence.Column(name = "user_topic_sortby_dir")
+    @Column(name = "user_topic_sortby_dir", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
     public String getUserTopicSortbyDir() {
         return userTopicSortbyDir;
     }
@@ -527,10 +516,8 @@ public class UsersEntity {
         this.userTopicSortbyDir = userTopicSortbyDir;
     }
 
-    private short userPostShowDays;
-
     @Basic
-    @javax.persistence.Column(name = "user_post_show_days")
+    @Column(name = "user_post_show_days", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
     public short getUserPostShowDays() {
         return userPostShowDays;
     }
@@ -539,10 +526,8 @@ public class UsersEntity {
         this.userPostShowDays = userPostShowDays;
     }
 
-    private String userPostSortbyType;
-
     @Basic
-    @javax.persistence.Column(name = "user_post_sortby_type")
+    @Column(name = "user_post_sortby_type", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
     public String getUserPostSortbyType() {
         return userPostSortbyType;
     }
@@ -551,10 +536,8 @@ public class UsersEntity {
         this.userPostSortbyType = userPostSortbyType;
     }
 
-    private String userPostSortbyDir;
-
     @Basic
-    @javax.persistence.Column(name = "user_post_sortby_dir")
+    @Column(name = "user_post_sortby_dir", nullable = false, insertable = true, updatable = true, length = 1, precision = 0)
     public String getUserPostSortbyDir() {
         return userPostSortbyDir;
     }
@@ -563,10 +546,8 @@ public class UsersEntity {
         this.userPostSortbyDir = userPostSortbyDir;
     }
 
-    private byte userNotify;
-
     @Basic
-    @javax.persistence.Column(name = "user_notify")
+    @Column(name = "user_notify", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserNotify() {
         return userNotify;
     }
@@ -575,10 +556,8 @@ public class UsersEntity {
         this.userNotify = userNotify;
     }
 
-    private byte userNotifyPm;
-
     @Basic
-    @javax.persistence.Column(name = "user_notify_pm")
+    @Column(name = "user_notify_pm", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserNotifyPm() {
         return userNotifyPm;
     }
@@ -587,10 +566,8 @@ public class UsersEntity {
         this.userNotifyPm = userNotifyPm;
     }
 
-    private byte userNotifyType;
-
     @Basic
-    @javax.persistence.Column(name = "user_notify_type")
+    @Column(name = "user_notify_type", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserNotifyType() {
         return userNotifyType;
     }
@@ -599,10 +576,8 @@ public class UsersEntity {
         this.userNotifyType = userNotifyType;
     }
 
-    private byte userAllowPm;
-
     @Basic
-    @javax.persistence.Column(name = "user_allow_pm")
+    @Column(name = "user_allow_pm", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserAllowPm() {
         return userAllowPm;
     }
@@ -611,10 +586,8 @@ public class UsersEntity {
         this.userAllowPm = userAllowPm;
     }
 
-    private byte userAllowViewonline;
-
     @Basic
-    @javax.persistence.Column(name = "user_allow_viewonline")
+    @Column(name = "user_allow_viewonline", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserAllowViewonline() {
         return userAllowViewonline;
     }
@@ -623,10 +596,8 @@ public class UsersEntity {
         this.userAllowViewonline = userAllowViewonline;
     }
 
-    private byte userAllowViewemail;
-
     @Basic
-    @javax.persistence.Column(name = "user_allow_viewemail")
+    @Column(name = "user_allow_viewemail", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserAllowViewemail() {
         return userAllowViewemail;
     }
@@ -635,10 +606,8 @@ public class UsersEntity {
         this.userAllowViewemail = userAllowViewemail;
     }
 
-    private byte userAllowMassemail;
-
     @Basic
-    @javax.persistence.Column(name = "user_allow_massemail")
+    @Column(name = "user_allow_massemail", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserAllowMassemail() {
         return userAllowMassemail;
     }
@@ -647,10 +616,8 @@ public class UsersEntity {
         this.userAllowMassemail = userAllowMassemail;
     }
 
-    private int userOptions;
-
     @Basic
-    @javax.persistence.Column(name = "user_options")
+    @Column(name = "user_options", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserOptions() {
         return userOptions;
     }
@@ -659,10 +626,8 @@ public class UsersEntity {
         this.userOptions = userOptions;
     }
 
-    private String userAvatar;
-
     @Basic
-    @javax.persistence.Column(name = "user_avatar")
+    @Column(name = "user_avatar", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUserAvatar() {
         return userAvatar;
     }
@@ -671,10 +636,8 @@ public class UsersEntity {
         this.userAvatar = userAvatar;
     }
 
-    private byte userAvatarType;
-
     @Basic
-    @javax.persistence.Column(name = "user_avatar_type")
+    @Column(name = "user_avatar_type", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserAvatarType() {
         return userAvatarType;
     }
@@ -683,10 +646,8 @@ public class UsersEntity {
         this.userAvatarType = userAvatarType;
     }
 
-    private short userAvatarWidth;
-
     @Basic
-    @javax.persistence.Column(name = "user_avatar_width")
+    @Column(name = "user_avatar_width", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
     public short getUserAvatarWidth() {
         return userAvatarWidth;
     }
@@ -695,10 +656,8 @@ public class UsersEntity {
         this.userAvatarWidth = userAvatarWidth;
     }
 
-    private short userAvatarHeight;
-
     @Basic
-    @javax.persistence.Column(name = "user_avatar_height")
+    @Column(name = "user_avatar_height", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
     public short getUserAvatarHeight() {
         return userAvatarHeight;
     }
@@ -707,10 +666,8 @@ public class UsersEntity {
         this.userAvatarHeight = userAvatarHeight;
     }
 
-    private String userSig;
-
     @Basic
-    @javax.persistence.Column(name = "user_sig")
+    @Column(name = "user_sig", nullable = false, insertable = true, updatable = true, length = 16777215, precision = 0)
     public String getUserSig() {
         return userSig;
     }
@@ -719,10 +676,8 @@ public class UsersEntity {
         this.userSig = userSig;
     }
 
-    private String userSigBbcodeUid;
-
     @Basic
-    @javax.persistence.Column(name = "user_sig_bbcode_uid")
+    @Column(name = "user_sig_bbcode_uid", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public String getUserSigBbcodeUid() {
         return userSigBbcodeUid;
     }
@@ -731,10 +686,8 @@ public class UsersEntity {
         this.userSigBbcodeUid = userSigBbcodeUid;
     }
 
-    private String userSigBbcodeBitfield;
-
     @Basic
-    @javax.persistence.Column(name = "user_sig_bbcode_bitfield")
+    @Column(name = "user_sig_bbcode_bitfield", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUserSigBbcodeBitfield() {
         return userSigBbcodeBitfield;
     }
@@ -743,10 +696,8 @@ public class UsersEntity {
         this.userSigBbcodeBitfield = userSigBbcodeBitfield;
     }
 
-    private String userFrom;
-
     @Basic
-    @javax.persistence.Column(name = "user_from")
+    @Column(name = "user_from", nullable = false, insertable = true, updatable = true, length = 100, precision = 0)
     public String getUserFrom() {
         return userFrom;
     }
@@ -755,10 +706,8 @@ public class UsersEntity {
         this.userFrom = userFrom;
     }
 
-    private String userIcq;
-
     @Basic
-    @javax.persistence.Column(name = "user_icq")
+    @Column(name = "user_icq", nullable = false, insertable = true, updatable = true, length = 15, precision = 0)
     public String getUserIcq() {
         return userIcq;
     }
@@ -767,10 +716,8 @@ public class UsersEntity {
         this.userIcq = userIcq;
     }
 
-    private String userAim;
-
     @Basic
-    @javax.persistence.Column(name = "user_aim")
+    @Column(name = "user_aim", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUserAim() {
         return userAim;
     }
@@ -779,10 +726,8 @@ public class UsersEntity {
         this.userAim = userAim;
     }
 
-    private String userYim;
-
     @Basic
-    @javax.persistence.Column(name = "user_yim")
+    @Column(name = "user_yim", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUserYim() {
         return userYim;
     }
@@ -791,10 +736,8 @@ public class UsersEntity {
         this.userYim = userYim;
     }
 
-    private String userMsnm;
-
     @Basic
-    @javax.persistence.Column(name = "user_msnm")
+    @Column(name = "user_msnm", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUserMsnm() {
         return userMsnm;
     }
@@ -803,10 +746,8 @@ public class UsersEntity {
         this.userMsnm = userMsnm;
     }
 
-    private String userJabber;
-
     @Basic
-    @javax.persistence.Column(name = "user_jabber")
+    @Column(name = "user_jabber", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getUserJabber() {
         return userJabber;
     }
@@ -815,10 +756,8 @@ public class UsersEntity {
         this.userJabber = userJabber;
     }
 
-    private String userWebsite;
-
     @Basic
-    @javax.persistence.Column(name = "user_website")
+    @Column(name = "user_website", nullable = false, insertable = true, updatable = true, length = 200, precision = 0)
     public String getUserWebsite() {
         return userWebsite;
     }
@@ -827,10 +766,8 @@ public class UsersEntity {
         this.userWebsite = userWebsite;
     }
 
-    private String userOcc;
-
     @Basic
-    @javax.persistence.Column(name = "user_occ")
+    @Column(name = "user_occ", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
     public String getUserOcc() {
         return userOcc;
     }
@@ -839,10 +776,8 @@ public class UsersEntity {
         this.userOcc = userOcc;
     }
 
-    private String userInterests;
-
     @Basic
-    @javax.persistence.Column(name = "user_interests")
+    @Column(name = "user_interests", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
     public String getUserInterests() {
         return userInterests;
     }
@@ -851,10 +786,8 @@ public class UsersEntity {
         this.userInterests = userInterests;
     }
 
-    private String userActkey;
-
     @Basic
-    @javax.persistence.Column(name = "user_actkey")
+    @Column(name = "user_actkey", nullable = false, insertable = true, updatable = true, length = 32, precision = 0)
     public String getUserActkey() {
         return userActkey;
     }
@@ -863,10 +796,8 @@ public class UsersEntity {
         this.userActkey = userActkey;
     }
 
-    private String userNewpasswd;
-
     @Basic
-    @javax.persistence.Column(name = "user_newpasswd")
+    @Column(name = "user_newpasswd", nullable = false, insertable = true, updatable = true, length = 40, precision = 0)
     public String getUserNewpasswd() {
         return userNewpasswd;
     }
@@ -875,10 +806,8 @@ public class UsersEntity {
         this.userNewpasswd = userNewpasswd;
     }
 
-    private String userFormSalt;
-
     @Basic
-    @javax.persistence.Column(name = "user_form_salt")
+    @Column(name = "user_form_salt", nullable = false, insertable = true, updatable = true, length = 32, precision = 0)
     public String getUserFormSalt() {
         return userFormSalt;
     }
@@ -887,10 +816,8 @@ public class UsersEntity {
         this.userFormSalt = userFormSalt;
     }
 
-    private byte userNew;
-
     @Basic
-    @javax.persistence.Column(name = "user_new")
+    @Column(name = "user_new", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserNew() {
         return userNew;
     }
@@ -899,10 +826,8 @@ public class UsersEntity {
         this.userNew = userNew;
     }
 
-    private byte userReminded;
-
     @Basic
-    @javax.persistence.Column(name = "user_reminded")
+    @Column(name = "user_reminded", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getUserReminded() {
         return userReminded;
     }
@@ -911,10 +836,8 @@ public class UsersEntity {
         this.userReminded = userReminded;
     }
 
-    private int userRemindedTime;
-
     @Basic
-    @javax.persistence.Column(name = "user_reminded_time")
+    @Column(name = "user_reminded_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getUserRemindedTime() {
         return userRemindedTime;
     }

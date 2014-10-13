@@ -1,6 +1,7 @@
 package com.imagine.world.service;
 
-import com.imagine.world.exception.MyException;
+import com.google.common.base.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -13,31 +14,33 @@ import org.springframework.stereotype.Component;
 public class ServiceState {
 
     private UserServiceI userServiceI;
-    private static NormalUserService NORMAL_USER = new NormalUserService();
-    private static ReviewerService REVIEWER = new ReviewerService();
-    private static PowerUserService POWER_USER = new PowerUserService();
 
-    public ServiceState(){
-        userServiceI = NORMAL_USER;
-    }
+    @Autowired
+    private NormalUserService normalUserService;
+    @Autowired
+    private ReviewerService reviewerService;
+    @Autowired
+    private PowerUserService powerUserService;
 
     private void setUserServiceI(UserServiceI userServiceI) {
         this.userServiceI = userServiceI;
     }
 
     public void changeToNormalUser(){
-        this.setUserServiceI(NORMAL_USER);
+        this.setUserServiceI(normalUserService);
     }
 
     public void changeToReviewerUser(){
-        this.setUserServiceI(REVIEWER);
+        this.setUserServiceI(reviewerService);
     }
 
     public void changeToPowerUser(){
-        this.setUserServiceI(POWER_USER);
+        this.setUserServiceI(powerUserService);
     }
 
     public UserServiceI getService() {
+        if(null == userServiceI)
+            userServiceI = normalUserService;
         return userServiceI;
     }
 }

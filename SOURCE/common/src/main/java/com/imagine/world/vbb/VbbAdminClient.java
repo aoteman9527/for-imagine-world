@@ -3,7 +3,7 @@ package com.imagine.world.vbb;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.*;
-import com.imagine.world.dao.UsersDAO;
+import com.imagine.world.dao.UserDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.LoginInvalidUserException;
@@ -31,7 +31,7 @@ public class VbbAdminClient extends VbbClient {
     protected String sessionhash = null;
     protected String adminhash = null;
     protected String securitytoken = null;
-    protected SimpleDateFormat BIRTHDAY_DATE_FORMAT = new SimpleDateFormat(UsersDAO.BIRTHDAY_DATE_FORMAT);
+    protected SimpleDateFormat BIRTHDAY_DATE_FORMAT = new SimpleDateFormat(UserDAO.BIRTHDAY_DATE_FORMAT);
 
 
     public void loginAdmincp(String username,String password) throws HttpException, IOException, URISyntaxException, LoginInvalidUserException {
@@ -174,12 +174,12 @@ public class VbbAdminClient extends VbbClient {
         // update information
         // save to database
 
-        UsersDAO usersDAO = new UsersDAO();
+        UserDAO userDAO = new UserDAO();
         UsersEntity userEntity = null;
         if(!Strings.isNullOrEmpty(username)){
-            userEntity = usersDAO.getUserByUsername(username);
+            userEntity = userDAO.getUserByUsername(username);
         } else if(!Strings.isNullOrEmpty(email)){
-            userEntity = usersDAO.getUserByUsername(email);
+            userEntity = userDAO.getUserByUsername(email);
         }
 
         if(userEntity==null){
@@ -271,11 +271,11 @@ public class VbbAdminClient extends VbbClient {
 //        if(!Strings.isNullOrEmpty(userId)){
 //            deleteUserByUserid(userId);
 //        } else if(!Strings.isNullOrEmpty(username)){
-//            UsersDAO usersDAO = new UsersDAO();
+//            UserDAO usersDAO = new UserDAO();
 //            UsersEntity userEntity = usersDAO.getUserByUsername(username);
 //            deleteUserByUserid(String.valueOf(userEntity.getUserid()));
 //        } else if(!Strings.isNullOrEmpty(email)){
-//            UsersDAO usersDAO = new UsersDAO();
+//            UserDAO usersDAO = new UserDAO();
 //            UsersEntity userEntity = usersDAO.getUserByEmail(email);
 //            deleteUserByUserid(String.valueOf(userEntity.getUserid()));
 //        } else {

@@ -2,13 +2,16 @@ package com.imagine.world.web.csv;
 
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
+import com.imagine.world.common.AvatarType;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by letuan on 2/18/14.
@@ -57,5 +60,29 @@ public class TestGettingStarted extends TestCase{
         }
 
         //then check file log4j.properties to know more info
+    }
+
+    public void testInteger(){
+        Integer a = null;
+        System.out.println(a>=0);
+    }
+
+    public void testTimezone(){
+        String[] availableIDs = TimeZone.getAvailableIDs();
+        System.out.println(availableIDs[5]);
+    }
+
+    public void testBigDecimal(){
+        BigDecimal a= new BigDecimal("-878787.87");
+        BigDecimal b= new BigDecimal("99999999999999.123123123");
+        System.out.println(a.doubleValue());
+        System.out.println(-99999.00999>0);
+        Integer ccc = new Integer(13123132);
+        System.out.println((short)ccc.intValue());
+    }
+
+    public void testEnum(){
+
+        System.out.println(AvatarType.getType("uploaded"));
     }
 }

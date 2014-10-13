@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public abstract class BaseApi {
 
-    @Resource(name = "serviceFactory")
+    @Resource
     ServiceState serviceState;
 
     /**
@@ -31,6 +31,5 @@ public abstract class BaseApi {
         error.put("errorMessage",exception.getMessage());
         return error;
     }
-
 
 }
