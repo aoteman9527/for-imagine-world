@@ -9,7 +9,7 @@
         <property name="connection.username">letuan</property>
         <property name="connection.password">sieunhan</property>
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">2</property>
+        <!--<property name="connection.pool_size">2</property>-->
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Enable Hibernate's automatic session context management -->
@@ -20,11 +20,16 @@
         <property name="show_sql">true</property>
 
         <!--Connection pool open source refer to https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/session-configuration.html-->
-        <!--hibernate.c3p0.min_size=5-->
-        <!--hibernate.c3p0.max_size=20-->
-        <!--hibernate.c3p0.timeout=1800-->
-        <!--hibernate.c3p0.max_statements=50-->
-
+        <property name="hibernate.c3p0.min_size">2</property>
+        <property name="hibernate.c3p0.max_size">3</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <!--hibernate.c3p0.min_size – Minimum number of JDBC connections in the pool. Hibernate default: 1-->
+        <!--hibernate.c3p0.max_size – Maximum number of JDBC connections in the pool. Hibernate default: 100-->
+        <!--hibernate.c3p0.timeout – When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.-->
+        <!--hibernate.c3p0.max_statements – Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable.-->
+        <!--hibernate.c3p0.idle_test_period – idle time in seconds before a connection is automatically validated. Hibernate default: 0-->
         <!-- bean mapper -->
         <mapping class="com.imagine.world.models.TextEntity"/>
         <mapping class="com.imagine.world.models.MyorderEntity"/>
@@ -33,6 +38,7 @@
         <mapping class="com.imagine.world.models.MyproductEntity"/>
         <mapping class="com.imagine.world.models.UsersEntity"/>
         <mapping class="com.imagine.world.models.PhpbbUsersEntity"/>
+        <mapping class="com.imagine.world.models.SessionsEntity"/>
         <!--<property name="hbm2ddl.auto">update</property>-->
 
         <!--Use auto commit mode, it will not need begin and commit transaction-->

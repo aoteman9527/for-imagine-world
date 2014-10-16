@@ -18,4 +18,24 @@ public enum UserType {
     public int getValue() {
         return value;
     }
+
+    public static UserType getType(int type){
+        switch (type){
+            case 0:
+                return NORMAL_USER;
+
+            case 1:
+                return INACTIVE_USER;
+
+            case 2:
+                return IGNORE;
+
+            case 3:
+                return FOUNDER;
+
+            default:
+                return null;
+        }
+
+    }
 }

@@ -1,23 +1,34 @@
 package com.imagine.world.service;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.imagine.world.common.AvatarType;
 import com.imagine.world.common.DaoUtils;
 import com.imagine.world.common.UserType;
+import com.imagine.world.dao.SessionDAO;
+import com.imagine.world.dao.UserDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.MyException;
+import com.imagine.world.models.Session;
+import com.imagine.world.models.SessionsEntity;
 import com.imagine.world.models.UserProfile;
+import com.imagine.world.models.UsersEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -31,10 +42,116 @@ public class NormalUserService implements UserServiceI {
     Session session;
 
     @Override
-    public void authorize(ServiceState serviceState, String email, String password) throws MyException {
+    public void authorize(ServiceState serviceState, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String email, String password) throws MyException {
 
-        //TODO : ......
-        serviceState.changeToReviewerUser();
+        //        ValidationUtils.rejectIfEmptyOrWhitespace();
+        Preconditions.checkArgument(EMAIL_PATTERN_C.matcher(email).matches(),"Invalid email "+ email);
+        Preconditions.checkArgument(PASSWORD_PATTERN_C.matcher(password).matches(),"Invalid password " + password );
+
+        /**
+         * Create DAOs
+         */
+        UserDAO userDAO = new UserDAO();
+        SessionDAO sessionDAO = new SessionDAO();
+
+        /**
+         * FIND USER by EMAIL
+         */
+        UsersEntity usersEntity = userDAO.getUserByEmail(email);
+
+        /**
+         * Start confirm login.
+         */
+        if(null!=usersEntity){
+            int loginAttempts = usersEntity.getUserLoginAttempts();
+            int lastWarning = usersEntity.getUserLastWarning();
+            int currentTime = (int) (System.currentTimeMillis()/1000L);
+
+            if(currentTime-lastWarning <= LOGIN_FAIL_TIMEOUT  ){
+                usersEntity.setUserLoginAttempts(new Integer(0).byteValue());
+                userDAO.merge(usersEntity);
+                throw new AuthorizationException(String.format("Must waiting for %s seconds", "" + (LOGIN_FAIL_TIMEOUT - (currentTime - lastWarning))));
+            }
+
+            if(loginAttempts >= MAX_LOGIN_ATTEMPS){
+                usersEntity.setUserLastWarning(currentTime);
+                lastWarning = usersEntity.getUserLastWarning();
+                userDAO.merge(usersEntity);
+                throw new AuthorizationException(String.format("2Must waiting for %s seconds",""+(LOGIN_FAIL_TIMEOUT-(currentTime-lastWarning))));
+            }
+
+            //check password
+            if(!usersEntity.getUserPassword().equals(password)){
+                int currentLoginAttemps = usersEntity.getUserLoginAttempts();
+                currentLoginAttemps++;
+                usersEntity.setUserLoginAttempts(new Integer(currentLoginAttemps).byteValue());
+                userDAO.merge(usersEntity);
+                throw new AuthorizationException("Invalid password *****");
+            }
+
+            /**
+             * Reset attemps and set authorization success status
+             */
+            usersEntity.setUserLoginAttempts(new Integer(0).byteValue());
+            userDAO.merge(usersEntity);
+
+            /**
+             * Save current session
+             */
+            HttpSession httpSession = httpServletRequest.getSession();
+            List<SessionsEntity> sessionsEntityList = sessionDAO.getSessionByUserId(usersEntity.getUserId());
+            SessionsEntity sessionsEntity;
+            if(0 == sessionsEntityList.size()){
+                sessionsEntity = new SessionsEntity();
+            } else
+                sessionsEntity = sessionsEntityList.get(0);
+            sessionsEntity.setSessionId(httpSession.getId());
+            sessionsEntity.setSessionUserId(usersEntity.getUserId());
+            sessionsEntity.setSessionTime((int) (httpSession.getLastAccessedTime() - httpSession.getCreationTime()));
+            sessionsEntity.setSessionLastVisit(currentTime);
+            sessionsEntity.setSessionBrowser("TBD");
+            sessionsEntity.setSessionForwardedFor(Strings.nullToEmpty(httpServletRequest.getHeader("X-Forwarded-For")));
+            sessionsEntity.setSessionIp(Strings.nullToEmpty(httpServletRequest.getRemoteAddr()));
+            sessionsEntity.setSessionPage("");
+            sessionDAO.persist(sessionsEntity);//use persist is better than merge for this case
+
+            /**
+             * Set cookie for remember user.
+             */
+            Cookie cookieSessionId = new Cookie(COOKIE_KEY_SESSION_ID, httpSession.getId());//set as default. because i has not updated sequences :D
+            Cookie cookieUserId = new Cookie(COOKIE_KEY_USER_ID, httpSession.getId());//set as default. because i has not updated sequences :D
+            cookieSessionId.setMaxAge(60*60*24*365);// 1 year
+            cookieUserId.setMaxAge(60*60*24*365);// 1 year
+            httpServletResponse.addCookie(cookieSessionId);
+            httpServletResponse.addCookie(cookieUserId);
+
+            /**
+             * Set some information to current session
+             */
+            session.setUserId(usersEntity.getUserId());
+            session.setEmail(usersEntity.getUserEmail());
+
+            /**
+             * Switch UserType
+             */
+            UserType userType = UserType.getType(usersEntity.getUserType());
+            switch (userType){
+                case NORMAL_USER:
+                    serviceState.changeToNormalUser();
+                    break;
+                case FOUNDER:
+                    serviceState.changeToPowerUser();
+                    break;
+                default:
+                    serviceState.changeToNormalUser();
+            }
+
+
+
+        } else { // there are not existing a user.
+            throw new AuthorizationException("There are not existing such user's email " + email);
+
+        }
     }
 
     @Override

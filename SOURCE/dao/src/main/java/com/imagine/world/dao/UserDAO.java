@@ -17,9 +17,10 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
 
     public static final String BIRTHDAY_DATE_FORMAT = "dd-MM-yyyy";
 
+
     public UsersEntity getUserByUsername(String username){
 
-        Query query = getDAOManager().createQuery(" select t from UsersEntity t where t.username = :username ");
+        Query query = getSession().createQuery(" select t from UsersEntity t where t.username = :username ");
 
         query.setParameter("username", username);
 
@@ -35,7 +36,7 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
 
     public UsersEntity getUserByEmail(String email){
 
-        Query query = getDAOManager().createQuery(" select t from UsersEntity t where t.email = :email ");
+        Query query = getSession().createQuery(" select t from UsersEntity t where t.userEmail = :email ");
 
         query.setParameter("email", email);
 
@@ -49,28 +50,28 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
         return null;
     }
 
-    public void update(UsersEntity arg0){
+    public void merge(UsersEntity arg0){
         try {
-            getDAOManager().beginTransaction();
-            getDAOManager().merge(arg0);
-            getDAOManager().getTransaction().commit();
+            getSession().beginTransaction();
+            getSession().merge(arg0);
+            getSession().getTransaction().commit();
         } catch (HibernateException e){
-            getDAOManager().getTransaction().rollback();
+            getSession().getTransaction().rollback();
+        } finally {
+            getSession().flush();
         }
     }
 
     public void insert(UsersEntity u){
-        Session session =getDAOManager();
         try {
-            session.beginTransaction();
-            session.persist(u);
-            session.getTransaction().commit();
+            getSession().beginTransaction();
+            getSession().persist(u);
+            getSession().getTransaction().commit();
         } catch (HibernateException e){
-            session.getTransaction().rollback();
+            getSession().getTransaction().rollback();
             throw e;
         } finally {
-            session.flush();
-            session.close();
+            getSession().flush();
         }
     }
 }

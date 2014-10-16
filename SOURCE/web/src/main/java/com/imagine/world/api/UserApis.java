@@ -16,7 +16,7 @@ public class UserApis extends BaseApi {
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public void login() throws MyException {
-        serviceState.getService().authorize(serviceState);
+//        serviceState.getService().authorize(serviceState);
     }
 
     @RequestMapping(value = "uploadTempAvatar",method = RequestMethod.POST)

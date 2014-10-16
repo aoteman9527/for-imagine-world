@@ -13,23 +13,28 @@ import java.io.Serializable;
 public abstract class CustomDAOSupport implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static Session daoManager;
-    // = new org.hibernate.cfg.Configuration()
-//	.configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+    private Session session;// each DAO object should be a session. it will manage it's own session.
     private static SessionFactory sessFac = new org.hibernate.cfg.Configuration()
             .configure("hibernate.cfg.xml").buildSessionFactory();
 
-
-    public void anyMethodName(SessionFactory sessionFactory) {
-        CustomDAOSupport.daoManager = sessionFactory.getCurrentSession();
-        daoManager.beginTransaction();
+    /**
+     *  why there are always return a new session.
+     *  because a connection to DB can have many session . we can do did
+     *  What happen for open session. it will be timeout. by configuration. in hibernate.cfg.xml
+     * @return session
+     */
+    public static Session getDAOManager() {
+//        if(session == null || !session.isConnected()){
+//            session = sessFac.openSession();
+//        }
+        return sessFac.openSession();
     }
 
-    public static Session getDAOManager() {
-        if(daoManager == null || !daoManager.isConnected()){
-            daoManager = sessFac.openSession();
+    public Session getSession(){
+        if(session == null || !session.isConnected()){
+            session = sessFac.openSession();
         }
-        return daoManager;
+        return session;
     }
 
 }
