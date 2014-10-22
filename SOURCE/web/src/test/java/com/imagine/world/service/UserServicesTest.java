@@ -123,6 +123,12 @@ public class UserServicesTest extends MyAbstractTest {
                 new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
         });
         serviceState.getService().userInfo(request);
-//        serviceState.getService().modifyUser(request,"currentEmail","leuleuleu@gmail.com","newpass","12345678","1990-12-30", UserType.NORMAL_USER.);
+//        serviceState.getService().modifyUser(request,1,"newUsername","letuan@gmail.com","leuleuleu@gmail.com",
+//                "newpass","123456","1990-12-30",
+//                UserType.NORMAL_USER.getValue(),"avatar ne",AvatarType.REMOTE.getValue(),(short)123,(short)123,"hohoho","hohoho");
+        serviceState.getService().modifyUser(request,1,null,null,null,
+                 null,null,"1990-12-30",
+                -1,null,null,(short)-1,(short)-1,"hohoho","hohoho");
+
     }
 }

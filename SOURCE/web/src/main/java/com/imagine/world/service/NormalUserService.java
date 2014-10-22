@@ -1,5 +1,6 @@
 package com.imagine.world.service;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
@@ -215,8 +216,8 @@ public class NormalUserService implements UserServiceI {
 
             userProfile.setUserAvatar(avatar);
             userProfile.setAvatarType(avatarType);
-            userProfile.setAvatarWidth(avatarWidth);
-            userProfile.setAvatarHeight(avatarHeight);
+            userProfile.setAvatarWidth(Objects.firstNonNull(avatarWidth,(short)0));
+            userProfile.setAvatarHeight(Objects.firstNonNull(avatarHeight,(short)0));
         }
 
         if(!Strings.isNullOrEmpty(userSig))
@@ -313,7 +314,7 @@ public class NormalUserService implements UserServiceI {
             usersEntity.setUserPassword(newPass);
         }
 
-        if(Strings.isNullOrEmpty(userBirthday)){
+        if(!Strings.isNullOrEmpty(userBirthday)){
             try {
                 birthdayFormat.parse(userBirthday);
             } catch (ParseException e) {
@@ -350,6 +351,8 @@ public class NormalUserService implements UserServiceI {
         if(!Strings.isNullOrEmpty(userFrom)){
             usersEntity.setUserFrom(userFrom);
         }
+
+        userDAO.persist(usersEntity);
 
     }
 
