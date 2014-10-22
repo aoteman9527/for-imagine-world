@@ -41,7 +41,6 @@
             <artifactId>metadata-extractor</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -140,7 +139,8 @@
         <!-- http servlet-->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- HTTP Mail client-->

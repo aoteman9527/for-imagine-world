@@ -4,10 +4,8 @@ import com.imagine.world.customdaosupport.CustomDAOSupport;
 import com.imagine.world.models.UsersEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -34,20 +32,24 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
         return null;
     }
 
-    public UsersEntity getUserByEmail(String email){
+    public List<UsersEntity> getUserByEmail(String email){
 
         Query query = getSession().createQuery(" select t from UsersEntity t where t.userEmail = :email ");
 
         query.setParameter("email", email);
 
+        List<UsersEntity> results = query.list();
+        return results;
+    }
+
+    public List<UsersEntity> getUserById(int userId){
+
+        Query query = getSession().createQuery(" select t from UsersEntity t where t.userId = :userId ");
+
+        query.setParameter("userId", userId);
 
         List<UsersEntity> results = query.list();
-
-        if (results !=null && results.size() > 0) {
-            return results.get(0);
-        }
-
-        return null;
+        return results;
     }
 
     public void merge(UsersEntity arg0){
@@ -62,7 +64,7 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
         }
     }
 
-    public void insert(UsersEntity u){
+    public void persist(UsersEntity u){
         try {
             getSession().beginTransaction();
             getSession().persist(u);

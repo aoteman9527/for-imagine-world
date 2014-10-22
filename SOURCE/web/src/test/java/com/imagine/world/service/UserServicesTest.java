@@ -1,6 +1,7 @@
 package com.imagine.world.service;
 
 import com.imagine.world.common.AvatarType;
+import com.imagine.world.common.UserType;
 import com.imagine.world.exception.MyException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -87,7 +88,7 @@ public class UserServicesTest extends MyAbstractTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         /**
-         * Please note about error message every trycatch
+         * Please look to error message every trycatch
          */
         try {            serviceState.getService().authorize(serviceState, request, response, "letuan@gmail.com", "wrongpass");      } catch (MyException e){            System.out.println(e.getMessage());        }
         try {            serviceState.getService().authorize(serviceState, request, response, "letuan@gmail.com", "wrongpass");      } catch (MyException e){            System.out.println(e.getMessage());        }
@@ -98,5 +99,30 @@ public class UserServicesTest extends MyAbstractTest {
 
         Cookie cookie = response.getCookie(UserServiceI.COOKIE_KEY_USER_ID);
         System.out.println("Cookie "+cookie);
+    }
+
+    @Test
+    public void testUserInfo() throws MyException {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
+
+        request.setCookies(new Cookie[]{
+                new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
+                new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
+        });
+        serviceState.getService().userInfo(request);
+    }
+
+    @Test
+    public void testModifyUser() throws MyException {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
+
+        request.setCookies(new Cookie[]{
+                new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
+                new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
+        });
+        serviceState.getService().userInfo(request);
+//        serviceState.getService().modifyUser(request,"currentEmail","leuleuleu@gmail.com","newpass","12345678","1990-12-30", UserType.NORMAL_USER.);
     }
 }

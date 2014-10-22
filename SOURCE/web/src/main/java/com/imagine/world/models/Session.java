@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class Session {
     private String tempAvatarPath;
     private String email;
-    private int userId;
+    private int userId=-1;
 
     public String getTempAvatarPath() {
         return tempAvatarPath;
@@ -36,5 +36,14 @@ public class Session {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * this function is used for log out case.
+     */
+    public void clearData(){
+        this.tempAvatarPath = null;
+        this.email = null;
+        this.userId = -1;
     }
 }

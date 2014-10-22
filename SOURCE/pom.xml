@@ -160,6 +160,28 @@
                 <version>1.9.5</version>
             </dependency>
 
+            <!--For JSON mapping . it will be conflict visit this for more detail  http://stackoverflow.com/questions/16335591/spring-mvc-json-406-not-acceptable-->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.4.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.4.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.4.3</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

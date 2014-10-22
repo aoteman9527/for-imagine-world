@@ -21,10 +21,26 @@ public class UserProfile {
     private Integer userRank;
     private String userAvatar;
     private String avatarType;
-    private Integer avatarWidth;
-    private Integer avatarHeight;
+    private short avatarWidth;
+    private short avatarHeight;
     private String userSig;
     private String userFrom;
+
+    public UserProfile(){}
+
+    public UserProfile(UsersEntity usersEntity){
+        this.username = usersEntity.getUsername();
+        this.userEmail = usersEntity.getUserEmail();
+        this.birthday = usersEntity.getUserBirthday();
+        this.userType = new Integer(usersEntity.getUserType());
+        this.timezone = usersEntity.getUserTimezone();
+        this.userRank = usersEntity.getUserRank();
+        this.avatarType = (int)usersEntity.getUserAvatarType() +"";
+        this.avatarWidth = usersEntity.getUserAvatarWidth();
+        this.avatarHeight = usersEntity.getUserAvatarHeight();
+        this.userSig = usersEntity.getUserSig();
+        this.userFrom = usersEntity.getUserFrom();
+    }
 
     public String getUsername() {
         return username;
@@ -90,19 +106,19 @@ public class UserProfile {
         this.avatarType = avatarType;
     }
 
-    public Integer getAvatarWidth() {
+    public short getAvatarWidth() {
         return avatarWidth;
     }
 
-    public void setAvatarWidth(Integer avatarWidth) {
+    public void setAvatarWidth(short avatarWidth) {
         this.avatarWidth = avatarWidth;
     }
 
-    public Integer getAvatarHeight() {
+    public short getAvatarHeight() {
         return avatarHeight;
     }
 
-    public void setAvatarHeight(Integer avatarHeight) {
+    public void setAvatarHeight(short avatarHeight) {
         this.avatarHeight = avatarHeight;
     }
 
@@ -146,8 +162,8 @@ public class UserProfile {
         if(!Strings.isNullOrEmpty(this.userAvatar)){
             usersEntity.setUserAvatar(this.userAvatar);
             usersEntity.setUserAvatarType(new Integer(AvatarType.valueOf(this.avatarType.toUpperCase()).getValue2()).byteValue());
-            usersEntity.setUserAvatarHeight(new Integer(Objects.firstNonNull(this.avatarHeight,0)).shortValue());
-            usersEntity.setUserAvatarWidth(new Integer(Objects.firstNonNull(this.avatarWidth,0)).shortValue());
+            usersEntity.setUserAvatarHeight(new Short(Objects.firstNonNull(this.avatarHeight,(short)0)));
+            usersEntity.setUserAvatarWidth(new Short(Objects.firstNonNull(this.avatarWidth,(short)0)));
         } else {
             usersEntity.setUserAvatar("");
         }

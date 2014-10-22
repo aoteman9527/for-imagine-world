@@ -1,6 +1,7 @@
 package com.imagine.world.service;
 
 import com.imagine.world.exception.MyException;
+import com.imagine.world.models.UserProfile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +31,17 @@ public interface UserServiceI {
     static final int MAX_LOGIN_ATTEMPS = 5;//
     static final String COOKIE_KEY_SESSION_ID="sessionId";
     static final String COOKIE_KEY_USER_ID="userId";
+    static final String PATH_AVATAR_FINAL="/tmp/local_avtar.";
+    static final String PATH_AVATAR_TEMP="/tmp/";
 
     public void authorize(ServiceState serviceState,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String email, String password) throws MyException;
     public void logOut() throws MyException;
     public void issueArticle() throws MyException;
-    public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Integer avatarWidth, Integer avatarHeight, String userSig, String userFrom) throws MyException;
+    public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException;
     public void uploadTempAvatar(MultipartFile multipartFile) throws MyException;
-    public void userInfo() throws MyException;
-    public void modifyUser() throws MyException;
+    public UserProfile userInfo(HttpServletRequest httpServletRequest) throws MyException;
+    public void modifyUser(HttpServletRequest httpServletRequest, int userId, String username, String currentEmail, String newEmail, String newPass, String currentPass, String userbirthday,
+                           int userType, String userAvatar, String userAvatarType,
+                           Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException;
+    public void checkLogin(HttpServletRequest httpServletRequest) throws MyException;
 }
