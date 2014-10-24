@@ -1,19 +1,17 @@
 package com.imagine.world.models;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by tuan on 10/9/14.
  */
 @Entity
-@javax.persistence.Table(name = "TOPICS", schema = "", catalog = "blogs")
+@Table(name = "TOPICS", schema = "", catalog = "blogs")
 public class TopicsEntity {
     private int topicId;
 
     @Id
-    @javax.persistence.Column(name = "topic_id")
+    @Column(name = "topic_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicId() {
         return topicId;
     }
@@ -25,7 +23,7 @@ public class TopicsEntity {
     private int forumId;
 
     @Basic
-    @javax.persistence.Column(name = "forum_id")
+    @Column(name = "forum_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumId() {
         return forumId;
     }
@@ -37,7 +35,7 @@ public class TopicsEntity {
     private int iconId;
 
     @Basic
-    @javax.persistence.Column(name = "icon_id")
+    @Column(name = "icon_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getIconId() {
         return iconId;
     }
@@ -49,7 +47,7 @@ public class TopicsEntity {
     private byte topicAttachment;
 
     @Basic
-    @javax.persistence.Column(name = "topic_attachment")
+    @Column(name = "topic_attachment", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getTopicAttachment() {
         return topicAttachment;
     }
@@ -61,7 +59,7 @@ public class TopicsEntity {
     private byte topicApproved;
 
     @Basic
-    @javax.persistence.Column(name = "topic_approved")
+    @Column(name = "topic_approved", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getTopicApproved() {
         return topicApproved;
     }
@@ -73,7 +71,7 @@ public class TopicsEntity {
     private byte topicReported;
 
     @Basic
-    @javax.persistence.Column(name = "topic_reported")
+    @Column(name = "topic_reported", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getTopicReported() {
         return topicReported;
     }
@@ -85,7 +83,7 @@ public class TopicsEntity {
     private String topicTitle;
 
     @Basic
-    @javax.persistence.Column(name = "topic_title")
+    @Column(name = "topic_title", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getTopicTitle() {
         return topicTitle;
     }
@@ -97,7 +95,7 @@ public class TopicsEntity {
     private int topicPoster;
 
     @Basic
-    @javax.persistence.Column(name = "topic_poster")
+    @Column(name = "topic_poster", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicPoster() {
         return topicPoster;
     }
@@ -109,7 +107,7 @@ public class TopicsEntity {
     private int topicTime;
 
     @Basic
-    @javax.persistence.Column(name = "topic_time")
+    @Column(name = "topic_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getTopicTime() {
         return topicTime;
     }
@@ -121,7 +119,7 @@ public class TopicsEntity {
     private int topicTimeLimit;
 
     @Basic
-    @javax.persistence.Column(name = "topic_time_limit")
+    @Column(name = "topic_time_limit", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getTopicTimeLimit() {
         return topicTimeLimit;
     }
@@ -133,7 +131,7 @@ public class TopicsEntity {
     private int topicViews;
 
     @Basic
-    @javax.persistence.Column(name = "topic_views")
+    @Column(name = "topic_views", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicViews() {
         return topicViews;
     }
@@ -145,7 +143,7 @@ public class TopicsEntity {
     private int topicReplies;
 
     @Basic
-    @javax.persistence.Column(name = "topic_replies")
+    @Column(name = "topic_replies", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicReplies() {
         return topicReplies;
     }
@@ -157,7 +155,7 @@ public class TopicsEntity {
     private int topicRepliesReal;
 
     @Basic
-    @javax.persistence.Column(name = "topic_replies_real")
+    @Column(name = "topic_replies_real", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicRepliesReal() {
         return topicRepliesReal;
     }
@@ -169,7 +167,7 @@ public class TopicsEntity {
     private byte topicStatus;
 
     @Basic
-    @javax.persistence.Column(name = "topic_status")
+    @Column(name = "topic_status", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getTopicStatus() {
         return topicStatus;
     }
@@ -181,7 +179,7 @@ public class TopicsEntity {
     private byte topicType;
 
     @Basic
-    @javax.persistence.Column(name = "topic_type")
+    @Column(name = "topic_type", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getTopicType() {
         return topicType;
     }
@@ -193,7 +191,7 @@ public class TopicsEntity {
     private int topicFirstPostId;
 
     @Basic
-    @javax.persistence.Column(name = "topic_first_post_id")
+    @Column(name = "topic_first_post_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicFirstPostId() {
         return topicFirstPostId;
     }
@@ -205,7 +203,7 @@ public class TopicsEntity {
     private String topicFirstPosterName;
 
     @Basic
-    @javax.persistence.Column(name = "topic_first_poster_name")
+    @Column(name = "topic_first_poster_name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getTopicFirstPosterName() {
         return topicFirstPosterName;
     }
@@ -217,7 +215,7 @@ public class TopicsEntity {
     private String topicFirstPosterColour;
 
     @Basic
-    @javax.persistence.Column(name = "topic_first_poster_colour")
+    @Column(name = "topic_first_poster_colour", nullable = false, insertable = true, updatable = true, length = 6, precision = 0)
     public String getTopicFirstPosterColour() {
         return topicFirstPosterColour;
     }
@@ -229,7 +227,7 @@ public class TopicsEntity {
     private int topicLastPostId;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_post_id")
+    @Column(name = "topic_last_post_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicLastPostId() {
         return topicLastPostId;
     }
@@ -241,7 +239,7 @@ public class TopicsEntity {
     private int topicLastPosterId;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_poster_id")
+    @Column(name = "topic_last_poster_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicLastPosterId() {
         return topicLastPosterId;
     }
@@ -253,7 +251,7 @@ public class TopicsEntity {
     private String topicLastPosterName;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_poster_name")
+    @Column(name = "topic_last_poster_name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getTopicLastPosterName() {
         return topicLastPosterName;
     }
@@ -265,7 +263,7 @@ public class TopicsEntity {
     private String topicLastPosterColour;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_poster_colour")
+    @Column(name = "topic_last_poster_colour", nullable = false, insertable = true, updatable = true, length = 6, precision = 0)
     public String getTopicLastPosterColour() {
         return topicLastPosterColour;
     }
@@ -277,7 +275,7 @@ public class TopicsEntity {
     private String topicLastPostSubject;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_post_subject")
+    @Column(name = "topic_last_post_subject", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getTopicLastPostSubject() {
         return topicLastPostSubject;
     }
@@ -289,7 +287,7 @@ public class TopicsEntity {
     private int topicLastPostTime;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_post_time")
+    @Column(name = "topic_last_post_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getTopicLastPostTime() {
         return topicLastPostTime;
     }
@@ -301,7 +299,7 @@ public class TopicsEntity {
     private int topicLastViewTime;
 
     @Basic
-    @javax.persistence.Column(name = "topic_last_view_time")
+    @Column(name = "topic_last_view_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getTopicLastViewTime() {
         return topicLastViewTime;
     }
@@ -313,7 +311,7 @@ public class TopicsEntity {
     private int topicMovedId;
 
     @Basic
-    @javax.persistence.Column(name = "topic_moved_id")
+    @Column(name = "topic_moved_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicMovedId() {
         return topicMovedId;
     }
@@ -325,7 +323,7 @@ public class TopicsEntity {
     private byte topicBumped;
 
     @Basic
-    @javax.persistence.Column(name = "topic_bumped")
+    @Column(name = "topic_bumped", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getTopicBumped() {
         return topicBumped;
     }
@@ -337,7 +335,7 @@ public class TopicsEntity {
     private int topicBumper;
 
     @Basic
-    @javax.persistence.Column(name = "topic_bumper")
+    @Column(name = "topic_bumper", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicBumper() {
         return topicBumper;
     }
@@ -349,7 +347,7 @@ public class TopicsEntity {
     private String pollTitle;
 
     @Basic
-    @javax.persistence.Column(name = "poll_title")
+    @Column(name = "poll_title", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getPollTitle() {
         return pollTitle;
     }
@@ -361,7 +359,7 @@ public class TopicsEntity {
     private int pollStart;
 
     @Basic
-    @javax.persistence.Column(name = "poll_start")
+    @Column(name = "poll_start", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getPollStart() {
         return pollStart;
     }
@@ -373,7 +371,7 @@ public class TopicsEntity {
     private int pollLength;
 
     @Basic
-    @javax.persistence.Column(name = "poll_length")
+    @Column(name = "poll_length", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getPollLength() {
         return pollLength;
     }
@@ -385,7 +383,7 @@ public class TopicsEntity {
     private byte pollMaxOptions;
 
     @Basic
-    @javax.persistence.Column(name = "poll_max_options")
+    @Column(name = "poll_max_options", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPollMaxOptions() {
         return pollMaxOptions;
     }
@@ -397,7 +395,7 @@ public class TopicsEntity {
     private int pollLastVote;
 
     @Basic
-    @javax.persistence.Column(name = "poll_last_vote")
+    @Column(name = "poll_last_vote", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getPollLastVote() {
         return pollLastVote;
     }
@@ -409,7 +407,7 @@ public class TopicsEntity {
     private byte pollVoteChange;
 
     @Basic
-    @javax.persistence.Column(name = "poll_vote_change")
+    @Column(name = "poll_vote_change", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPollVoteChange() {
         return pollVoteChange;
     }

@@ -5,8 +5,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import com.imagine.world.common.AvatarType;
+import com.imagine.world.common.TopicStatus;
+import com.imagine.world.common.TopicType;
 import com.imagine.world.common.UserType;
 import com.imagine.world.dao.SessionDAO;
+import com.imagine.world.dao.TopicDao;
 import com.imagine.world.dao.UserDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
@@ -34,7 +37,7 @@ import java.util.List;
  *
  */
 @Component
-public class NormalUserService implements UserServiceI {
+public class NormalUserService implements UserServiceI, PostServiceI {
 
     @Resource
     Session session;
@@ -129,7 +132,7 @@ public class NormalUserService implements UserServiceI {
              */
             session.setUserId(usersEntity.getUserId());
             session.setEmail(usersEntity.getUserEmail());
-
+            session.setUsername(usersEntity.getUsername());
             /**
              * Switch UserType
              */
@@ -398,5 +401,97 @@ public class NormalUserService implements UserServiceI {
 //                return true;
 //        }
 //        return false;
+    }
+
+    @Override
+    public void deletePost() {
+
+    }
+
+    @Override
+    public void deleteTopic() {
+
+    }
+
+    @Override
+    public void modifyPost() {
+
+    }
+
+    @Override
+    public void modifyTopic() {
+
+    }
+
+    @Override
+    public void postNew(HttpServletRequest httpServletRequest, int forumId,String subject,String text) throws MyException {
+        this.checkLogin(httpServletRequest);
+        this.checkPermission();
+
+        /**
+         * Do Business
+         */
+        //TODO validate forumId
+        this.addNewTopic(forumId,subject,
+                session.getUserId(),//userId
+                System.currentTimeMillis(), //topicTime
+                0,//views
+                TopicStatus.ITEM_UNLOCKED.getValue(), //default
+                TopicType.POST_NORMAL.getValue(), //default
+                -1,//Cause it is unknow the new post
+                session.getUsername(),//firstPostName
+                -1,//this equal with first post
+                session.getUsername(),//lastPostName
+                session.getUserId()//lastPostId
+                );
+    }
+
+    @Override
+    public void getTopics() {
+
+    }
+
+    @Override
+    public void postInfo() {
+
+    }
+
+    @Override
+    public void getPosts() {
+
+    }
+
+    @Override
+    public void checkPermission() {
+
+    }
+
+    @Override
+    public TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime,
+                            int views, byte status, byte type,
+                            int firstPostId, String firstPosterName,
+                            int lastPostId, String lastPosterName, int lastPosterId) {
+        TopicsEntity topicsEntity = new TopicsEntity();
+        topicsEntity.setForumId(forumId);
+        topicsEntity.setTopicTitle(title);
+        topicsEntity.setTopicPoster(posterId);
+        topicsEntity.setTopicTime((int) (topicTime / 1000));
+        topicsEntity.setTopicViews(views);
+        topicsEntity.setTopicStatus(status);
+        topicsEntity.setTopicType(type);
+        topicsEntity.setTopicFirstPostId(firstPostId);
+        topicsEntity.setTopicFirstPosterName(firstPosterName);
+        topicsEntity.setTopicLastPostId(lastPostId);
+        topicsEntity.setTopicLastPosterName(lastPosterName);
+        topicsEntity.setTopicLastPosterId(lastPosterId);
+
+        TopicDao topicDao = new TopicDao();
+        topicDao.persist(topicsEntity);
+        return topicsEntity;
+    }
+
+    @Override
+    public void addNewPost() {
+
     }
 }

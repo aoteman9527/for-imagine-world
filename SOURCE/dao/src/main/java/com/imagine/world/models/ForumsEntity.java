@@ -1,19 +1,58 @@
 package com.imagine.world.models;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by tuan on 10/9/14.
  */
 @Entity
-@javax.persistence.Table(name = "FORUMS", schema = "", catalog = "blogs")
+@Table(name = "FORUMS", schema = "", catalog = "blogs")
 public class ForumsEntity {
     private int forumId;
+    private int parentId;
+    private int leftId;
+    private int rightId;
+    private String forumParents;
+    private String forumName;
+    private String forumDesc;
+    private String forumDescBitfield;
+    private int forumDescOptions;
+    private String forumDescUid;
+    private String forumLink;
+    private String forumPassword;
+    private int forumStyle;
+    private String forumImage;
+    private String forumRules;
+    private String forumRulesLink;
+    private String forumRulesBitfield;
+    private int forumRulesOptions;
+    private String forumRulesUid;
+    private byte forumTopicsPerPage;
+    private byte forumType;
+    private byte forumStatus;
+    private int forumPosts;
+    private int forumTopics;
+    private int forumTopicsReal;
+    private int forumLastPostId;
+    private int forumLastPosterId;
+    private String forumLastPostSubject;
+    private int forumLastPostTime;
+    private String forumLastPosterName;
+    private String forumLastPosterColour;
+    private byte forumFlags;
+    private int forumOptions;
+    private byte displaySubforumList;
+    private byte displayOnIndex;
+    private byte enableIndexing;
+    private byte enableIcons;
+    private byte enablePrune;
+    private int pruneNext;
+    private int pruneDays;
+    private int pruneViewed;
+    private int pruneFreq;
 
     @Id
-    @javax.persistence.Column(name = "forum_id")
+    @Column(name = "forum_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumId() {
         return forumId;
     }
@@ -22,10 +61,8 @@ public class ForumsEntity {
         this.forumId = forumId;
     }
 
-    private int parentId;
-
     @Basic
-    @javax.persistence.Column(name = "parent_id")
+    @Column(name = "parent_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getParentId() {
         return parentId;
     }
@@ -34,10 +71,8 @@ public class ForumsEntity {
         this.parentId = parentId;
     }
 
-    private int leftId;
-
     @Basic
-    @javax.persistence.Column(name = "left_id")
+    @Column(name = "left_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getLeftId() {
         return leftId;
     }
@@ -46,10 +81,8 @@ public class ForumsEntity {
         this.leftId = leftId;
     }
 
-    private int rightId;
-
     @Basic
-    @javax.persistence.Column(name = "right_id")
+    @Column(name = "right_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getRightId() {
         return rightId;
     }
@@ -58,10 +91,8 @@ public class ForumsEntity {
         this.rightId = rightId;
     }
 
-    private String forumParents;
-
     @Basic
-    @javax.persistence.Column(name = "forum_parents")
+    @Column(name = "forum_parents", nullable = false, insertable = true, updatable = true, length = 16777215, precision = 0)
     public String getForumParents() {
         return forumParents;
     }
@@ -70,10 +101,8 @@ public class ForumsEntity {
         this.forumParents = forumParents;
     }
 
-    private String forumName;
-
     @Basic
-    @javax.persistence.Column(name = "forum_name")
+    @Column(name = "forum_name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumName() {
         return forumName;
     }
@@ -82,10 +111,8 @@ public class ForumsEntity {
         this.forumName = forumName;
     }
 
-    private String forumDesc;
-
     @Basic
-    @javax.persistence.Column(name = "forum_desc")
+    @Column(name = "forum_desc", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
     public String getForumDesc() {
         return forumDesc;
     }
@@ -94,10 +121,8 @@ public class ForumsEntity {
         this.forumDesc = forumDesc;
     }
 
-    private String forumDescBitfield;
-
     @Basic
-    @javax.persistence.Column(name = "forum_desc_bitfield")
+    @Column(name = "forum_desc_bitfield", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumDescBitfield() {
         return forumDescBitfield;
     }
@@ -106,10 +131,8 @@ public class ForumsEntity {
         this.forumDescBitfield = forumDescBitfield;
     }
 
-    private int forumDescOptions;
-
     @Basic
-    @javax.persistence.Column(name = "forum_desc_options")
+    @Column(name = "forum_desc_options", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getForumDescOptions() {
         return forumDescOptions;
     }
@@ -118,10 +141,8 @@ public class ForumsEntity {
         this.forumDescOptions = forumDescOptions;
     }
 
-    private String forumDescUid;
-
     @Basic
-    @javax.persistence.Column(name = "forum_desc_uid")
+    @Column(name = "forum_desc_uid", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public String getForumDescUid() {
         return forumDescUid;
     }
@@ -130,10 +151,8 @@ public class ForumsEntity {
         this.forumDescUid = forumDescUid;
     }
 
-    private String forumLink;
-
     @Basic
-    @javax.persistence.Column(name = "forum_link")
+    @Column(name = "forum_link", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumLink() {
         return forumLink;
     }
@@ -142,10 +161,8 @@ public class ForumsEntity {
         this.forumLink = forumLink;
     }
 
-    private String forumPassword;
-
     @Basic
-    @javax.persistence.Column(name = "forum_password")
+    @Column(name = "forum_password", nullable = false, insertable = true, updatable = true, length = 40, precision = 0)
     public String getForumPassword() {
         return forumPassword;
     }
@@ -154,10 +171,8 @@ public class ForumsEntity {
         this.forumPassword = forumPassword;
     }
 
-    private int forumStyle;
-
     @Basic
-    @javax.persistence.Column(name = "forum_style")
+    @Column(name = "forum_style", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumStyle() {
         return forumStyle;
     }
@@ -166,10 +181,8 @@ public class ForumsEntity {
         this.forumStyle = forumStyle;
     }
 
-    private String forumImage;
-
     @Basic
-    @javax.persistence.Column(name = "forum_image")
+    @Column(name = "forum_image", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumImage() {
         return forumImage;
     }
@@ -178,10 +191,8 @@ public class ForumsEntity {
         this.forumImage = forumImage;
     }
 
-    private String forumRules;
-
     @Basic
-    @javax.persistence.Column(name = "forum_rules")
+    @Column(name = "forum_rules", nullable = false, insertable = true, updatable = true, length = 65535, precision = 0)
     public String getForumRules() {
         return forumRules;
     }
@@ -190,10 +201,8 @@ public class ForumsEntity {
         this.forumRules = forumRules;
     }
 
-    private String forumRulesLink;
-
     @Basic
-    @javax.persistence.Column(name = "forum_rules_link")
+    @Column(name = "forum_rules_link", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumRulesLink() {
         return forumRulesLink;
     }
@@ -202,10 +211,8 @@ public class ForumsEntity {
         this.forumRulesLink = forumRulesLink;
     }
 
-    private String forumRulesBitfield;
-
     @Basic
-    @javax.persistence.Column(name = "forum_rules_bitfield")
+    @Column(name = "forum_rules_bitfield", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumRulesBitfield() {
         return forumRulesBitfield;
     }
@@ -214,10 +221,8 @@ public class ForumsEntity {
         this.forumRulesBitfield = forumRulesBitfield;
     }
 
-    private int forumRulesOptions;
-
     @Basic
-    @javax.persistence.Column(name = "forum_rules_options")
+    @Column(name = "forum_rules_options", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getForumRulesOptions() {
         return forumRulesOptions;
     }
@@ -226,10 +231,8 @@ public class ForumsEntity {
         this.forumRulesOptions = forumRulesOptions;
     }
 
-    private String forumRulesUid;
-
     @Basic
-    @javax.persistence.Column(name = "forum_rules_uid")
+    @Column(name = "forum_rules_uid", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public String getForumRulesUid() {
         return forumRulesUid;
     }
@@ -238,10 +241,8 @@ public class ForumsEntity {
         this.forumRulesUid = forumRulesUid;
     }
 
-    private byte forumTopicsPerPage;
-
     @Basic
-    @javax.persistence.Column(name = "forum_topics_per_page")
+    @Column(name = "forum_topics_per_page", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getForumTopicsPerPage() {
         return forumTopicsPerPage;
     }
@@ -250,10 +251,8 @@ public class ForumsEntity {
         this.forumTopicsPerPage = forumTopicsPerPage;
     }
 
-    private byte forumType;
-
     @Basic
-    @javax.persistence.Column(name = "forum_type")
+    @Column(name = "forum_type", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getForumType() {
         return forumType;
     }
@@ -262,10 +261,8 @@ public class ForumsEntity {
         this.forumType = forumType;
     }
 
-    private byte forumStatus;
-
     @Basic
-    @javax.persistence.Column(name = "forum_status")
+    @Column(name = "forum_status", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getForumStatus() {
         return forumStatus;
     }
@@ -274,10 +271,8 @@ public class ForumsEntity {
         this.forumStatus = forumStatus;
     }
 
-    private int forumPosts;
-
     @Basic
-    @javax.persistence.Column(name = "forum_posts")
+    @Column(name = "forum_posts", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumPosts() {
         return forumPosts;
     }
@@ -286,10 +281,8 @@ public class ForumsEntity {
         this.forumPosts = forumPosts;
     }
 
-    private int forumTopics;
-
     @Basic
-    @javax.persistence.Column(name = "forum_topics")
+    @Column(name = "forum_topics", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumTopics() {
         return forumTopics;
     }
@@ -298,10 +291,8 @@ public class ForumsEntity {
         this.forumTopics = forumTopics;
     }
 
-    private int forumTopicsReal;
-
     @Basic
-    @javax.persistence.Column(name = "forum_topics_real")
+    @Column(name = "forum_topics_real", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumTopicsReal() {
         return forumTopicsReal;
     }
@@ -310,10 +301,8 @@ public class ForumsEntity {
         this.forumTopicsReal = forumTopicsReal;
     }
 
-    private int forumLastPostId;
-
     @Basic
-    @javax.persistence.Column(name = "forum_last_post_id")
+    @Column(name = "forum_last_post_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumLastPostId() {
         return forumLastPostId;
     }
@@ -322,10 +311,8 @@ public class ForumsEntity {
         this.forumLastPostId = forumLastPostId;
     }
 
-    private int forumLastPosterId;
-
     @Basic
-    @javax.persistence.Column(name = "forum_last_poster_id")
+    @Column(name = "forum_last_poster_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumLastPosterId() {
         return forumLastPosterId;
     }
@@ -334,10 +321,8 @@ public class ForumsEntity {
         this.forumLastPosterId = forumLastPosterId;
     }
 
-    private String forumLastPostSubject;
-
     @Basic
-    @javax.persistence.Column(name = "forum_last_post_subject")
+    @Column(name = "forum_last_post_subject", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumLastPostSubject() {
         return forumLastPostSubject;
     }
@@ -346,10 +331,8 @@ public class ForumsEntity {
         this.forumLastPostSubject = forumLastPostSubject;
     }
 
-    private int forumLastPostTime;
-
     @Basic
-    @javax.persistence.Column(name = "forum_last_post_time")
+    @Column(name = "forum_last_post_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getForumLastPostTime() {
         return forumLastPostTime;
     }
@@ -358,10 +341,8 @@ public class ForumsEntity {
         this.forumLastPostTime = forumLastPostTime;
     }
 
-    private String forumLastPosterName;
-
     @Basic
-    @javax.persistence.Column(name = "forum_last_poster_name")
+    @Column(name = "forum_last_poster_name", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getForumLastPosterName() {
         return forumLastPosterName;
     }
@@ -370,10 +351,8 @@ public class ForumsEntity {
         this.forumLastPosterName = forumLastPosterName;
     }
 
-    private String forumLastPosterColour;
-
     @Basic
-    @javax.persistence.Column(name = "forum_last_poster_colour")
+    @Column(name = "forum_last_poster_colour", nullable = false, insertable = true, updatable = true, length = 6, precision = 0)
     public String getForumLastPosterColour() {
         return forumLastPosterColour;
     }
@@ -382,10 +361,8 @@ public class ForumsEntity {
         this.forumLastPosterColour = forumLastPosterColour;
     }
 
-    private byte forumFlags;
-
     @Basic
-    @javax.persistence.Column(name = "forum_flags")
+    @Column(name = "forum_flags", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getForumFlags() {
         return forumFlags;
     }
@@ -394,10 +371,8 @@ public class ForumsEntity {
         this.forumFlags = forumFlags;
     }
 
-    private int forumOptions;
-
     @Basic
-    @javax.persistence.Column(name = "forum_options")
+    @Column(name = "forum_options", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getForumOptions() {
         return forumOptions;
     }
@@ -406,10 +381,8 @@ public class ForumsEntity {
         this.forumOptions = forumOptions;
     }
 
-    private byte displaySubforumList;
-
     @Basic
-    @javax.persistence.Column(name = "display_subforum_list")
+    @Column(name = "display_subforum_list", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getDisplaySubforumList() {
         return displaySubforumList;
     }
@@ -418,10 +391,8 @@ public class ForumsEntity {
         this.displaySubforumList = displaySubforumList;
     }
 
-    private byte displayOnIndex;
-
     @Basic
-    @javax.persistence.Column(name = "display_on_index")
+    @Column(name = "display_on_index", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getDisplayOnIndex() {
         return displayOnIndex;
     }
@@ -430,10 +401,8 @@ public class ForumsEntity {
         this.displayOnIndex = displayOnIndex;
     }
 
-    private byte enableIndexing;
-
     @Basic
-    @javax.persistence.Column(name = "enable_indexing")
+    @Column(name = "enable_indexing", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnableIndexing() {
         return enableIndexing;
     }
@@ -442,10 +411,8 @@ public class ForumsEntity {
         this.enableIndexing = enableIndexing;
     }
 
-    private byte enableIcons;
-
     @Basic
-    @javax.persistence.Column(name = "enable_icons")
+    @Column(name = "enable_icons", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnableIcons() {
         return enableIcons;
     }
@@ -454,10 +421,8 @@ public class ForumsEntity {
         this.enableIcons = enableIcons;
     }
 
-    private byte enablePrune;
-
     @Basic
-    @javax.persistence.Column(name = "enable_prune")
+    @Column(name = "enable_prune", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnablePrune() {
         return enablePrune;
     }
@@ -466,10 +431,8 @@ public class ForumsEntity {
         this.enablePrune = enablePrune;
     }
 
-    private int pruneNext;
-
     @Basic
-    @javax.persistence.Column(name = "prune_next")
+    @Column(name = "prune_next", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getPruneNext() {
         return pruneNext;
     }
@@ -478,10 +441,8 @@ public class ForumsEntity {
         this.pruneNext = pruneNext;
     }
 
-    private int pruneDays;
-
     @Basic
-    @javax.persistence.Column(name = "prune_days")
+    @Column(name = "prune_days", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getPruneDays() {
         return pruneDays;
     }
@@ -490,10 +451,8 @@ public class ForumsEntity {
         this.pruneDays = pruneDays;
     }
 
-    private int pruneViewed;
-
     @Basic
-    @javax.persistence.Column(name = "prune_viewed")
+    @Column(name = "prune_viewed", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getPruneViewed() {
         return pruneViewed;
     }
@@ -502,10 +461,8 @@ public class ForumsEntity {
         this.pruneViewed = pruneViewed;
     }
 
-    private int pruneFreq;
-
     @Basic
-    @javax.persistence.Column(name = "prune_freq")
+    @Column(name = "prune_freq", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getPruneFreq() {
         return pruneFreq;
     }

@@ -1,19 +1,17 @@
 package com.imagine.world.models;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by tuan on 10/9/14.
  */
 @Entity
-@javax.persistence.Table(name = "POSTS", schema = "", catalog = "blogs")
+@Table(name = "POSTS", schema = "", catalog = "blogs")
 public class PostsEntity {
     private int postId;
 
     @Id
-    @javax.persistence.Column(name = "post_id")
+    @Column(name = "post_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getPostId() {
         return postId;
     }
@@ -25,7 +23,7 @@ public class PostsEntity {
     private int topicId;
 
     @Basic
-    @javax.persistence.Column(name = "topic_id")
+    @Column(name = "topic_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getTopicId() {
         return topicId;
     }
@@ -37,7 +35,7 @@ public class PostsEntity {
     private int forumId;
 
     @Basic
-    @javax.persistence.Column(name = "forum_id")
+    @Column(name = "forum_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getForumId() {
         return forumId;
     }
@@ -49,7 +47,7 @@ public class PostsEntity {
     private int posterId;
 
     @Basic
-    @javax.persistence.Column(name = "poster_id")
+    @Column(name = "poster_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getPosterId() {
         return posterId;
     }
@@ -61,7 +59,7 @@ public class PostsEntity {
     private int iconId;
 
     @Basic
-    @javax.persistence.Column(name = "icon_id")
+    @Column(name = "icon_id", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getIconId() {
         return iconId;
     }
@@ -73,7 +71,7 @@ public class PostsEntity {
     private String posterIp;
 
     @Basic
-    @javax.persistence.Column(name = "poster_ip")
+    @Column(name = "poster_ip", nullable = false, insertable = true, updatable = true, length = 40, precision = 0)
     public String getPosterIp() {
         return posterIp;
     }
@@ -85,7 +83,7 @@ public class PostsEntity {
     private int postTime;
 
     @Basic
-    @javax.persistence.Column(name = "post_time")
+    @Column(name = "post_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getPostTime() {
         return postTime;
     }
@@ -97,7 +95,7 @@ public class PostsEntity {
     private byte postApproved;
 
     @Basic
-    @javax.persistence.Column(name = "post_approved")
+    @Column(name = "post_approved", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPostApproved() {
         return postApproved;
     }
@@ -109,7 +107,7 @@ public class PostsEntity {
     private byte postReported;
 
     @Basic
-    @javax.persistence.Column(name = "post_reported")
+    @Column(name = "post_reported", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPostReported() {
         return postReported;
     }
@@ -121,7 +119,7 @@ public class PostsEntity {
     private byte enableBbcode;
 
     @Basic
-    @javax.persistence.Column(name = "enable_bbcode")
+    @Column(name = "enable_bbcode", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnableBbcode() {
         return enableBbcode;
     }
@@ -133,7 +131,7 @@ public class PostsEntity {
     private byte enableSmilies;
 
     @Basic
-    @javax.persistence.Column(name = "enable_smilies")
+    @Column(name = "enable_smilies", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnableSmilies() {
         return enableSmilies;
     }
@@ -145,7 +143,7 @@ public class PostsEntity {
     private byte enableMagicUrl;
 
     @Basic
-    @javax.persistence.Column(name = "enable_magic_url")
+    @Column(name = "enable_magic_url", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnableMagicUrl() {
         return enableMagicUrl;
     }
@@ -157,7 +155,7 @@ public class PostsEntity {
     private byte enableSig;
 
     @Basic
-    @javax.persistence.Column(name = "enable_sig")
+    @Column(name = "enable_sig", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getEnableSig() {
         return enableSig;
     }
@@ -169,7 +167,7 @@ public class PostsEntity {
     private String postUsername;
 
     @Basic
-    @javax.persistence.Column(name = "post_username")
+    @Column(name = "post_username", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getPostUsername() {
         return postUsername;
     }
@@ -181,7 +179,7 @@ public class PostsEntity {
     private String postSubject;
 
     @Basic
-    @javax.persistence.Column(name = "post_subject")
+    @Column(name = "post_subject", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getPostSubject() {
         return postSubject;
     }
@@ -193,7 +191,7 @@ public class PostsEntity {
     private String postText;
 
     @Basic
-    @javax.persistence.Column(name = "post_text")
+    @Column(name = "post_text", nullable = false, insertable = true, updatable = true, length = 16777215, precision = 0)
     public String getPostText() {
         return postText;
     }
@@ -205,7 +203,7 @@ public class PostsEntity {
     private String postChecksum;
 
     @Basic
-    @javax.persistence.Column(name = "post_checksum")
+    @Column(name = "post_checksum", nullable = false, insertable = true, updatable = true, length = 32, precision = 0)
     public String getPostChecksum() {
         return postChecksum;
     }
@@ -217,7 +215,7 @@ public class PostsEntity {
     private byte postAttachment;
 
     @Basic
-    @javax.persistence.Column(name = "post_attachment")
+    @Column(name = "post_attachment", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPostAttachment() {
         return postAttachment;
     }
@@ -229,7 +227,7 @@ public class PostsEntity {
     private String bbcodeBitfield;
 
     @Basic
-    @javax.persistence.Column(name = "bbcode_bitfield")
+    @Column(name = "bbcode_bitfield", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getBbcodeBitfield() {
         return bbcodeBitfield;
     }
@@ -241,7 +239,7 @@ public class PostsEntity {
     private String bbcodeUid;
 
     @Basic
-    @javax.persistence.Column(name = "bbcode_uid")
+    @Column(name = "bbcode_uid", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public String getBbcodeUid() {
         return bbcodeUid;
     }
@@ -253,7 +251,7 @@ public class PostsEntity {
     private byte postPostcount;
 
     @Basic
-    @javax.persistence.Column(name = "post_postcount")
+    @Column(name = "post_postcount", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPostPostcount() {
         return postPostcount;
     }
@@ -265,7 +263,7 @@ public class PostsEntity {
     private int postEditTime;
 
     @Basic
-    @javax.persistence.Column(name = "post_edit_time")
+    @Column(name = "post_edit_time", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     public int getPostEditTime() {
         return postEditTime;
     }
@@ -277,7 +275,7 @@ public class PostsEntity {
     private String postEditReason;
 
     @Basic
-    @javax.persistence.Column(name = "post_edit_reason")
+    @Column(name = "post_edit_reason", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     public String getPostEditReason() {
         return postEditReason;
     }
@@ -289,7 +287,7 @@ public class PostsEntity {
     private int postEditUser;
 
     @Basic
-    @javax.persistence.Column(name = "post_edit_user")
+    @Column(name = "post_edit_user", nullable = false, insertable = true, updatable = true, length = 8, precision = 0)
     public int getPostEditUser() {
         return postEditUser;
     }
@@ -301,19 +299,23 @@ public class PostsEntity {
     private short postEditCount;
 
     @Basic
-    @javax.persistence.Column(name = "post_edit_count")
+    @Column(name = "post_edit_count", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
+    public short getPostEditCount() {
+        return postEditCount;
+    }
+
+    @Basic
+    @Column(name = "post_edit_count", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
     public short getPostEditCount() {
         return postEditCount;
     }
 
     public void setPostEditCount(short postEditCount) {
         this.postEditCount = postEditCount;
-    }
-
-    private byte postEditLocked;
+    }    private byte postEditLocked;
 
     @Basic
-    @javax.persistence.Column(name = "post_edit_locked")
+    @Column(name = "post_edit_locked", nullable = false, insertable = true, updatable = true, length = 3, precision = 0)
     public byte getPostEditLocked() {
         return postEditLocked;
     }

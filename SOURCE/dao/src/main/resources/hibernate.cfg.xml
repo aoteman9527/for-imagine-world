@@ -39,6 +39,9 @@
         <mapping class="com.imagine.world.models.UsersEntity"/>
         <mapping class="com.imagine.world.models.PhpbbUsersEntity"/>
         <mapping class="com.imagine.world.models.SessionsEntity"/>
+        <mapping class="com.imagine.world.models.TopicsEntity"/>
+        <mapping class="com.imagine.world.models.ForumsEntity"/>
+        <mapping class="com.imagine.world.models.PostsEntity"/>
         <!--<property name="hbm2ddl.auto">update</property>-->
 
         <!--Use auto commit mode, it will not need begin and commit transaction-->
