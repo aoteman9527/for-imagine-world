@@ -1,6 +1,7 @@
 package com.imagine.world.service;
 
 import com.imagine.world.exception.MyException;
+import com.imagine.world.models.PostsEntity;
 import com.imagine.world.models.TopicsEntity;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,5 +26,8 @@ public interface PostServiceI {
                             int posterId, long topicTime,
                             int views, byte status, byte type, int firstPostId, String firstPosterName,
                             int lastPostId, String lastPosterName, int lastPosterId);
-    public void addNewPost();
+    public PostsEntity addNewPost(int topicId, int forumId, int posterId,
+                           long postTime, String postUsernae,
+                           String subject, String text, String checksum,
+                           long editTime, String editReason, int editUser);
 }

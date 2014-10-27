@@ -304,12 +304,6 @@ public class PostsEntity {
         return postEditCount;
     }
 
-    @Basic
-    @Column(name = "post_edit_count", nullable = false, insertable = true, updatable = true, length = 5, precision = 0)
-    public short getPostEditCount() {
-        return postEditCount;
-    }
-
     public void setPostEditCount(short postEditCount) {
         this.postEditCount = postEditCount;
     }    private byte postEditLocked;

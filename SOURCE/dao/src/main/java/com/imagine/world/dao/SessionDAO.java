@@ -2,7 +2,6 @@ package com.imagine.world.dao;
 
 import com.imagine.world.customdaosupport.CustomDAOSupport;
 import com.imagine.world.models.SessionsEntity;
-import com.imagine.world.models.UsersEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 

@@ -1,7 +1,7 @@
 package com.imagine.world.dao;
 
 import com.imagine.world.customdaosupport.CustomDAOSupport;
-import com.imagine.world.models.TopicsEntity;
+import com.imagine.world.models.ForumsEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
@@ -9,24 +9,23 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by tuanlhd on 10/24/14.
+ * Created by tuanlhd on 10/27/14.
  */
-public class TopicDao extends CustomDAOSupport implements Serializable {
+public class ForumDAO extends CustomDAOSupport implements Serializable {
+    public List<ForumsEntity> getForumById(int forumId){
 
-    public List<TopicsEntity> getTopicById(int topicId){
+        Query query = getSession().createQuery(" select t from ForumsEntity t where t.forumId = :forumId ");
 
-        Query query = getSession().createQuery(" select t from TopicsEntity t where t.topicId = :topicId ");
+        query.setParameter("forumId", forumId);
 
-        query.setParameter("topicId", topicId);
-
-        List<TopicsEntity> results = query.list();
+        List<ForumsEntity> results = query.list();
         return results;
     }
 
-    public void persist(TopicsEntity topicsEntity){
+    public void persist(ForumsEntity forumsEntity){
         try {
             getSession().beginTransaction();
-            getSession().persist(topicsEntity);
+            getSession().persist(forumsEntity);
             getSession().getTransaction().commit();
         } catch (HibernateException e){
             getSession().getTransaction().rollback();
@@ -36,10 +35,10 @@ public class TopicDao extends CustomDAOSupport implements Serializable {
         }
     }
 
-    public void merge(TopicsEntity topicsEntity){
+    public void merge(ForumsEntity forumsEntity){
         try {
             getSession().beginTransaction();
-            getSession().merge(topicsEntity);
+            getSession().merge(forumsEntity);
             getSession().getTransaction().commit();
         } catch (HibernateException e){
             getSession().getTransaction().rollback();

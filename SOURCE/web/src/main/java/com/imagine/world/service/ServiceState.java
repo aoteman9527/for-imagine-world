@@ -1,6 +1,5 @@
 package com.imagine.world.service;
 
-import com.google.common.base.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Scope( value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ServiceState {
 
-    private UserServiceI userServiceI;
+    private CombineServices combineServices;
 
     @Autowired
     private NormalUserService normalUserService;
@@ -22,25 +21,25 @@ public class ServiceState {
     @Autowired
     private PowerUserService powerUserService;
 
-    private void setUserServiceI(UserServiceI userServiceI) {
-        this.userServiceI = userServiceI;
+    private void setCombineServices(CombineServices combineServices) {
+        this.combineServices = combineServices;
     }
 
     public void changeToNormalUser(){
-        this.setUserServiceI(normalUserService);
+        this.setCombineServices(normalUserService);
     }
 
     public void changeToReviewerUser(){
-        this.setUserServiceI(reviewerService);
+        this.setCombineServices(reviewerService);
     }
 
     public void changeToPowerUser(){
-        this.setUserServiceI(powerUserService);
+        this.setCombineServices(powerUserService);
     }
 
-    public UserServiceI getService() {
-        if(null == userServiceI)
-            userServiceI = normalUserService;
-        return userServiceI;
+    public CombineServices getService() {
+        if(null == combineServices)
+            combineServices = normalUserService;
+        return combineServices;
     }
 }

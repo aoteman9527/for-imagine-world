@@ -8,13 +8,12 @@ import com.imagine.world.common.AvatarType;
 import com.imagine.world.common.TopicStatus;
 import com.imagine.world.common.TopicType;
 import com.imagine.world.common.UserType;
-import com.imagine.world.dao.SessionDAO;
-import com.imagine.world.dao.TopicDao;
-import com.imagine.world.dao.UserDAO;
+import com.imagine.world.dao.*;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.*;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +36,7 @@ import java.util.List;
  *
  */
 @Component
-public class NormalUserService implements UserServiceI, PostServiceI {
+public class NormalUserService implements CombineServices {
 
     @Resource
     Session session;
@@ -431,19 +430,44 @@ public class NormalUserService implements UserServiceI, PostServiceI {
         /**
          * Do Business
          */
-        //TODO validate forumId
-        this.addNewTopic(forumId,subject,
+        ForumDAO forumDAO = new ForumDAO();
+        Preconditions.checkState(forumDAO.getForumById(forumId).size() > 0, "There are no existed this forum");
+
+        TopicsEntity topicsEntity = this.addNewTopic(forumId,subject,
                 session.getUserId(),//userId
                 System.currentTimeMillis(), //topicTime
                 0,//views
                 TopicStatus.ITEM_UNLOCKED.getValue(), //default
                 TopicType.POST_NORMAL.getValue(), //default
-                -1,//Cause it is unknow the new post
+                -1,//Cause it is unknown the new post
                 session.getUsername(),//firstPostName
                 -1,//this equal with first post
                 session.getUsername(),//lastPostName
                 session.getUserId()//lastPostId
                 );
+
+        PostsEntity postsEntity = this.addNewPost(topicsEntity.getTopicId(),
+                forumId,
+                session.getUserId(),//PosterId
+                System.currentTimeMillis(),//postTime
+                session.getUsername(),//PosterUsername
+                subject,
+                text,//PostText
+                new String(DigestUtils.md5(text)),
+                -1, //Default
+                "",//Default
+                -1//Default
+        );
+
+        /**
+         * update Topic first_post_id
+         * update Topic last_post_id
+         */
+        topicsEntity.setTopicFirstPostId(postsEntity.getPostId());
+        topicsEntity.setTopicLastPosterId(postsEntity.getPostId());
+        TopicDAO topicDAO = new TopicDAO();
+        topicDAO.persist(topicsEntity);
+
     }
 
     @Override
@@ -485,13 +509,32 @@ public class NormalUserService implements UserServiceI, PostServiceI {
         topicsEntity.setTopicLastPosterName(lastPosterName);
         topicsEntity.setTopicLastPosterId(lastPosterId);
 
-        TopicDao topicDao = new TopicDao();
-        topicDao.persist(topicsEntity);
+        TopicDAO topicDAO = new TopicDAO();
+        topicDAO.persist(topicsEntity);
         return topicsEntity;
     }
 
     @Override
-    public void addNewPost() {
+    public PostsEntity addNewPost(int topicId, int forumId, int posterId,
+                           long postTime, String postUsername,
+                           String subject, String text, String checksum,
+                           long editTime, String editReason, int editUser) {
+        PostsEntity postsEntity = new PostsEntity();
+        postsEntity.setTopicId(topicId);
+        postsEntity.setForumId(forumId);
+        postsEntity.setPosterId(posterId);
+        postsEntity.setPostTime((int) (postTime / 1000));
+        postsEntity.setPostUsername(postUsername);
+        postsEntity.setPostSubject(subject);
+        postsEntity.setPostText(text);
+        postsEntity.setPostChecksum(checksum);
+        postsEntity.setPostEditTime((int) (editTime / 1000));
+        postsEntity.setPostEditReason(editReason);
+        postsEntity.setPostEditUser(editUser);
 
+        PostDAO postDAO = new PostDAO();
+        postDAO.persist(postsEntity);
+
+        return postsEntity;
     }
 }
