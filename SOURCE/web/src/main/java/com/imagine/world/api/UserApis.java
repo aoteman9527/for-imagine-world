@@ -1,6 +1,6 @@
 package com.imagine.world.api;
 
-import com.google.common.collect.*;
+import com.google.common.collect.Maps;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.SearchableList;
 import com.imagine.world.models.Session;
@@ -14,10 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.TreeSet;
 
 /**
  * Created by tuan on 10/10/14.

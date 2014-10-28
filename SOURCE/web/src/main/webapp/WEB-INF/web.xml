@@ -47,5 +47,7 @@
         <!--one minute-->
         <session-timeout>1</session-timeout>
     </session-config>
-
+    <listener>
+        <listener-class>com.imagine.world.api.Initialization</listener-class>
+    </listener>
 </web-app>

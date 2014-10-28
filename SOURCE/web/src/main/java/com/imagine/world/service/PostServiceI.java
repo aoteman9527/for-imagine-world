@@ -1,5 +1,6 @@
 package com.imagine.world.service;
 
+import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.PostsEntity;
 import com.imagine.world.models.TopicsEntity;
@@ -17,7 +18,9 @@ public interface PostServiceI {
     public void modifyTopic();
     public void postNew(HttpServletRequest httpServletRequest,
                         int forumId,String subject,String text) throws MyException;
-    public void getTopics();
+    public void reply(HttpServletRequest httpServletRequest, int forumId, int topicId, String subject,
+                      String text) throws MyException;
+    public void getTopics() throws AuthorizationException;
     public void postInfo();
     public void getPosts();
 
@@ -29,5 +32,5 @@ public interface PostServiceI {
     public PostsEntity addNewPost(int topicId, int forumId, int posterId,
                            long postTime, String postUsernae,
                            String subject, String text, String checksum,
-                           long editTime, String editReason, int editUser);
+                           long editTime, String editReason, int editUser, String posterIp);
 }

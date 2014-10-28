@@ -35,7 +35,7 @@ public interface UserServiceI {
     static final String PATH_AVATAR_TEMP="/tmp/";
 
     public void authorize(ServiceState serviceState,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String email, String password) throws MyException;
-    public void logOut() throws MyException;
+    public void logOut(ServiceState serviceState) throws MyException;
     public void issueArticle() throws MyException;
     public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException;
     public void uploadTempAvatar(MultipartFile multipartFile) throws MyException;
@@ -43,5 +43,5 @@ public interface UserServiceI {
     public void modifyUser(HttpServletRequest httpServletRequest, int userId, String username, String currentEmail, String newEmail, String newPass, String currentPass, String userbirthday,
                            int userType, String userAvatar, String userAvatarType,
                            Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException;
-    public void checkLogin(HttpServletRequest httpServletRequest) throws MyException;
+    public void checkLogin(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse, ServiceState serviceState) throws MyException;
 }

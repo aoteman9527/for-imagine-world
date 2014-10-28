@@ -35,12 +35,6 @@ public class UserServicesTest extends MyAbstractTest {
 
     @Autowired
     ServiceState serviceState ;
-//    @Autowired MockHttpServletRequest request;
-//    @Autowired MockHttpServletResponse response;
-//    @Resource
-//    HttpServletRequest httpServletRequest;
-//    @Resource
-//    HttpServletResponse httpServletResponse;
 
     @Test
     public void testRegisterUser() throws MyException {

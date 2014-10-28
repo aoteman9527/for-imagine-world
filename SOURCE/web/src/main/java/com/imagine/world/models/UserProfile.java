@@ -3,9 +3,9 @@ package com.imagine.world.models;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.imagine.world.common.AvatarType;
+import com.imagine.world.common.DefaultUtils;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 /**
  * Created by tuan on 10/10/14.
@@ -168,30 +168,7 @@ public class UserProfile {
             usersEntity.setUserAvatar("");
         }
 
-        usersEntity.setUserActkey(new Random().nextInt(16)+"");
-        usersEntity.setUserAim("");
-        usersEntity.setUserColour("");
-        usersEntity.setUserDateformat("");
-        usersEntity.setUserFormSalt("");
-        usersEntity.setUserIcq("");
-        usersEntity.setUserInterests("");
-        usersEntity.setUserIp("");
-        usersEntity.setUserJabber("");
-        usersEntity.setUserLang("");
-        usersEntity.setUserLastConfirmKey("");
-        usersEntity.setUserLastpage("");
-        usersEntity.setUserMsnm("");
-        usersEntity.setUserNewpasswd("");
-        usersEntity.setUserOcc("");
-        usersEntity.setUserPermissions("");
-        usersEntity.setUserPostSortbyDir("");
-        usersEntity.setUserPostSortbyType("");
-        usersEntity.setUserSigBbcodeBitfield("");
-        usersEntity.setUserSigBbcodeUid("");
-        usersEntity.setUserTopicSortbyDir("");
-        usersEntity.setUserTopicSortbyType("");
-        usersEntity.setUserWebsite("");
-        usersEntity.setUserYim("");
+        DefaultUtils.setDefaultValueUser(usersEntity);
 
         return usersEntity;
     }

@@ -1,11 +1,7 @@
 package com.imagine.world.csv;
 
 import com.imagine.world.dao.MyproductDao;
-import com.imagine.world.models.MyproductEntity;
 import org.apache.log4j.Logger;
-
-import java.sql.Date;
-import java.util.List;
 
 /**
  * Created by letuan on 2/21/14.

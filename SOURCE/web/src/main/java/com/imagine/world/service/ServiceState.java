@@ -20,6 +20,8 @@ public class ServiceState {
     private ReviewerService reviewerService;
     @Autowired
     private PowerUserService powerUserService;
+    @Autowired
+    private NoLoggedInUserService noLoggedInUserService;
 
     private void setCombineServices(CombineServices combineServices) {
         this.combineServices = combineServices;
@@ -35,6 +37,10 @@ public class ServiceState {
 
     public void changeToPowerUser(){
         this.setCombineServices(powerUserService);
+    }
+
+    public void changeToNoLoggedInUser(){
+        this.setCombineServices(noLoggedInUserService);
     }
 
     public CombineServices getService() {

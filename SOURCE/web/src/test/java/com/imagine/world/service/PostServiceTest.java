@@ -1,6 +1,9 @@
 package com.imagine.world.service;
 
+import com.imagine.world.dao.ForumDAO;
 import com.imagine.world.exception.MyException;
+import com.imagine.world.models.ForumsEntity;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.http.Cookie;
+import java.util.Date;
 
 /**
  * Created by tuanlhd on 10/27/14.
@@ -21,6 +25,18 @@ import javax.servlet.http.Cookie;
 public class PostServiceTest extends MyAbstractTest {
     @Autowired
     ServiceState serviceState ;
+
+    @Test
+    @Ignore
+    public void testRegisterNewUserForPost() throws MyException {
+        serviceState.getService().register(
+                "letuan",
+               "letuan@gmail.com",
+                "123456",
+                new Date(),
+                null,null,null,null,null,null,null,null,null);
+
+    }
 
     @Test
     public void testPostNew() throws MyException {

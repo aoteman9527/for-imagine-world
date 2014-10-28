@@ -1,7 +1,6 @@
 package com.imagine.world.mvc.controller;
 
 import com.google.common.collect.Maps;
-import com.imagine.world.exception.MyException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
