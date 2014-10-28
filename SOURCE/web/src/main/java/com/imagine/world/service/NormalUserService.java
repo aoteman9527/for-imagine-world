@@ -22,6 +22,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -47,12 +48,11 @@ public class NormalUserService extends NoLoggedInUserService {
     }
 
     @Override
-    public UserProfile userInfo(HttpServletRequest httpServletRequest) throws MyException {
+    public UserProfile userInfo(HttpServletResponse httpServletResponse) throws MyException {
         /**
          * Check login
          */
-//        checkLogin(httpServletRequest);
-        //Does not need check login enymore. cause the State pattern have done it for me.
+        //Does not need check login , because this state mean user logged in.
 
         /**
          * Do business
@@ -181,9 +181,12 @@ public class NormalUserService extends NoLoggedInUserService {
 
     @Override
     public void postNew(
-//            HttpServletRequest httpServletRequest,
+            HttpServletResponse response,
             int forumId,String subject,String text) throws MyException {
-//        this.checkLogin(httpServletRequest);
+
+        /**
+         * does not need check logged in. because this state . user were logged in.
+         */
         this.checkPermission();
 
         /**
@@ -298,7 +301,12 @@ public class NormalUserService extends NoLoggedInUserService {
     }
 
     @Override
-    public void reply(HttpServletRequest httpServletRequest,int forumId, int topicId, String subject, String text) throws MyException {
+    public void reply(HttpServletResponse response,int forumId, int topicId, String subject, String text) throws MyException {
+        this.checkPermission();
+
+        /**
+         * does not need check logged in. because this state . user were logged in.
+         */
         this.checkPermission();
 
         /**

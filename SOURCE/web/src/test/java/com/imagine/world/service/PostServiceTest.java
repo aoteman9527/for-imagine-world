@@ -49,10 +49,10 @@ public class PostServiceTest extends MyAbstractTest {
                 new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
                 new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
         });
-        serviceState.getService().postNew(
-                1,
-                "THIS IS SUBJECT",
-                "HUHUHUHUHUHUHUHUHU "// subject
-        );
+//        serviceState.getService().postNew(
+//                1,
+//                "THIS IS SUBJECT",
+//                "HUHUHUHUHUHUHUHUHU "// subject
+//        );
     }
 }

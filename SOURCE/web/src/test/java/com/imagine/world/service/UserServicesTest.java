@@ -120,7 +120,7 @@ public class UserServicesTest extends MyAbstractTest {
                 new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
                 new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
         });
-        serviceState.getService().userInfo(request);
+//        serviceState.getService().userInfo(request);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class UserServicesTest extends MyAbstractTest {
                 new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
                 new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
         });
-        serviceState.getService().userInfo(request);
+//        serviceState.getService().userInfo(request);
 //        serviceState.getService().modifyUser(request,1,"newUsername","letuan@gmail.com","leuleuleu@gmail.com",
 //                "newpass","123456","1990-12-30",
 //                UserType.NORMAL_USER.getValue(),"avatar ne",AvatarType.REMOTE.getValue(),(short)123,(short)123,"hohoho","hohoho");
