@@ -6,19 +6,23 @@ import com.imagine.world.models.PostsEntity;
 import com.imagine.world.models.TopicsEntity;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by tuan on 10/23/14.
  */
 public interface PostServiceI {
 
-    public void deletePost();
-    public void deleteTopic();
-    public void modifyPost();
-    public void modifyTopic();
-    public void postNew(HttpServletRequest httpServletRequest,
+    public void deletePost() throws AuthorizationException;
+    public void deleteTopic() throws AuthorizationException;
+    public void modifyPost() throws AuthorizationException;
+    public void modifyTopic() throws AuthorizationException;
+    public void postNew(
+            HttpServletResponse httpServletResponse,
                         int forumId,String subject,String text) throws MyException;
-    public void reply(HttpServletRequest httpServletRequest, int forumId, int topicId, String subject,
+    public void reply(
+            HttpServletResponse httpServletResponse,
+            int forumId, int topicId, String subject,
                       String text) throws MyException;
     public void getTopics() throws AuthorizationException;
     public void postInfo();

@@ -43,7 +43,9 @@ public class NoLoggedInUserService implements CombineServices {
 
 
     @Override
-    public void authorize(ServiceState serviceState, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String email, String password) throws MyException {
+    public void authorize(
+//            ServiceState serviceState, HttpServletRequest httpServletRequest,
+                          HttpServletResponse httpServletResponse, String email, String password) throws MyException {
         //        ValidationUtils.rejectIfEmptyOrWhitespace();
         Preconditions.checkArgument(EMAIL_PATTERN_C.matcher(email).matches(), "Invalid email " + email);
         Preconditions.checkArgument(PASSWORD_PATTERN_C.matcher(password).matches(),"Invalid password " + password );
@@ -99,20 +101,22 @@ public class NoLoggedInUserService implements CombineServices {
             /**
              * Save current session
              */
-            HttpSession httpSession = httpServletRequest.getSession();
+            HttpSession httpSession = request.getSession();
             List<SessionsEntity> sessionsEntityList = sessionDAO.getSessionByUserId(usersEntity.getUserId());
             SessionsEntity sessionsEntity;
             if(0 == sessionsEntityList.size()){
                 sessionsEntity = new SessionsEntity();
             } else
                 sessionsEntity = sessionsEntityList.get(0);
+            if(!httpSession.getId().equalsIgnoreCase(sessionsEntity.getSessionId()))
+                sessionDAO.delete(sessionsEntity);
             sessionsEntity.setSessionId(httpSession.getId());
             sessionsEntity.setSessionUserId(usersEntity.getUserId());
             sessionsEntity.setSessionTime((int) (httpSession.getLastAccessedTime() - httpSession.getCreationTime()));
             sessionsEntity.setSessionLastVisit(currentTime);
             sessionsEntity.setSessionBrowser("TBD");
-            sessionsEntity.setSessionForwardedFor(Strings.nullToEmpty(httpServletRequest.getHeader("X-Forwarded-For")));
-            sessionsEntity.setSessionIp(Strings.nullToEmpty(httpServletRequest.getRemoteAddr()));
+            sessionsEntity.setSessionForwardedFor(Strings.nullToEmpty(request.getHeader("X-Forwarded-For")));
+            sessionsEntity.setSessionIp(Strings.nullToEmpty(request.getRemoteAddr()));
             sessionsEntity.setSessionPage("");
             sessionDAO.persist(sessionsEntity);//use persist is better than merge for this case
 
@@ -163,6 +167,7 @@ public class NoLoggedInUserService implements CombineServices {
 
     @Override
     public void issueArticle() throws MyException {
+        throw new AuthorizationException("This user does not logged in");
 
     }
 
@@ -259,14 +264,16 @@ public class NoLoggedInUserService implements CombineServices {
 
 
     @Override
-    public UserProfile userInfo(HttpServletRequest httpServletRequest) throws MyException {
-      return null;
-
+    public UserProfile userInfo(HttpServletResponse response) throws MyException {
+        this.checkLogin(response);
+        /**
+         * after check login. if user is logged in. this will change state to normal user or others.
+         */
+        return this.serviceState.getService().userInfo(response);
     }
 
     /**
      *
-     * @param httpServletRequest
      * @param userId REQUIRED
      * @param username
      * @param currentEmail
@@ -284,14 +291,22 @@ public class NoLoggedInUserService implements CombineServices {
      * @throws MyException
      */
     @Override
-    public void modifyUser(HttpServletRequest httpServletRequest, int userId, String username, String currentEmail, String newEmail,
+    public void modifyUser(
+//            HttpServletRequest httpServletRequest,
+                           int userId, String username, String currentEmail, String newEmail,
                            String newPass, String currentPass, String userBirthday,
                            int userType, String userAvatar, String userAvatarType,
                            Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException {
+        throw new AuthorizationException("This user does not logged in");
+
     }
 
     @Override
-    public void checkLogin(HttpServletRequest request,HttpServletResponse response, ServiceState serviceState) throws MyException {
+    public void checkLogin(
+//            HttpServletRequest request,
+            HttpServletResponse response
+//            ServiceState serviceState
+    ) throws MyException {
         String email = session.getEmail();
         List<UsersEntity> usersEntityList;
         if(Strings.isNullOrEmpty(email)){
@@ -327,34 +342,46 @@ public class NoLoggedInUserService implements CombineServices {
          */
         UsersEntity usersEntity = usersEntityList.get(0);
 
-        this.authorize(serviceState, request,
+        this.authorize(
+//                serviceState, request,
                 response,usersEntity.getUserEmail(),
                 usersEntity.getUserPassword());
         //DONE nothing to do here
     }
 
     @Override
-    public void deletePost() {
+    public void deletePost() throws AuthorizationException {
+        throw new AuthorizationException("This user does not logged in");
+    }
+
+    @Override
+    public void deleteTopic() throws AuthorizationException {
+        throw new AuthorizationException("This user does not logged in");
 
     }
 
     @Override
-    public void deleteTopic() {
+    public void modifyPost() throws AuthorizationException {
+        throw new AuthorizationException("This user does not logged in");
 
     }
 
     @Override
-    public void modifyPost() {
+    public void modifyTopic() throws AuthorizationException {
+        throw new AuthorizationException("This user does not logged in");
 
     }
 
     @Override
-    public void modifyTopic() {
+    public void postNew(
+            HttpServletResponse response,
+            int forumId,String subject,String text ) throws MyException {
+        this.checkLogin(response);
+        this.serviceState.getService().postNew(
+                response,
+                forumId,subject,text
+        );
 
-    }
-
-    @Override
-    public void postNew(HttpServletRequest httpServletRequest, int forumId,String subject,String text) throws MyException {
     }
 
     @Override
@@ -374,13 +401,16 @@ public class NoLoggedInUserService implements CombineServices {
     }
 
     @Override
-    public void reply(HttpServletRequest httpServletRequest,int forumId, int topicId, String subject, String text) throws MyException {
-        throw new AuthorizationException("This user does not login");
+    public void reply(HttpServletResponse response,int forumId, int topicId, String subject, String text) throws MyException {
+        this.checkLogin(response);
+        this.serviceState.getService().reply(
+                response,
+                forumId, topicId, subject, text);
     }
 
     @Override
     public void getTopics() throws AuthorizationException {
-
+        throw new AuthorizationException("This user does not logged in");
     }
 
     @Override

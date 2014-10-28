@@ -42,13 +42,14 @@ public class PostServiceTest extends MyAbstractTest {
     public void testPostNew() throws MyException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        serviceState.getService().authorize(serviceState, request, response, "letuan@gmail.com", "123456");
+        serviceState.getService().authorize(
+//                serviceState, request,
+                response, "letuan@gmail.com", "123456");
         request.setCookies(new Cookie[]{
                 new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
                 new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
         });
         serviceState.getService().postNew(
-                request,
                 1,
                 "THIS IS SUBJECT",
                 "HUHUHUHUHUHUHUHUHU "// subject

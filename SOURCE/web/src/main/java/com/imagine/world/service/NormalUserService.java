@@ -24,9 +24,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 
@@ -71,7 +69,6 @@ public class NormalUserService extends NoLoggedInUserService {
 
     /**
      *
-     * @param httpServletRequest
      * @param userId REQUIRED
      * @param username
      * @param currentEmail
@@ -89,7 +86,9 @@ public class NormalUserService extends NoLoggedInUserService {
      * @throws MyException
      */
     @Override
-    public void modifyUser(HttpServletRequest httpServletRequest, int userId, String username, String currentEmail, String newEmail,
+    public void modifyUser(
+//            HttpServletRequest httpServletRequest,
+            int userId, String username, String currentEmail, String newEmail,
                            String newPass, String currentPass, String userBirthday,
                            int userType, String userAvatar, String userAvatarType,
                            Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException {
@@ -181,7 +180,9 @@ public class NormalUserService extends NoLoggedInUserService {
     }
 
     @Override
-    public void postNew(HttpServletRequest httpServletRequest, int forumId,String subject,String text) throws MyException {
+    public void postNew(
+//            HttpServletRequest httpServletRequest,
+            int forumId,String subject,String text) throws MyException {
 //        this.checkLogin(httpServletRequest);
         this.checkPermission();
 
@@ -215,7 +216,7 @@ public class NormalUserService extends NoLoggedInUserService {
                 -1, //editTime
                 "",//Default
                 0,//editUser
-                httpServletRequest.getRemoteAddr()
+                request.getRemoteAddr()
         );
 
         /**

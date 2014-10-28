@@ -69,4 +69,13 @@ public class UserApis extends BaseApi {
         return map;
 
     }
+
+    @RequestMapping(value = "testLogin", method = RequestMethod.GET)
+    @ResponseBody
+    public void testLogin( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws MyException {
+        serviceState.getService().authorize(
+//                serviceState, request,
+                httpServletResponse, "letuan@gmail.com", "123456");
+
+    }
 }
