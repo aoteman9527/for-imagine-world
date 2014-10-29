@@ -4,7 +4,6 @@ import com.imagine.world.exception.MyException;
 import com.imagine.world.models.UserProfile;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -37,16 +36,34 @@ public interface UserServiceI {
     public void authorize(
 //            ServiceState serviceState,HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse, String email, String password) throws MyException;
-    public void logOut(ServiceState serviceState) throws MyException;
+    public void logOut() throws MyException;
     public void issueArticle() throws MyException;
+
+    /**
+     *
+     * @param username : does not allow duplicate
+     * @param email : does not allow duplicate
+     * @param password
+     * @param birthday
+     * @param userType
+     * @param timezone
+     * @param rank
+     * @param avatar
+     * @param avatarType
+     * @param avatarWidth
+     * @param avatarHeight
+     * @param userSig
+     * @param userFrom
+     * @throws MyException
+     */
     public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException;
     public void uploadTempAvatar(MultipartFile multipartFile) throws MyException;
     public UserProfile userInfo(HttpServletResponse httpServletResponse) throws MyException;
     public void modifyUser(
-//            HttpServletRequest httpServletRequest,
-                           int userId, String username, String currentEmail, String newEmail, String newPass, String currentPass, String userbirthday,
-                           int userType, String userAvatar, String userAvatarType,
-                           Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException;
+                HttpServletResponse httpServletResponse,
+               int userId, String username, String currentEmail, String newEmail, String newPass, String currentPass, String userBirthday,
+               int userType, String userAvatar, String userAvatarType,
+               Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException;
     public void checkLogin(
 //            HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse

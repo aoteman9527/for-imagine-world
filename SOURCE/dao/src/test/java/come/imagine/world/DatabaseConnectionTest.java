@@ -48,10 +48,10 @@ public class DatabaseConnectionTest extends TestCase{
     @Ignore
     public void testFindUser() throws ParseException {
         UserDAO userDAO = new UserDAO();
-        UsersEntity userEntity= userDAO.getUserByUsername("playernodie19");
-        System.out.println(userEntity.getUserBirthday());
+        List<UsersEntity> usersEntityList= userDAO.getUserByUsername("playernodie19");
+        System.out.println(usersEntityList.get(0).getUserBirthday());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = simpleDateFormat.parse(userEntity.getUserBirthday());
+        Date date = simpleDateFormat.parse(usersEntityList.get(0).getUserBirthday());
     }
 
 }

@@ -1,58 +1,92 @@
 package com.imagine.world.service;
 
-import com.imagine.world.dao.ForumDAO;
-import com.imagine.world.exception.MyException;
-import com.imagine.world.models.ForumsEntity;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.stereotype.Service;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultHandler;
+import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.Cookie;
 import java.util.Date;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
  * Created by tuanlhd on 10/27/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= "classpath:test-myspring-servlet.xml")
-@Service
+@WebAppConfiguration
 public class PostServiceTest extends MyAbstractTest {
+
     @Autowired
     ServiceState serviceState ;
 
-    @Test
-    @Ignore
-    public void testRegisterNewUserForPost() throws MyException {
-        serviceState.getService().register(
-                "letuan",
-               "letuan@gmail.com",
-                "123456",
-                new Date(),
-                null,null,null,null,null,null,null,null,null);
+    @Autowired
+    private WebApplicationContext wac;
 
+    private MockMvc mockMvc;
+
+    @Before
+    public void setup() {
+        this.mockMvc = webAppContextSetup(this.wac).build();
     }
 
     @Test
-    public void testPostNew() throws MyException {
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        MockHttpServletResponse response = new MockHttpServletResponse();
-        serviceState.getService().authorize(
-//                serviceState, request,
-                response, "letuan@gmail.com", "123456");
-        request.setCookies(new Cookie[]{
-                new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
-                new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
-        });
-//        serviceState.getService().postNew(
-//                1,
-//                "THIS IS SUBJECT",
-//                "HUHUHUHUHUHUHUHUHU "// subject
-//        );
+//    @Ignore
+    public void testRegisterNewUserForPost() throws Exception {
+
+        String username = "tuanle23";
+        String email= "letuan@gmail23.com";
+        String password= "123456";
+        String birthday= "2011-11-12";
+        this.mockMvc.perform(post("/register")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("username", username)
+                .param("email", email)
+                .param("password", password)
+                .param("birthday", birthday)
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+    }
+
+    @Test
+    public void testPostNew() throws Exception {
+
+        this.mockMvc.perform(post("/authorize")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("email", "letuan@gmail.com")
+                .param("password", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+        this.mockMvc.perform(post("/postNew")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", "1")
+                .param("subject", "THIS IS SUBJECT "+UserServiceI.simpleDateFormat.format(new Date(System.currentTimeMillis())))
+                .param("text", "HUHUHUHUHUHUHUHUHU ")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
     }
 }

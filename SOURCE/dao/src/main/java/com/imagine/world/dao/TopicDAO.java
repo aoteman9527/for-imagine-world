@@ -47,4 +47,16 @@ public class TopicDAO extends CustomDAOSupport implements Serializable {
             getSession().flush();
         }
     }
+
+    public void save(TopicsEntity topicsEntity){
+        try {
+            getSession().beginTransaction();
+            getSession().save(topicsEntity);
+            getSession().getTransaction().commit();
+        } catch (HibernateException e){
+            getSession().getTransaction().rollback();
+        } finally {
+            getSession().flush();
+        }
+    }
 }

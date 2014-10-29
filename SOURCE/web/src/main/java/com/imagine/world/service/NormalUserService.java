@@ -21,7 +21,6 @@ import com.imagine.world.models.UsersEntity;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +36,7 @@ import java.util.List;
 public class NormalUserService extends NoLoggedInUserService {
 
     @Override
-    public void logOut(ServiceState serviceState) {
+    public void logOut() {
         session.clearData();
         serviceState.changeToNoLoggedInUser();
     }
@@ -87,7 +86,7 @@ public class NormalUserService extends NoLoggedInUserService {
      */
     @Override
     public void modifyUser(
-//            HttpServletRequest httpServletRequest,
+            HttpServletResponse response,
             int userId, String username, String currentEmail, String newEmail,
                            String newPass, String currentPass, String userBirthday,
                            int userType, String userAvatar, String userAvatarType,
@@ -193,7 +192,7 @@ public class NormalUserService extends NoLoggedInUserService {
          * Do Business
          */
         ForumDAO forumDAO = new ForumDAO();
-        Preconditions.checkState(forumDAO.getForumById(forumId).size() > 0, "There are no existed this forum");
+        Preconditions.checkState(forumDAO.getForumById(forumId).isEmpty()==false, "There are no existed this forum");
 
         TopicsEntity topicsEntity = this.addNewTopic(forumId,subject,
                 session.getUserId(),//userId
@@ -271,6 +270,7 @@ public class NormalUserService extends NoLoggedInUserService {
 
         TopicDAO topicDAO = new TopicDAO();
         topicDAO.persist(topicsEntity);
+        topicsEntity.setTopicId(topicDAO.getLastInsertId());
         return topicsEntity;
     }
 
@@ -297,6 +297,9 @@ public class NormalUserService extends NoLoggedInUserService {
 
         PostDAO postDAO = new PostDAO();
         postDAO.persist(postsEntity);
+
+        postsEntity.setTopicId(postDAO.getLastInsertId());
+
         return postsEntity;
     }
 

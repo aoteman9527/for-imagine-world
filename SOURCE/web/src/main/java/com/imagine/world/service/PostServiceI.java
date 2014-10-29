@@ -5,7 +5,6 @@ import com.imagine.world.exception.MyException;
 import com.imagine.world.models.PostsEntity;
 import com.imagine.world.models.TopicsEntity;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**

@@ -160,7 +160,7 @@ public class NoLoggedInUserService implements CombineServices {
     }
 
     @Override
-    public void logOut(ServiceState serviceState) throws MyException {
+    public void logOut() throws MyException {
         throw new AuthorizationException("This user does not logged in");
 
     }
@@ -178,6 +178,10 @@ public class NoLoggedInUserService implements CombineServices {
         Preconditions.checkArgument(EMAIL_PATTERN_C.matcher(email).matches(),"Invalid email "+email);
         Preconditions.checkArgument(PASSWORD_PATTERN_C.matcher(password).matches(),"Invalid password");
         // validate timezone http://stackoverflow.com/questions/13092865/timezone-validation-in-java
+
+        UserDAO userDAO = new UserDAO();
+        Preconditions.checkState(userDAO.getUserByEmail(email).isEmpty(),"This email was existed in system "+email);
+        Preconditions.checkState(userDAO.getUserByUsername(username).isEmpty(),"This username was existed in system "+username);
 
         UserProfile userProfile = new UserProfile();
         userProfile.setUsername(username);
@@ -230,7 +234,7 @@ public class NoLoggedInUserService implements CombineServices {
             userProfile.setUserFrom(userFrom);
 
         //To DAO and save
-        new UserDAO().persist(userProfile.toUserDao());
+        userDAO.persist(userProfile.toUserDao());
     }
 
     ///////// ValidateUtils /////////////////////////
@@ -292,13 +296,32 @@ public class NoLoggedInUserService implements CombineServices {
      */
     @Override
     public void modifyUser(
-//            HttpServletRequest httpServletRequest,
+                            HttpServletResponse response,
                            int userId, String username, String currentEmail, String newEmail,
                            String newPass, String currentPass, String userBirthday,
                            int userType, String userAvatar, String userAvatarType,
                            Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException {
-        throw new AuthorizationException("This user does not logged in");
-
+        this.checkLogin(response);
+        /**
+         * after check login. if user is logged in. this will change state to normal user or others.
+         */
+        this.serviceState.getService().modifyUser(
+                                    response,
+                                    userId,
+                                    username,
+                                    currentEmail,
+                                    newEmail,
+                                    newPass,
+                                    currentPass,
+                                    userBirthday,
+                                    userType,
+                                    userAvatar,
+                                    userAvatarType,
+                                    userAvatarWidth,
+                                    userAvatarHeight,
+                                    userSig,
+                                    userFrom
+                                );
     }
 
     @Override
@@ -379,7 +402,7 @@ public class NoLoggedInUserService implements CombineServices {
         this.checkLogin(response);
         this.serviceState.getService().postNew(
                 response,
-                forumId,subject,text
+                forumId, subject, text
         );
 
     }

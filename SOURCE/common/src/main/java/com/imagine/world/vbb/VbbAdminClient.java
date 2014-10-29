@@ -175,7 +175,7 @@ public class VbbAdminClient extends VbbClient {
         // save to database
 
         UserDAO userDAO = new UserDAO();
-        UsersEntity userEntity = null;
+        List<UsersEntity> userEntity = null;
         if(!Strings.isNullOrEmpty(username)){
             userEntity = userDAO.getUserByUsername(username);
         } else if(!Strings.isNullOrEmpty(email)){
@@ -187,11 +187,11 @@ public class VbbAdminClient extends VbbClient {
         }
 
         if(!Strings.isNullOrEmpty(password)){
-            userEntity.setUserPassword(password);
+            userEntity.get(0).setUserPassword(password);
         }
 
         if(!Strings.isNullOrEmpty(email)){
-            userEntity.setUserEmail(email);
+            userEntity.get(0).setUserEmail(email);
         }
 
 //        if(!Strings.isNullOrEmpty(languageId)){

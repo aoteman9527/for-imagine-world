@@ -3,7 +3,8 @@ package com.imagine.world.api;
 import com.google.common.collect.Maps;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.SearchableList;
-import com.imagine.world.models.Session;
+import com.imagine.world.models.UserProfile;
+import com.imagine.world.service.UserServiceI;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -21,21 +24,137 @@ import java.util.Map;
  * Created by tuan on 10/10/14.
  */
 @Service
-@RequestMapping("/")
+@RequestMapping
 public class UserApis extends BaseApi {
 
-    @RequestMapping(value = "login",method = RequestMethod.GET)
+    @RequestMapping(value = "authorize",method = RequestMethod.POST)
     @ResponseBody
-    public Object login() throws MyException {
-//        serviceState.getService().authorize(serviceState);
-        return new Session();
+    public void authorize(
+            HttpServletResponse response,
+            @RequestParam String email,
+            @RequestParam String password
+    ) throws MyException {
+        serviceState.getService().authorize(response,email,password);
+    }
+
+    @RequestMapping(value = "logOut",method = RequestMethod.GET)
+    @ResponseBody
+    public void logOut() throws MyException {
+        serviceState.getService().logOut();
+    }
+
+    @RequestMapping(value = "register",method = RequestMethod.POST)
+    @ResponseBody
+    public void register(
+            @RequestParam String username,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String birthday,
+            @RequestParam(required = false) Integer userType,
+            @RequestParam(required = false) BigDecimal timezone,
+            @RequestParam(required = false) Integer rank,
+            @RequestParam(required = false) String avatar,
+            @RequestParam(required = false) String avatarType,
+            @RequestParam(required = false) Short avatarWidth,
+            @RequestParam(required = false) Short avatarHeight,
+            @RequestParam(required = false) String userSig,
+            @RequestParam(required = false) String userFrom
+    ) throws MyException, ParseException {
+        serviceState.getService().register(
+                username,
+                email,
+                password,
+                UserServiceI.birthdayFormat.parse(birthday),
+                userType,
+                timezone,
+                rank,
+                avatar,
+                avatarType,
+                avatarWidth,
+                avatarHeight,
+                userSig,
+                userFrom
+        );
     }
 
     @RequestMapping(value = "uploadTempAvatar",method = RequestMethod.POST)
-    public void uploadTeampAvatar( @RequestParam("tempFile") MultipartFile multipartFile){
-        if (!multipartFile.isEmpty()) {
-        } else {
-        }
+    public void uploadTeampAvatar( @RequestParam("tempFile") MultipartFile multipartFile) throws MyException {
+        serviceState.getService().uploadTempAvatar(multipartFile);
+    }
+
+    @RequestMapping(value = "userInfo",method = RequestMethod.GET)
+    @ResponseBody
+    public UserProfile userInfo( HttpServletResponse httpServletResponse) throws MyException {
+        return serviceState.getService().userInfo(httpServletResponse);
+    }
+
+    @RequestMapping(value = "modifyUser",method = RequestMethod.POST)
+    public void modifyUser(
+            HttpServletResponse httpServletResponse,
+            @RequestParam Integer userId,
+            @RequestParam String username,
+            @RequestParam String currentEmail,
+            @RequestParam String newEmail,
+            @RequestParam String newPass,
+            @RequestParam String currentPass,
+            @RequestParam String userbirthday,
+            @RequestParam Integer userType,
+            @RequestParam String userAvatar,
+            @RequestParam String userAvatarType,
+            @RequestParam Short userAvatarWidth,
+            @RequestParam Short userAvatarHeight,
+            @RequestParam String userSig,
+            @RequestParam String userFrom
+    ) throws MyException {
+        serviceState.getService().modifyUser(
+                httpServletResponse,
+                userId,
+                username,
+                currentEmail,
+                newEmail,
+                newPass,
+                currentPass,
+                userbirthday,
+                userType,
+                userAvatar,
+                userAvatarType,
+                userAvatarWidth,
+                userAvatarHeight,
+                userSig,
+                userFrom
+                );
+    }
+
+    @RequestMapping(value = "postNew",method = RequestMethod.POST)
+    public void postNew(
+            HttpServletResponse httpServletResponse,
+            @RequestParam Integer forumId,
+            @RequestParam String subject,
+            @RequestParam String text
+    ) throws MyException {
+        serviceState.getService().postNew(
+                 httpServletResponse,
+                 forumId,
+                 subject,
+                 text
+        );
+    }
+
+    @RequestMapping(value = "reply",method = RequestMethod.POST)
+    public void reply(
+            HttpServletResponse httpServletResponse,
+            @RequestParam Integer topicId,
+            @RequestParam Integer forumId,
+            @RequestParam String subject,
+            @RequestParam String text
+    ) throws MyException {
+        serviceState.getService().reply(
+                httpServletResponse,
+                topicId,
+                forumId,
+                subject,
+                text
+        );
     }
 
     @RequestMapping(value = "testcookie", method = RequestMethod.GET)

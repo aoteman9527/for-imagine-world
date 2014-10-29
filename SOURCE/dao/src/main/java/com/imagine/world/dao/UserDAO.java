@@ -16,7 +16,7 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
     public static final String BIRTHDAY_DATE_FORMAT = "dd-MM-yyyy";
 
 
-    public UsersEntity getUserByUsername(String username){
+    public List<UsersEntity> getUserByUsername(String username){
 
         Query query = getSession().createQuery(" select t from UsersEntity t where t.username = :username ");
 
@@ -25,11 +25,7 @@ public class UserDAO extends CustomDAOSupport implements Serializable {
 
         List<UsersEntity> results = query.list();
 
-        if (results !=null && results.size() > 0) {
-            return results.get(0);
-        }
-
-        return null;
+        return results;
     }
 
     public List<UsersEntity> getUserByEmail(String email){

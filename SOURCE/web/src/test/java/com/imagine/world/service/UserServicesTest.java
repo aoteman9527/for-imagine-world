@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
@@ -13,9 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.Cookie;
@@ -24,13 +24,16 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
 /**
  * Created by tuan on 10/11/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= "classpath:test-myspring-servlet.xml")
 @WebAppConfiguration
-//@Service
 public class UserServicesTest extends MyAbstractTest {
 
     @Autowired
@@ -136,16 +139,28 @@ public class UserServicesTest extends MyAbstractTest {
 //        serviceState.getService().modifyUser(request,1,"newUsername","letuan@gmail.com","leuleuleu@gmail.com",
 //                "newpass","123456","1990-12-30",
 //                UserType.NORMAL_USER.getValue(),"avatar ne",AvatarType.REMOTE.getValue(),(short)123,(short)123,"hohoho","hohoho");
-        serviceState.getService().modifyUser(1,null,null,null,
-                 null,null,"1990-12-30",
-                -1,null,null,(short)-1,(short)-1,"hohoho","hohoho");
+//        serviceState.getService().modifyUser(1,null,null,null,
+//                 null,null,"1990-12-30",
+//                -1,null,null,(short)-1,(short)-1,"hohoho","hohoho");
 
     }
 
     @Test
     public void testLoginNew() throws Exception {
-        this.mockMvc.perform(get("/testLogin").accept("application/json"))
-                .andExpect(status().isOk());
+//        this.mockMvc.perform(get("/testLogin").accept("application/json"))
+//                .andExpect(status().isOk());
+
+        this.mockMvc.perform(post("/authorize")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("email", "letuan@gmail.com")
+                .param("password", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());
+            }
+        }).andExpect(status().isOk());
 
     }
+
 }

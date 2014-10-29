@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public abstract class CustomDAOSupport implements Serializable {
@@ -37,4 +38,8 @@ public abstract class CustomDAOSupport implements Serializable {
         return session;
     }
 
+    public int getLastInsertId(){
+        List list = this.getSession().createSQLQuery("SELECT LAST_INSERT_ID();").list();
+        return new Integer(list.get(0).toString());
+    }
 }
