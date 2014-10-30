@@ -438,14 +438,15 @@ public class NoLoggedInUserService implements CombineServices {
     }
 
     @Override
-    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType) throws MyException {
+    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType, byte topicApproved) throws MyException {
         this.checkLogin(response);
         return this.serviceState.getService().getTopics(
                  response,
                  forumId,
                  page,
                  num,
-                 sortType
+                 sortType,
+                topicApproved
         );
     }
 
@@ -455,8 +456,17 @@ public class NoLoggedInUserService implements CombineServices {
     }
 
     @Override
-    public void getPosts() {
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) throws MyException {
 
+        this.checkLogin(response);
+        return this.serviceState.getService().getPosts(
+                response,
+                forumId,
+                topicId,
+                page,
+                num,
+                sortType
+        );
     }
 
     @Override

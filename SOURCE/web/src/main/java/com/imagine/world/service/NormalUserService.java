@@ -239,12 +239,13 @@ public class NormalUserService extends NoLoggedInUserService {
     }
 
     @Override
-    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType) throws AuthorizationException {
+    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType, byte topicApproved) throws AuthorizationException {
         /**
          * Does not need to check login. cause thi state mean logged in.
          */
         this.checkPermission();
-
+        //TODO : if approved is existed and view post that does not approve need a check user permission
+        //TODO handle topicApproved
         /**
          * Do business
          */
@@ -273,13 +274,15 @@ public class NormalUserService extends NoLoggedInUserService {
                 build();
     }
 
-    @Override
-    public void postInfo() {
 
+    @Override
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) {
+
+        return null;
     }
 
     @Override
-    public void getPosts() {
+    public void postInfo() {
 
     }
 

@@ -35,9 +35,9 @@ public interface PostServiceI {
      * @return
      * @throws MyException
      */
-    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType) throws MyException;
+    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType, byte topicApproved) throws MyException;
     public void postInfo();
-    public void getPosts();
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) throws MyException;
 
     public void checkPermission();
     public TopicsEntity addNewTopic(int forumId, String title,
