@@ -5,7 +5,6 @@ import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.service.ServiceState;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -39,7 +38,7 @@ public abstract class BaseApi {
         } else {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
-
+        exception.printStackTrace();
         return error;
     }
 

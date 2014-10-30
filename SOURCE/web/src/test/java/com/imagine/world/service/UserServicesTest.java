@@ -127,14 +127,7 @@ public class UserServicesTest extends MyAbstractTest {
     }
 
     @Test
-    public void testModifyUser() throws MyException {
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        MockHttpServletResponse response = new MockHttpServletResponse();
-
-        request.setCookies(new Cookie[]{
-                new Cookie(UserServiceI.COOKIE_KEY_SESSION_ID, 1 + ""),
-                new Cookie(UserServiceI.COOKIE_KEY_USER_ID, 1 + "")
-        });
+    public void testModifyUser() throws Exception {
 //        serviceState.getService().userInfo(request);
 //        serviceState.getService().modifyUser(request,1,"newUsername","letuan@gmail.com","leuleuleu@gmail.com",
 //                "newpass","123456","1990-12-30",
@@ -142,6 +135,49 @@ public class UserServicesTest extends MyAbstractTest {
 //        serviceState.getService().modifyUser(1,null,null,null,
 //                 null,null,"1990-12-30",
 //                -1,null,null,(short)-1,(short)-1,"hohoho","hohoho");
+
+        this.mockMvc.perform(post("/authorize")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("email", "letuan@gmail.com")
+                .param("password", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+        this.mockMvc.perform(post("/modifyUser")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("userId", "1")
+                .param("username", "123456")
+                .param("currentEmail", "letuan@gmail.com")
+                .param("newEmail", "123456@gmail.com")
+                .param("userBirthday", "1222-05-32")
+                .param("userType", "3")
+                .param("userSig", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+        this.mockMvc.perform(post("/modifyUser")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("userId", "1")
+                .param("username", "letuan")
+                .param("currentEmail", "123456@gmail.com")
+                .param("newEmail", "letuan@gmail.com")
+                .param("userBirthday", "1990-12-12")
+                .param("userType", "3")
+                .param("userSig", "NONONONONONOOONO")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
 
     }
 

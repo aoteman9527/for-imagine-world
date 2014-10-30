@@ -6,6 +6,7 @@ import com.imagine.world.models.PostsEntity;
 import com.imagine.world.models.TopicsEntity;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * Created by tuan on 10/23/14.
@@ -23,7 +24,18 @@ public interface PostServiceI {
             HttpServletResponse httpServletResponse,
             int forumId, int topicId, String subject,
                       String text) throws MyException;
-    public void getTopics() throws AuthorizationException;
+
+    /**
+     *
+     * @param response
+     * @param forumId
+     * @param page
+     * @param num
+     * @param sortType refer to TopicSortType value by enum Name
+     * @return
+     * @throws MyException
+     */
+    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType) throws MyException;
     public void postInfo();
     public void getPosts();
 
@@ -31,7 +43,7 @@ public interface PostServiceI {
     public TopicsEntity addNewTopic(int forumId, String title,
                             int posterId, long topicTime,
                             int views, byte status, byte type, int firstPostId, String firstPosterName,
-                            int lastPostId, String lastPosterName, int lastPosterId);
+                            int lastPostId, String lastPosterName, int lastPosterId, int approveType);
     public PostsEntity addNewPost(int topicId, int forumId, int posterId,
                            long postTime, String postUsernae,
                            String subject, String text, String checksum,

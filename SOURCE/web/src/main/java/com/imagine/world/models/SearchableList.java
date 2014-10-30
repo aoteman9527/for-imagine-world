@@ -9,6 +9,14 @@ import java.util.Comparator;
  * Created by tuan on 10/19/14.
  */
 public class SearchableList<E> extends ArrayList {
+
+    /**
+     * this is core function of this collection. use for index any object with comparator.
+     *
+     * @param o
+     * @param comparator
+     * @return
+     */
     public int indexOf(E o,Comparator<E> comparator) {
         Collections.sort(this,comparator);
         return Collections.binarySearch(this, o, comparator);
@@ -25,6 +33,12 @@ public class SearchableList<E> extends ArrayList {
         return (E) super.get(index);
     }
 
+    /**
+     *
+     * @param o the object need to find. it has attribute for using in comparator
+     * @param comparator : for searching
+     * @return
+     */
     public E get(E o, Comparator<E> comparator){
         return this.get(this.indexOf(o,comparator));
     }

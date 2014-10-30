@@ -88,23 +88,23 @@ public class UserApis extends BaseApi {
         return serviceState.getService().userInfo(httpServletResponse);
     }
 
-    @RequestMapping(value = "modifyUser",method = RequestMethod.POST)
+    @RequestMapping(value = "modifyUser", method = RequestMethod.POST)
     public void modifyUser(
             HttpServletResponse httpServletResponse,
             @RequestParam Integer userId,
-            @RequestParam String username,
-            @RequestParam String currentEmail,
-            @RequestParam String newEmail,
-            @RequestParam String newPass,
-            @RequestParam String currentPass,
-            @RequestParam String userbirthday,
-            @RequestParam Integer userType,
-            @RequestParam String userAvatar,
-            @RequestParam String userAvatarType,
-            @RequestParam Short userAvatarWidth,
-            @RequestParam Short userAvatarHeight,
-            @RequestParam String userSig,
-            @RequestParam String userFrom
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String currentEmail,
+            @RequestParam(required = false) String newEmail,
+            @RequestParam(required = false) String newPass,
+            @RequestParam(required = false) String currentPass,
+            @RequestParam(required = false) String userBirthday,
+            @RequestParam(required = false) Integer userType,
+            @RequestParam(required = false) String userAvatar,
+            @RequestParam(required = false) String userAvatarType,
+            @RequestParam(required = false) Short userAvatarWidth,
+            @RequestParam(required = false) Short userAvatarHeight,
+            @RequestParam(required = false) String userSig,
+            @RequestParam(required = false) String userFrom
     ) throws MyException {
         serviceState.getService().modifyUser(
                 httpServletResponse,
@@ -114,7 +114,7 @@ public class UserApis extends BaseApi {
                 newEmail,
                 newPass,
                 currentPass,
-                userbirthday,
+                userBirthday,
                 userType,
                 userAvatar,
                 userAvatarType,
@@ -126,36 +126,56 @@ public class UserApis extends BaseApi {
     }
 
     @RequestMapping(value = "postNew",method = RequestMethod.POST)
+    @ResponseBody
     public void postNew(
-            HttpServletResponse httpServletResponse,
+            HttpServletResponse response,
             @RequestParam Integer forumId,
             @RequestParam String subject,
             @RequestParam String text
     ) throws MyException {
         serviceState.getService().postNew(
-                 httpServletResponse,
-                 forumId,
-                 subject,
-                 text
-        );
-    }
-
-    @RequestMapping(value = "reply",method = RequestMethod.POST)
-    public void reply(
-            HttpServletResponse httpServletResponse,
-            @RequestParam Integer topicId,
-            @RequestParam Integer forumId,
-            @RequestParam String subject,
-            @RequestParam String text
-    ) throws MyException {
-        serviceState.getService().reply(
-                httpServletResponse,
-                topicId,
+                response,
                 forumId,
                 subject,
                 text
         );
     }
+
+    @RequestMapping(value = "/reply",method = RequestMethod.POST)
+    public void reply(
+            HttpServletResponse httpServletResponse,
+            @RequestParam Integer forumId,
+            @RequestParam Integer topicId,
+            @RequestParam String subject,
+            @RequestParam String text
+    ) throws MyException {
+        serviceState.getService().reply(
+                httpServletResponse,
+                forumId,
+                topicId,
+                subject,
+                text
+        );
+    }
+
+    @RequestMapping(value = "getTopics",method = RequestMethod.POST)
+    @ResponseBody
+    public Map getTopics(
+            HttpServletResponse response,
+            @RequestParam int forumId,
+            @RequestParam int page,
+            @RequestParam int num,
+            @RequestParam String sortType
+    ) throws MyException {
+        return serviceState.getService().getTopics(
+                response,
+                forumId,
+                page,
+                num,
+                sortType
+        );
+    }
+
 
     @RequestMapping(value = "testcookie", method = RequestMethod.GET)
     @ResponseBody

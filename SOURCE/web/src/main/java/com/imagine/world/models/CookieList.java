@@ -23,7 +23,6 @@ public class CookieList extends SearchableList<Cookie> {
 
     public Cookie getByname(String name){
         Cookie cookie = new Cookie(name,null);
-
         return this.get(cookie,nameComparator);
     }
 }

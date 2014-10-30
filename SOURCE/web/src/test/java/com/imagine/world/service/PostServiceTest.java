@@ -1,6 +1,8 @@
 package com.imagine.world.service;
 
+import com.imagine.world.common.TopicSortType;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -42,7 +43,7 @@ public class PostServiceTest extends MyAbstractTest {
     }
 
     @Test
-//    @Ignore
+    @Ignore
     public void testRegisterNewUserForPost() throws Exception {
 
         String username = "tuanle23";
@@ -89,4 +90,91 @@ public class PostServiceTest extends MyAbstractTest {
             }
         }).andExpect(status().isOk());
     }
+
+    @Test
+    public void testReply() throws Exception {
+
+        this.mockMvc.perform(post("/authorize")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("email", "letuan@gmail.com")
+                .param("password", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+        this.mockMvc.perform(post("/reply")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", "1")
+                .param("topicId", "34")
+                .param("subject", "THIS IS REPL Y SUBJECT "+UserServiceI.simpleDateFormat.format(new Date(System.currentTimeMillis())))
+                .param("text", "THIS IS REPLAY POST")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+        this.mockMvc.perform(post("/reply")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", "22222222")//WRONG FORUM
+                .param("topicId", "34")
+                .param("subject", "THIS IS REPL Y SUBJECT "+UserServiceI.simpleDateFormat.format(new Date(System.currentTimeMillis())))
+                .param("text", "THIS IS REPLAY POST")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());
+                ;
+            }
+        }).andExpect(status().is5xxServerError());
+        this.mockMvc.perform(post("/reply")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", "1")
+                .param("topicId", "3444444")//WRONG TOPIC
+                .param("subject", "THIS IS REPL Y SUBJECT " + UserServiceI.simpleDateFormat.format(new Date(System.currentTimeMillis())))
+                .param("text", "THIS IS REPLAY POST")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().is5xxServerError());
+    }
+
+    @Test
+    public void testViewForum() throws Exception {
+        this.mockMvc.perform(post("/authorize")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("email", "letuan@gmail.com")
+                .param("password", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+
+        int forumId = 1;
+        int page = 0;
+        int num = 100;
+        String sortType = TopicSortType.LAST_POST_TIME_ASC.name();
+        this.mockMvc.perform(post("/getTopics")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", forumId+"")
+                .param("page", page+"")
+                .param("num", num+"")
+                .param("sortType", sortType)
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+    }
+
 }

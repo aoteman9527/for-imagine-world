@@ -27,6 +27,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tuanlhd on 10/28/14.
@@ -166,7 +167,12 @@ public class NoLoggedInUserService implements CombineServices {
     }
 
     @Override
-    public void issueArticle() throws MyException {
+    public void issueArticle(HttpServletResponse response) throws MyException {
+        this.checkLogin(response);
+        /**
+         * after check login. if user is logged in. this will change state to normal user or others.
+         */
+        this.serviceState.getService().issueArticle(response);
         throw new AuthorizationException("This user does not logged in");
 
     }
@@ -344,7 +350,7 @@ public class NoLoggedInUserService implements CombineServices {
             if(sessionsEntityList.size() == 0)
                 throw new AuthorizationException("Cookie expired there are no existed record");
             SessionsEntity sessionsEntity = sessionsEntityList.get(0);
-            sessionDAO.delete(sessionsEntity);
+            sessionDAO.delete(sessionsEntity);//prepare for updating new session.
             sessionsEntity.setSessionId(request.getSession().getId());//update session id
             sessionDAO.persist(sessionsEntity);//do persist hibernate
             UserDAO userDAO = new UserDAO();
@@ -361,7 +367,7 @@ public class NoLoggedInUserService implements CombineServices {
 
         /**
          * Authorize again to this user
-         * After do authorize. change state.
+         * After do authorize. auto change state.
          */
         UsersEntity usersEntity = usersEntityList.get(0);
 
@@ -411,7 +417,7 @@ public class NoLoggedInUserService implements CombineServices {
     public TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime,
                                     int views, byte status, byte type,
                                     int firstPostId, String firstPosterName,
-                                    int lastPostId, String lastPosterName, int lastPosterId) {
+                                    int lastPostId, String lastPosterName, int lastPosterId, int approveType) {
         return null;
     }
 
@@ -432,8 +438,15 @@ public class NoLoggedInUserService implements CombineServices {
     }
 
     @Override
-    public void getTopics() throws AuthorizationException {
-        throw new AuthorizationException("This user does not logged in");
+    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType) throws MyException {
+        this.checkLogin(response);
+        return this.serviceState.getService().getTopics(
+                 response,
+                 forumId,
+                 page,
+                 num,
+                 sortType
+        );
     }
 
     @Override

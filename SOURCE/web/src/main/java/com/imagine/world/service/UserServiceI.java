@@ -37,7 +37,7 @@ public interface UserServiceI {
 //            ServiceState serviceState,HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse, String email, String password) throws MyException;
     public void logOut() throws MyException;
-    public void issueArticle() throws MyException;
+    public void issueArticle(HttpServletResponse response) throws MyException;
 
     /**
      *

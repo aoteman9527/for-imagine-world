@@ -23,6 +23,30 @@ public class TopicDAO extends CustomDAOSupport implements Serializable {
         return results;
     }
 
+    /**
+     *
+     * @param forumId
+     * @param sortCondition : string like "topic_id ASC, topic_time DESC"
+     * @param topicApproved
+     * @param page : from 0 ~ n
+     * @param limit : from 1 ~ n
+     * @return
+     */
+    public List<TopicsEntity> getTopicBy(int forumId, String sortCondition, byte topicApproved, int page, int limit){
+
+        Query query = getSession().createQuery(
+                "select t from TopicsEntity t where t.forumId = :forumId and t.topicApproved = :topicApproved " +
+                "ORDER BY "+ sortCondition);
+
+        query.setParameter("forumId", forumId);
+        query.setParameter("topicApproved", topicApproved);
+        query.setMaxResults(limit);
+        query.setFirstResult(page*limit);
+
+        List<TopicsEntity> results = query.list();
+        return results;
+    }
+
     public void persist(TopicsEntity topicsEntity){
         try {
             getSession().beginTransaction();

@@ -39,6 +39,17 @@ public abstract class CustomDAOSupport implements Serializable {
     }
 
     public int getLastInsertId(){
+        /**
+         * Here's what the MySQL 5.5 documentation says:
+
+         The ID that was generated is maintained in the server on a per-connection basis.
+         This means that the value returned by the function to a given client
+         is the first AUTO_INCREMENT value generated for most recent statement affecting
+         an AUTO_INCREMENT column by that client. This value cannot be affected by other clients,
+         even if they generate AUTO_INCREMENT values of their own. This behavior ensures that each client
+         can retrieve its own ID without concern for the activity of other clients,
+         and without the need for locks or transactions.
+         */
         List list = this.getSession().createSQLQuery("SELECT LAST_INSERT_ID();").list();
         return new Integer(list.get(0).toString());
     }

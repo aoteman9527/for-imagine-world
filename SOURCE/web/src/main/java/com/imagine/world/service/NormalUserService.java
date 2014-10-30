@@ -2,11 +2,10 @@ package com.imagine.world.service;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.imagine.world.common.AvatarType;
-import com.imagine.world.common.DefaultUtils;
-import com.imagine.world.common.TopicStatus;
-import com.imagine.world.common.TopicType;
+import com.imagine.world.common.*;
 import com.imagine.world.dao.ForumDAO;
 import com.imagine.world.dao.PostDAO;
 import com.imagine.world.dao.TopicDAO;
@@ -14,10 +13,7 @@ import com.imagine.world.dao.UserDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.InprocessException;
 import com.imagine.world.exception.MyException;
-import com.imagine.world.models.PostsEntity;
-import com.imagine.world.models.TopicsEntity;
-import com.imagine.world.models.UserProfile;
-import com.imagine.world.models.UsersEntity;
+import com.imagine.world.models.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -42,7 +40,7 @@ public class NormalUserService extends NoLoggedInUserService {
     }
 
     @Override
-    public void issueArticle() throws AuthorizationException {
+    public void issueArticle(HttpServletResponse r) throws AuthorizationException {
         throw new AuthorizationException("Current user is not allow to use this function");
     }
 
@@ -104,9 +102,11 @@ public class NormalUserService extends NoLoggedInUserService {
         if(!Strings.isNullOrEmpty(username)){
             Preconditions.checkArgument(USERNAME_PATTERN_C.matcher(username).matches(),"Invalid username "+username);
             usersEntity.setUsername(username);
+            usersEntity.setUsernameClean(username.toLowerCase());
         }
 
         if(!Strings.isNullOrEmpty(newEmail)){
+            Preconditions.checkArgument(EMAIL_PATTERN_C.matcher(newEmail).matches(),"Invalid format email "+ newEmail);
             Preconditions.checkArgument(currentEmail.equalsIgnoreCase(usersEntity.getUserEmail()),"Current email does not match");
             usersEntity.setUserEmail(newEmail);
         }
@@ -156,6 +156,11 @@ public class NormalUserService extends NoLoggedInUserService {
 
         userDAO.persist(usersEntity);
 
+        this.authorize(
+                response,
+                usersEntity.getUserEmail(),
+                usersEntity.getUserPassword()
+        );
     }
 
     @Override
@@ -204,7 +209,8 @@ public class NormalUserService extends NoLoggedInUserService {
                 session.getUsername(),//firstPostName
                 0,//this equal with first post
                 session.getUsername(),//lastPostName
-                session.getUserId()//lastPostId
+                session.getUserId(),//lastPostId
+                TopicApproveType.ALLOWABLE.getValue()//DEFAULT allow
                 );
 
         PostsEntity postsEntity = this.addNewPost(topicsEntity.getTopicId(),
@@ -228,13 +234,43 @@ public class NormalUserService extends NoLoggedInUserService {
         topicsEntity.setTopicFirstPostId(postsEntity.getPostId());
         topicsEntity.setTopicLastPosterId(postsEntity.getPostId());
         TopicDAO topicDAO = new TopicDAO();
-        topicDAO.persist(topicsEntity);
+        topicDAO.merge(topicsEntity);
 
     }
 
     @Override
-    public void getTopics() throws AuthorizationException {
-        throw new AuthorizationException("This user does not login");
+    public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType) throws AuthorizationException {
+        /**
+         * Does not need to check login. cause thi state mean logged in.
+         */
+        this.checkPermission();
+
+        /**
+         * Do business
+         */
+        String sortCondition=TopicSortType.valueOf(sortType.toUpperCase()).getValue();//TODO
+        TopicDAO topicDAO = new TopicDAO();
+        List<TopicsEntity> topicsEntities = topicDAO.getTopicBy(
+                forumId,
+                sortCondition,
+                TopicApproveType.ALLOWABLE.getValue(),
+                page,
+                num
+        );
+
+        List<Topic> topics = Lists.newArrayList();
+        Iterator<TopicsEntity> it = topicsEntities.iterator();
+        TopicsEntity t;
+        while(it.hasNext()){
+            t = it.next();
+            topics.add(new Topic(t));
+        }
+
+        return ImmutableMap.<String, Object>builder().
+                put("name", "Topics of forumId " + forumId).
+                put("size", topics.size()).
+                put("topics",topics).
+                build();
     }
 
     @Override
@@ -251,7 +287,7 @@ public class NormalUserService extends NoLoggedInUserService {
     public TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime,
                             int views, byte status, byte type,
                             int firstPostId, String firstPosterName,
-                            int lastPostId, String lastPosterName, int lastPosterId) {
+                            int lastPostId, String lastPosterName, int lastPosterId, int approveType) {
         TopicsEntity topicsEntity = new TopicsEntity();
         topicsEntity.setForumId(forumId);
         topicsEntity.setTopicTitle(title);
@@ -298,7 +334,7 @@ public class NormalUserService extends NoLoggedInUserService {
         PostDAO postDAO = new PostDAO();
         postDAO.persist(postsEntity);
 
-        postsEntity.setTopicId(postDAO.getLastInsertId());
+        postsEntity.setPostId(postDAO.getLastInsertId());
 
         return postsEntity;
     }
@@ -315,12 +351,32 @@ public class NormalUserService extends NoLoggedInUserService {
         /**
          * Do Business
          */
+        //check forum existed
+        ForumDAO forumDAO = new ForumDAO();
+        Preconditions.checkState(forumDAO.getForumById(forumId).isEmpty()==false, "There are no existed this forum "+forumId);
+
+        //check topic existed
         TopicDAO topicDAO = new TopicDAO();
         List<TopicsEntity> topicsEntityList = topicDAO.getTopicById(topicId);
-        if(topicsEntityList.size()>0){
+        Preconditions.checkState(topicsEntityList.isEmpty()==false, "There are no existed this topic "+topicId);
 
-        } else {
-            throw new InprocessException("THERE ARE NOT EXIST topicId " + topicId);
-        }
+        PostsEntity postsEntity = this.addNewPost(
+                topicId,
+                forumId,
+                session.getUserId(),
+                System.currentTimeMillis(),
+                session.getUsername(),
+                subject,
+                text,
+                new String(DigestUtils.md5(text)),//checksum
+                -1,//editTime
+                "",//editReason
+                0,//editUser
+                request.getRemoteAddr()
+        );
+        topicsEntityList.get(0).setTopicLastPosterId(session.getUserId());
+        topicsEntityList.get(0).setTopicLastPostTime((int) (System.currentTimeMillis() / 1000));
+        topicsEntityList.get(0).setTopicLastPostId(postsEntity.getPostId());
+        topicDAO.merge(topicsEntityList.get(0));
     }
 }
