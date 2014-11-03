@@ -4,8 +4,8 @@ package com.imagine.world.common;
  * Created by tuanlhd on 10/30/14.
  */
 public enum TopicApproveType {
-    ALLOWABLE(1),
-    UNALLOWABLE(0);
+    WAITING(1),
+    PASS_WAITING(0);
 
     private int type2;
 

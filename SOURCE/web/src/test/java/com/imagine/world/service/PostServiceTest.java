@@ -177,4 +177,35 @@ public class PostServiceTest extends MyAbstractTest {
         }).andExpect(status().isOk());
     }
 
+    @Test
+    public void testViewForumFail() throws Exception {
+        this.mockMvc.perform(post("/authorize")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("email", "letuan@gmail.com")
+                .param("password", "123456")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+
+
+        int forumId = 1;
+        int page = 0;
+        int num = 100;
+        String sortType = TopicSortType.LAST_POST_TIME_ASC.name();
+        this.mockMvc.perform(post("/getTopics")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", forumId+"")
+                .param("page", page+"")
+                .param("num", num+"")
+                .param("sortType", sortType)
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().isOk());
+    }
 }

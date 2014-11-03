@@ -165,14 +165,16 @@ public class UserApis extends BaseApi {
             @RequestParam int forumId,
             @RequestParam int page,
             @RequestParam int num,
-            @RequestParam String sortType
+            @RequestParam String sortType,
+            @RequestParam byte topicApproved
     ) throws MyException {
         return serviceState.getService().getTopics(
                 response,
                 forumId,
                 page,
                 num,
-                sortType
+                sortType,
+                topicApproved
         );
     }
 
