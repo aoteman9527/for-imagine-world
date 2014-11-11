@@ -1,5 +1,6 @@
 package com.imagine.world.service;
 
+import com.imagine.world.common.PostApproveType;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.PostsEntity;
@@ -89,7 +90,27 @@ public class NoLoggedInUserService extends BaseService {
 
     @Override
     public void modifyUser(HttpServletResponse response, int userId, String username, String currentEmail, String newEmail, String newPass, String currentPass, String userBirthday, int userType, String userAvatar, String userAvatarType, Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException {
-        super.modifyUser(response, userId, username, currentEmail, newEmail, newPass, currentPass, userBirthday, userType, userAvatar, userAvatarType, userAvatarWidth, userAvatarHeight, userSig, userFrom);
+        this.checkLogin(response);
+        /**
+         * after check login. if user is logged in. this will change state to normal user or others.
+         */
+        this.serviceState.getService().modifyUser(
+                response,
+                userId,
+                username,
+                currentEmail,
+                newEmail,
+                newPass,
+                currentPass,
+                userBirthday,
+                userType,
+                userAvatar,
+                userAvatarType,
+                userAvatarWidth,
+                userAvatarHeight,
+                userSig,
+                userFrom
+        );
     }
 
     @Override
@@ -133,7 +154,10 @@ public class NoLoggedInUserService extends BaseService {
     }
 
     @Override
-    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) throws MyException {
-        return super.getPosts(response, forumId, topicId, page, num, sortType);
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType, byte postApproveType) throws MyException {
+        if( postApproveType != PostApproveType.PASS_WAITING.getValue())
+            throw new AuthorizationException("This is no logged in user, you can not use topicApproved is different 0");
+
+        return super.getPosts(response, forumId, topicId, page, num, sortType, postApproveType);
     }
 }

@@ -1,5 +1,6 @@
 package com.imagine.world.service;
 
+import com.imagine.world.common.PostApproveType;
 import com.imagine.world.common.TopicApproveType;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.MyException;
@@ -57,28 +58,7 @@ public class NormalUserService extends BaseService {
                            String newPass, String currentPass, String userBirthday,
                            int userType, String userAvatar, String userAvatarType,
                            Short userAvatarWidth, Short userAvatarHeight, String userSig, String userFrom) throws MyException {
-        this.checkLogin(response);
-        /**
-         * after check login. if user is logged in. this will change state to normal user or others.
-         */
-        this.serviceState.getService().modifyUser(
-                response,
-                userId,
-                username,
-                currentEmail,
-                newEmail,
-                newPass,
-                currentPass,
-                userBirthday,
-                userType,
-                userAvatar,
-                userAvatarType,
-                userAvatarWidth,
-                userAvatarHeight,
-                userSig,
-                userFrom
-        );
-
+        super.modifyUser(response, userId, username, currentEmail, newEmail, newPass, currentPass, userBirthday, userType, userAvatar, userAvatarType, userAvatarWidth, userAvatarHeight, userSig, userFrom);
     }
 
     @Override
@@ -102,9 +82,11 @@ public class NormalUserService extends BaseService {
 
 
     @Override
-    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) throws MyException {
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType,byte postApproveType) throws MyException {
+        if( postApproveType != PostApproveType.PASS_WAITING.getValue())
+            throw new AuthorizationException("This is normal user, you can not use topicApproved is different 0");
 
-        return super.getPosts(response, forumId,  topicId, page,  num, sortType);
+        return super.getPosts(response, forumId,  topicId, page,  num, sortType, postApproveType);
     }
 
     @Override

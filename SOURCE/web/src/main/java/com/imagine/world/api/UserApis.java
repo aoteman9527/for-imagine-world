@@ -178,6 +178,27 @@ public class UserApis extends BaseApi {
         );
     }
 
+    @RequestMapping(value = "getPosts",method = RequestMethod.POST)
+    @ResponseBody
+    public Map getPosts(
+            HttpServletResponse response,
+            @RequestParam int forumId,
+            @RequestParam int topicId,
+            @RequestParam int page,
+            @RequestParam int num,
+            @RequestParam String sortType,
+            @RequestParam byte postApproved
+    ) throws MyException {
+        return serviceState.getService().getPosts(
+                response,
+                forumId,
+                topicId,
+                page,
+                num,
+                sortType,
+                postApproved
+        );
+    }
 
     @RequestMapping(value = "testcookie", method = RequestMethod.GET)
     @ResponseBody

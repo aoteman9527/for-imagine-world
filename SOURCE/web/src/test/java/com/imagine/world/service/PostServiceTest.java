@@ -1,5 +1,8 @@
 package com.imagine.world.service;
 
+import com.imagine.world.common.PostApproveType;
+import com.imagine.world.common.PostSortType;
+import com.imagine.world.common.TopicApproveType;
 import com.imagine.world.common.TopicSortType;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -165,10 +168,11 @@ public class PostServiceTest extends MyAbstractTest {
         String sortType = TopicSortType.LAST_POST_TIME_ASC.name();
         this.mockMvc.perform(post("/getTopics")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("forumId", forumId+"")
+                .param("forumId", forumId + "")
                 .param("page", page+"")
                 .param("num", num+"")
                 .param("sortType", sortType)
+                .param("topicApproved", TopicApproveType.PASS_WAITING.getValue()+"")
         ).andDo(new ResultHandler() {
             @Override
             public void handle(MvcResult mvcResult) throws Exception {
@@ -201,10 +205,34 @@ public class PostServiceTest extends MyAbstractTest {
                 .param("page", page+"")
                 .param("num", num+"")
                 .param("sortType", sortType)
+                .param("topicApproved", TopicApproveType.WAITING.getValue()+"")
         ).andDo(new ResultHandler() {
             @Override
             public void handle(MvcResult mvcResult) throws Exception {
                 System.out.println(mvcResult.getResponse().getContentAsString());;
+            }
+        }).andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void testViewTopic() throws Exception {
+        int forumId = 1;
+        int topicId = 29;
+        int page = 0;
+        int num = 100;
+        String sortType = PostSortType.POST_TIME_ASC.name();
+        this.mockMvc.perform(post("/getPosts")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("forumId", forumId + "")
+                .param("topicId", topicId+"")
+                .param("page", page+"")
+                .param("num", num+"")
+                .param("sortType", sortType)
+                .param("postApproved", PostApproveType.PASS_WAITING.getValue()+"")
+        ).andDo(new ResultHandler() {
+            @Override
+            public void handle(MvcResult mvcResult) throws Exception {
+                System.out.println(mvcResult.getResponse().getContentAsString());
             }
         }).andExpect(status().isOk());
     }

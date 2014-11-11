@@ -611,18 +611,19 @@ public abstract class BaseService implements CombineServices {
     @Override
     public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType, byte topicApproved) throws MyException {
         /**
-         * Does not need to check login. cause thi state mean logged in.
+         * Does not need to check login. cause this is base service. it will be checked by concrete class
          */
 
         /**
          * Do business
          */
+
         String sortCondition= TopicSortType.valueOf(sortType.toUpperCase()).getValue();
         TopicDAO topicDAO = new TopicDAO();
         List<TopicsEntity> topicsEntities = topicDAO.getTopicBy(
                 forumId,
                 sortCondition,
-                TopicApproveType.WAITING.getValue(),
+                topicApproved,
                 page,
                 num
         );
@@ -648,7 +649,7 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) throws MyException {
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType, byte postApproveType) throws MyException {
 
 //        this.checkLogin(response);
 //        return this.serviceState.getService().getPosts(
@@ -659,8 +660,29 @@ public abstract class BaseService implements CombineServices {
 //                num,
 //                sortType
 //        );
-        //TODO : implement
-        return null ;
+        String sortCondition = PostSortType.valueOf(sortType.toUpperCase()).getValue();
+        PostDAO postDAO = new PostDAO();
+        List<PostsEntity> postsEntityList = postDAO.getPostBy(
+                forumId,
+                topicId,
+                page,
+                num,
+                sortCondition,
+                postApproveType
+                );
+
+        List<Post> posts = Lists.newArrayList();
+        Iterator<PostsEntity> it = postsEntityList.iterator();
+        PostsEntity p;
+        while(it.hasNext()){
+            p = it.next();
+            posts.add(new Post(p));
+        }
+        return ImmutableMap.<String, Object>builder().
+                put("name", "Post of forumId= " + forumId+" topicId= "+topicId).
+                put("size", posts.size()).
+                put("posts",posts).
+                build();
     }
 
     @Override

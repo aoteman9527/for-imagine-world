@@ -37,13 +37,14 @@ public interface PostServiceI {
      */
     public Map getTopics(HttpServletResponse response, int forumId, int page, int num, String sortType, byte topicApproved) throws MyException;
     public void postInfo();
-    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num, String sortType) throws MyException;
+    public Map getPosts(HttpServletResponse response, int forumId, int topicId, int page, int num,
+                        String sortType, byte postApproveType) throws MyException;
 
     public void checkPermission();
     public TopicsEntity addNewTopic(int forumId, String title,
                             int posterId, long topicTime,
                             int views, byte status, byte type, int firstPostId, String firstPosterName,
-                            int lastPostId, String lastPosterName, int lastPosterId, int approveType);
+                            int lastPostId, String lastPosterName, int lastPosterId, int topicApproveType);
     public PostsEntity addNewPost(int topicId, int forumId, int posterId,
                            long postTime, String postUsernae,
                            String subject, String text, String checksum,
