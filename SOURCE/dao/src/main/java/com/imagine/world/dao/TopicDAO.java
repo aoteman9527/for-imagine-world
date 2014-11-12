@@ -47,6 +47,13 @@ public class TopicDAO extends CustomDAOSupport implements Serializable {
         return results;
     }
 
+    public void delete(TopicsEntity t){
+        getSession().beginTransaction();
+        getSession().delete(t);
+        getSession().getTransaction().commit();
+        getSession().flush();
+    }
+
     public void persist(TopicsEntity topicsEntity){
         try {
             getSession().beginTransaction();

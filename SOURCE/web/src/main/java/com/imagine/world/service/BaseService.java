@@ -434,14 +434,22 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public void deletePost() throws AuthorizationException {
-//        throw new AuthorizationException("This user does not logged in");
+    public void deletePost(int postId) throws AuthorizationException {
+        PostDAO postDAO = new PostDAO();
+        List<PostsEntity> postsEntityList= postDAO.getPostById(postId);
+        Preconditions.checkArgument(!postsEntityList.isEmpty(),"There are no record for delete postId="+postId);
+        postDAO.delete(postsEntityList.get(0));
     }
 
     @Override
-    public void deleteTopic() throws AuthorizationException {
+    public void deleteTopic(int topicId) throws AuthorizationException {
 //        throw new AuthorizationException("This user does not logged in");
-
+        PostDAO postDAO = new PostDAO();
+        postDAO.deleteByTopicId(topicId);
+        TopicDAO topicDAO = new TopicDAO();
+        List<TopicsEntity> topicsEntityList = topicDAO.getTopicById(topicId);
+        Preconditions.checkArgument(!topicsEntityList.isEmpty(),"There are no topic to delete by topicId="+topicId);
+        topicDAO.delete(topicsEntityList.get(0));
     }
 
     @Override
@@ -678,6 +686,12 @@ public abstract class BaseService implements CombineServices {
             p = it.next();
             posts.add(new Post(p));
         }
+        TopicDAO topicDAO = new TopicDAO();
+        List<TopicsEntity> topicsEntityList = topicDAO.getTopicById(topicId);
+
+        topicsEntityList.get(0).setTopicLastViewTime((int) (System.currentTimeMillis() / 1000));
+        topicDAO.merge(topicsEntityList.get(0));
+
         return ImmutableMap.<String, Object>builder().
                 put("name", "Post of forumId= " + forumId+" topicId= "+topicId).
                 put("size", posts.size()).

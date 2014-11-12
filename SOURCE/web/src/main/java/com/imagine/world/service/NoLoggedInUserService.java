@@ -119,13 +119,13 @@ public class NoLoggedInUserService extends BaseService {
     }
 
     @Override
-    public void deletePost() throws AuthorizationException {
-        super.deletePost();
+    public void deletePost(int idPost) throws AuthorizationException {
+        super.deletePost(idPost);
     }
 
     @Override
-    public void deleteTopic() throws AuthorizationException {
-        super.deleteTopic();
+    public void deleteTopic(int topicId) throws AuthorizationException {
+        super.deleteTopic(topicId);
     }
 
     @Override

@@ -13,8 +13,8 @@ import java.util.Map;
  */
 public interface PostServiceI {
 
-    public void deletePost() throws AuthorizationException;
-    public void deleteTopic() throws AuthorizationException;
+    public void deletePost(int postId) throws AuthorizationException;
+    public void deleteTopic(int topicId) throws AuthorizationException;
     public void modifyPost() throws AuthorizationException;
     public void modifyTopic() throws AuthorizationException;
     public void postNew(

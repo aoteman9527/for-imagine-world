@@ -1,7 +1,9 @@
 package com.imagine.world.service;
 
+import com.google.common.base.Preconditions;
 import com.imagine.world.common.PostApproveType;
 import com.imagine.world.common.TopicApproveType;
+import com.imagine.world.dao.TopicDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.PostsEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -120,13 +123,25 @@ public class NormalUserService extends BaseService {
     }
 
     @Override
-    public void deletePost() throws AuthorizationException {
-        super.deletePost();
+    public void deletePost(int idPost) throws AuthorizationException {
+        super.deletePost(idPost);
     }
 
     @Override
-    public void deleteTopic() throws AuthorizationException {
-        super.deleteTopic();
+    public void deleteTopic(int topicId) throws AuthorizationException {
+        /**
+         * Check Topic is belonged current user
+         * If it's no must throw exception
+         */
+        TopicDAO topicDAO = new TopicDAO();
+        List<TopicsEntity> topicsEntityList = topicDAO.getTopicById(topicId);
+        Preconditions.checkArgument(!topicsEntityList.isEmpty(), "There are no topic to delete by topicId=" + topicId);
+        Preconditions.checkArgument(!topicsEntityList.get(0)
+                .getTopicFirstPosterName()
+                .equalsIgnoreCase(session.getUsername()),
+                "This topic is not belong to user "+session.getUsername()
+        );
+        super.deleteTopic(topicId);
     }
 
     @Override
