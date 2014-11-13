@@ -3,18 +3,15 @@ package com.imagine.world.service;
 import com.google.common.base.Preconditions;
 import com.imagine.world.common.PostApproveType;
 import com.imagine.world.common.TopicApproveType;
+import com.imagine.world.dao.PostDAO;
 import com.imagine.world.dao.TopicDAO;
 import com.imagine.world.exception.AuthorizationException;
 import com.imagine.world.exception.MyException;
 import com.imagine.world.models.PostsEntity;
 import com.imagine.world.models.TopicsEntity;
-import com.imagine.world.models.UserProfile;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +23,6 @@ import java.util.Map;
 @Component
 public class NormalUserService extends BaseService {
 
-    @Override
-    public void logOut() throws AuthorizationException {
-        super.logOut();
-    }
 
     @Override
     public void issueArticle(HttpServletResponse r) throws AuthorizationException {
@@ -93,45 +86,24 @@ public class NormalUserService extends BaseService {
     }
 
     @Override
-    public void postInfo() {
-        super.postInfo();
+    public void deletePost(HttpServletResponse response, int idPost) throws MyException {
+        /**
+         * check permission
+         * With normal user. he only delete his post
+         */
+        PostDAO postDAO = new PostDAO();
+        List<PostsEntity> postsEntities = postDAO.getPostById(idPost);
+        Preconditions.checkArgument(postsEntities.isEmpty());
+        Preconditions.checkArgument(postsEntities.get(0).getPosterId()==session.getUserId());
+
+        super.deletePost(response, idPost);
     }
 
     @Override
-    public void authorize(HttpServletResponse httpServletResponse, String email, String password) throws MyException {
-        super.authorize(httpServletResponse, email, password);
-    }
-
-    @Override
-    public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException {
-        super.register(username, email, password, birthday, userType, timezone, rank, avatar, avatarType, avatarWidth, avatarHeight, userSig, userFrom);
-    }
-
-    @Override
-    public void uploadTempAvatar(MultipartFile multipartFile) throws MyException {
-        super.uploadTempAvatar(multipartFile);
-    }
-
-    @Override
-    public UserProfile userInfo(HttpServletResponse response) throws MyException {
-        return super.userInfo(response);
-    }
-
-    @Override
-    public void checkLogin(HttpServletResponse response) throws MyException {
-        super.checkLogin(response);
-    }
-
-    @Override
-    public void deletePost(int idPost) throws AuthorizationException {
-        super.deletePost(idPost);
-    }
-
-    @Override
-    public void deleteTopic(int topicId) throws AuthorizationException {
+    public void deleteTopic(HttpServletResponse response,int topicId) throws MyException {
         /**
          * Check Topic is belonged current user
-         * If it's no must throw exception
+         * If it's not must throw exception
          */
         TopicDAO topicDAO = new TopicDAO();
         List<TopicsEntity> topicsEntityList = topicDAO.getTopicById(topicId);
@@ -141,36 +113,48 @@ public class NormalUserService extends BaseService {
                 .equalsIgnoreCase(session.getUsername()),
                 "This topic is not belong to user "+session.getUsername()
         );
-        super.deleteTopic(topicId);
+        super.deleteTopic(response,topicId);
     }
 
     @Override
-    public void modifyPost() throws AuthorizationException {
-        super.modifyPost();
+    public void modifyPost(HttpServletResponse response,int forumId, int topicId, int postId, String subject, String text, String reason, String modifier ) throws MyException {
+        /**
+         * check permission
+         * With normal user. he only delete his post
+         */
+        PostDAO postDAO = new PostDAO();
+        List<PostsEntity> postsEntities = postDAO.getPostById(postId);
+        Preconditions.checkArgument(postsEntities.isEmpty());
+        Preconditions.checkArgument(postsEntities.get(0).getPosterId()==session.getUserId());
+        super.modifyPost(response, forumId, topicId, postId, subject, text, reason, modifier);
     }
 
     @Override
-    public void modifyTopic() throws AuthorizationException {
-        super.modifyTopic();
+    public void modifyTopic(HttpServletResponse response, int forumId, int topicId, String tittle) throws MyException {
+        /**
+         * Check Topic is belonged current user
+         * If it's not must throw exception
+         */
+        TopicDAO topicDAO = new TopicDAO();
+        List<TopicsEntity> topicsEntityList = topicDAO.getTopicById(topicId);
+        Preconditions.checkArgument(!topicsEntityList.isEmpty(), "There are no topic to delete by topicId=" + topicId);
+        Preconditions.checkArgument(!topicsEntityList.get(0)
+                .getTopicFirstPosterName()
+                .equalsIgnoreCase(session.getUsername()),
+                "This topic is not belong to user "+session.getUsername()
+        );
+        super.modifyTopic(response, forumId, topicId, tittle);
     }
 
     @Override
     public void postNew(HttpServletResponse response, int forumId, String subject, String text) throws MyException {
+        //TODO : check the forum allow to post new .
         super.postNew(response, forumId, subject, text);
     }
 
     @Override
-    public TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime, int views, byte status, byte type, int firstPostId, String firstPosterName, int lastPostId, String lastPosterName, int lastPosterId, int approveType) {
-        return super.addNewTopic(forumId, title, posterId, topicTime, views, status, type, firstPostId, firstPosterName, lastPostId, lastPosterName, lastPosterId, approveType);
-    }
-
-    @Override
-    public PostsEntity addNewPost(int topicId, int forumId, int posterId, long postTime, String postUsername, String subject, String text, String checksum, long editTime, String editReason, int editUser, String posterIp) {
-        return super.addNewPost(topicId, forumId, posterId, postTime, postUsername, subject, text, checksum, editTime, editReason, editUser, posterIp);
-    }
-
-    @Override
     public void reply(HttpServletResponse response, int forumId, int topicId, String subject, String text) throws MyException {
+        //TODO : check topic is closed.
         super.reply(response, forumId, topicId, subject, text);
     }
 }

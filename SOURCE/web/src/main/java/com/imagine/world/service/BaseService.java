@@ -177,7 +177,7 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException {
+    public final void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException {
 //        ValidationUtils.rejectIfEmptyOrWhitespace();
         Preconditions.checkArgument(USERNAME_PATTERN_C.matcher(username).matches(),"Invalid username "+username);
         Preconditions.checkArgument(EMAIL_PATTERN_C.matcher(email).matches(),"Invalid email "+email);
@@ -434,7 +434,7 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public void deletePost(int postId) throws AuthorizationException {
+    public void deletePost(HttpServletResponse response,int postId) throws  MyException {
         PostDAO postDAO = new PostDAO();
         List<PostsEntity> postsEntityList= postDAO.getPostById(postId);
         Preconditions.checkArgument(!postsEntityList.isEmpty(),"There are no record for delete postId="+postId);
@@ -442,7 +442,7 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public void deleteTopic(int topicId) throws AuthorizationException {
+    public void deleteTopic(HttpServletResponse response,int topicId) throws MyException {
 //        throw new AuthorizationException("This user does not logged in");
         PostDAO postDAO = new PostDAO();
         postDAO.deleteByTopicId(topicId);
@@ -453,14 +453,25 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public void modifyPost() throws AuthorizationException {
+    public void modifyPost(HttpServletResponse response,int forumId, int topicId, int postId, String subject, String text, String reason, String modifier ) throws  MyException {
 //        throw new AuthorizationException("This user does not logged in");
+        PostDAO postDAO = new PostDAO();
+        List<PostsEntity> postsEntities = postDAO.getPostById(postId);
+        Preconditions.checkArgument(!postsEntities.isEmpty(),"There are not existed post with postId="+postId);
+        postsEntities.get(0).setPostEditTime((int) System.currentTimeMillis() / 1000);
+        postsEntities.get(0).setPostEditReason(reason);
+        postsEntities.get(0).setPostSubject(subject);
+        postsEntities.get(0).setPostText(text);
+        postDAO.merge(postsEntities.get(0));
     }
 
     @Override
-    public void modifyTopic() throws AuthorizationException {
-//        throw new AuthorizationException("This user does not logged in");
-
+    public void modifyTopic(HttpServletResponse response, int forumId, int topicId, String tittle) throws MyException {
+        TopicDAO topicDAO = new TopicDAO();
+        List<TopicsEntity> topicsEntities = topicDAO.getTopicById(topicId);
+        Preconditions.checkArgument(!topicsEntities.isEmpty(),"There are not existed topic "+ topicId);
+        topicsEntities.get(0).setTopicTitle(tittle);
+        topicDAO.merge(topicsEntities.get(0));
     }
 
     @Override
@@ -520,7 +531,7 @@ public abstract class BaseService implements CombineServices {
 
 
     @Override
-    public TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime,
+    public final TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime,
                                     int views, byte status, byte type,
                                     int firstPostId, String firstPosterName,
                                     int lastPostId, String lastPosterName, int lastPosterId, int approveType) {
@@ -547,7 +558,7 @@ public abstract class BaseService implements CombineServices {
     }
 
     @Override
-    public PostsEntity addNewPost(int topicId, int forumId, int posterId,
+    public final PostsEntity addNewPost(int topicId, int forumId, int posterId,
                                   long postTime, String postUsername,
                                   String subject, String text, String checksum,
                                   long editTime, String editReason, int editUser, String posterIp) {

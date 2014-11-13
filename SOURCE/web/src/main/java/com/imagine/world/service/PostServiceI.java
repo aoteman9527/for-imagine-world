@@ -13,10 +13,22 @@ import java.util.Map;
  */
 public interface PostServiceI {
 
-    public void deletePost(int postId) throws AuthorizationException;
-    public void deleteTopic(int topicId) throws AuthorizationException;
-    public void modifyPost() throws AuthorizationException;
-    public void modifyTopic() throws AuthorizationException;
+    public void deletePost(HttpServletResponse response,int postId) throws MyException;
+    public void deleteTopic(HttpServletResponse response,int topicId) throws MyException;
+
+    /**
+     *
+     * @param forumId
+     * @param topicId
+     * @param postId
+     * @param subject
+     * @param text
+     * @param reason
+     * @param modifier = username
+     * @throws AuthorizationException
+     */
+    public void modifyPost(HttpServletResponse response,int forumId, int topicId, int postId, String subject, String text, String reason, String modifier ) throws MyException;
+    public void modifyTopic(HttpServletResponse response,int forumId, int topicId, String tittle) throws MyException;
     public void postNew(
             HttpServletResponse httpServletResponse,
                         int forumId,String subject,String text) throws MyException;

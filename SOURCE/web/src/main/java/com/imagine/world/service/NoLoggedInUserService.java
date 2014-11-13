@@ -59,23 +59,15 @@ public class NoLoggedInUserService extends BaseService {
     }
 
     @Override
-    public void authorize(HttpServletResponse httpServletResponse, String email, String password) throws MyException {
-        super.authorize(httpServletResponse, email, password);
-    }
-
-    @Override
     public void logOut() throws AuthorizationException {
+
         throw new AuthorizationException("This user does not need to logout cause he have not logged in.");
     }
 
     @Override
     public void issueArticle(HttpServletResponse response) throws MyException {
-        super.issueArticle(response);
-    }
-
-    @Override
-    public void register(String username, String email, String password, Date birthday, Integer userType, BigDecimal timezone, Integer rank, String avatar, String avatarType, Short avatarWidth, Short avatarHeight, String userSig, String userFrom) throws MyException {
-        super.register(username, email, password, birthday, userType, timezone, rank, avatar, avatarType, avatarWidth, avatarHeight, userSig, userFrom);
+        this.checkLogin(response);
+        this.serviceState.getService().issueArticle(response);
     }
 
     @Override
@@ -114,38 +106,27 @@ public class NoLoggedInUserService extends BaseService {
     }
 
     @Override
-    public void checkLogin(HttpServletResponse response) throws MyException {
-        super.checkLogin(response);
+    public void deletePost(HttpServletResponse response,int idPost) throws MyException {
+        this.checkLogin(response);
+        this.serviceState.getService().deletePost(response, idPost);
     }
 
     @Override
-    public void deletePost(int idPost) throws AuthorizationException {
-        super.deletePost(idPost);
+    public void deleteTopic(HttpServletResponse response,int topicId) throws MyException {
+        this.checkLogin(response);
+        this.serviceState.getService().deleteTopic(response, topicId);
     }
 
     @Override
-    public void deleteTopic(int topicId) throws AuthorizationException {
-        super.deleteTopic(topicId);
+    public void modifyPost(HttpServletResponse response,int forumId, int topicId, int postId, String subject, String text, String reason, String modifier ) throws MyException {
+        this.checkLogin(response);
+        this.serviceState.getService().modifyPost(response, forumId, topicId, postId, subject, text, reason, modifier);
     }
 
     @Override
-    public void modifyPost() throws AuthorizationException {
-        super.modifyPost();
-    }
-
-    @Override
-    public void modifyTopic() throws AuthorizationException {
-        super.modifyTopic();
-    }
-
-    @Override
-    public TopicsEntity addNewTopic(int forumId, String title, int posterId, long topicTime, int views, byte status, byte type, int firstPostId, String firstPosterName, int lastPostId, String lastPosterName, int lastPosterId, int approveType) {
-        return super.addNewTopic(forumId, title, posterId, topicTime, views, status, type, firstPostId, firstPosterName, lastPostId, lastPosterName, lastPosterId, approveType);
-    }
-
-    @Override
-    public PostsEntity addNewPost(int topicId, int forumId, int posterId, long postTime, String postUsername, String subject, String text, String checksum, long editTime, String editReason, int editUser, String posterIp) {
-        return super.addNewPost(topicId, forumId, posterId, postTime, postUsername, subject, text, checksum, editTime, editReason, editUser, posterIp);
+    public void modifyTopic(HttpServletResponse response, int forumId, int topicId, String tittle) throws MyException {
+        this.checkLogin(response);
+        this.serviceState.getService().modifyTopic(response, forumId, topicId, tittle);
     }
 
     @Override
