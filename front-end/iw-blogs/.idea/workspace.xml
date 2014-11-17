@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="69f5d2bc-5c42-46da-bf0c-54ec9081f136" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/controllers" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views/decorator" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/models" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/controllers/BaseController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views/BaseView.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views/decorator/DecoratorView.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/controllers/ForumController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views/decorator/ForumDetailView.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views/decorator/ForumMenuView.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/controllers/HomeController.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/views/IndexForumView.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/models/TopicList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/enum.js" afterPath="$PROJECT_DIR$/src/js/enum.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.html" afterPath="$PROJECT_DIR$/src/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/partForumMenu.html" afterPath="$PROJECT_DIR$/src/partForumMenu.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/scripts.js" afterPath="$PROJECT_DIR$/src/js/scripts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="VIEW-TOPIC.layoutit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,19 +83,73 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="20" selection-start="1561" selection-end="1561" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="882">
+            <state line="43" column="63" selection-start="2246" selection-end="2246" vertical-scroll-proportion="0.72378516" vertical-offset="208" max-vertical-offset="1026">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scripts.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/js/scripts.js">
+      <file leaf-file-name="BaseController.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/controllers/BaseController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="9" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.20143884" vertical-offset="678" max-vertical-offset="1620">
+            <state line="76" column="5" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="1494">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ForumController.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/controllers/ForumController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="5" selection-start="314" selection-end="314" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="432">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/views/BaseView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="29" selection-start="169" selection-end="173" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="324">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexForumView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/views/IndexForumView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="36" selection-start="137" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="270">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ForumDetailView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/views/decorator/ForumDetailView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="26" selection-start="220" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="432">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ForumMenuView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/views/decorator/ForumMenuView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="33" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="432">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="partForumDetail.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/partForumDetail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="102" column="17" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="2358">
               <folding />
             </state>
           </provider>
@@ -95,17 +166,30 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/part.topicDetail.html" />
-        <option value="$PROJECT_DIR$/src/partForumMenu.html" />
         <option value="$PROJECT_DIR$/src/partForumDetail.html" />
         <option value="$PROJECT_DIR$/src/indexTopic.html" />
         <option value="$PROJECT_DIR$/src/partFooter.html" />
         <option value="$PROJECT_DIR$/src/indexForum.html" />
         <option value="$PROJECT_DIR$/src/partHeader.html" />
-        <option value="$PROJECT_DIR$/src/js/enum.js" />
         <option value="$PROJECT_DIR$/src/partIntroduction.html" />
         <option value="$PROJECT_DIR$/src/indexHome.html" />
-        <option value="$PROJECT_DIR$/src/index.html" />
+        <option value="$PROJECT_DIR$/src/js/views/ForumMenuView.js" />
+        <option value="$PROJECT_DIR$/src/js/views/HomeView.js" />
+        <option value="$PROJECT_DIR$/src/partForumMenu.html" />
         <option value="$PROJECT_DIR$/src/js/scripts.js" />
+        <option value="$PROJECT_DIR$/src/js/enum.js" />
+        <option value="$PROJECT_DIR$/src/js/controllers/BController.js" />
+        <option value="$PROJECT_DIR$/src/js/views/part/ForumMenuView.js" />
+        <option value="$PROJECT_DIR$/src/js/views/decorator/DecoratorView.js" />
+        <option value="$PROJECT_DIR$/src/js/controllers/HomeController.js" />
+        <option value="$PROJECT_DIR$/src/js/models/TopicList.js" />
+        <option value="$PROJECT_DIR$/src/js/views/BaseView.js" />
+        <option value="$PROJECT_DIR$/src/js/controllers/BaseController.js" />
+        <option value="$PROJECT_DIR$/src/js/controllers/ForumController.js" />
+        <option value="$PROJECT_DIR$/src/js/views/IndexForumView.js" />
+        <option value="$PROJECT_DIR$/src/js/views/decorator/ForumDetailView.js" />
+        <option value="$PROJECT_DIR$/src/js/views/decorator/ForumMenuView.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
       </list>
     </option>
   </component>
@@ -124,7 +208,7 @@
     <OptionsSetting value="true" id="Edit" />
     <OptionsSetting value="true" id="Undo Check Out" />
     <OptionsSetting value="true" id="Get Latest Version" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -143,8 +227,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -159,7 +241,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VIEW.layoutit" />
+              <option name="myItemId" value="iw-blogs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -169,7 +251,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VIEW.layoutit" />
+              <option name="myItemId" value="iw-blogs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -179,6 +261,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -191,12 +275,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/js/views/part" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -477,15 +563,18 @@
       <updated>1415939836027</updated>
       <workItem from="1415939837914" duration="14705000" />
       <workItem from="1415957912392" duration="1987000" />
+      <workItem from="1415961654982" duration="780000" />
+      <workItem from="1416187838780" duration="8160000" />
+      <workItem from="1416209771041" duration="44000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16692000" />
+    <option name="totallyTimeSpent" value="25676000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="33" y="-4" width="1247" height="1028" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -505,13 +594,13 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979185" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979185" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -535,6 +624,62 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="63" selection-start="2246" selection-end="2246" vertical-scroll-proportion="0.0" vertical-offset="244" max-vertical-offset="1026">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/controllers/BaseController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="5" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="1494">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/controllers/ForumController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="5" selection-start="314" selection-end="314" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/BaseView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="29" selection-start="169" selection-end="173" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="324">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/IndexForumView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="36" selection-start="137" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/decorator/ForumDetailView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="26" selection-start="220" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/decorator/ForumMenuView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="33" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/partForumDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="17" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="2358">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="20" selection-start="1561" selection-end="1561" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
           <folding />
         </state>
@@ -542,24 +687,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="20" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="1458">
+        <state line="46" column="22" selection-start="1350" selection-end="1350" vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="1620" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="20" selection-start="1561" selection-end="1561" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="882">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="9" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0" vertical-offset="846" max-vertical-offset="1620" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="20" selection-start="1561" selection-end="1561" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="20" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="1458" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="847" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/partForumMenu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="102" selection-end="102" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="144" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/partForumDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="16" selection-start="1868" selection-end="1868" vertical-scroll-proportion="0.18780488" vertical-offset="1466" max-vertical-offset="2358" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/partFooter.html">
@@ -582,16 +739,9 @@
         <state line="20" column="35" selection-start="1343" selection-end="1343" vertical-scroll-proportion="-13.333333" vertical-offset="0" max-vertical-offset="1566" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/enum.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="16" selection-start="43" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="198" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/indexForum.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="6" selection-start="0" selection-end="594" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="324">
-          <folding />
-        </state>
+        <state line="12" column="6" selection-start="0" selection-end="594" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="324" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/partIntroduction.html">
@@ -601,21 +751,95 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/indexHome.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="33" selection-start="357" selection-end="373" vertical-scroll-proportion="0.16112532" vertical-offset="0" max-vertical-offset="782">
+        <state line="4" column="21" selection-start="190" selection-end="199" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="324" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/partForumMenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="9" selection-end="9" vertical-scroll-proportion="-0.6666667" vertical-offset="0" max-vertical-offset="198" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/enum.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="318" selection-end="330" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="30" selection-start="791" selection-end="817" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/controllers/HomeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="22" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/models/TopicList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="21" selection-start="90" selection-end="90" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="162">
+          <folding>
+            <element signature="n#!!doc;n#TopicList#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/decorator/DecoratorView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="8" selection-start="43" selection-end="81" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/controllers/BaseController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="5" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.0" vertical-offset="611" max-vertical-offset="1458">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/controllers/ForumController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="5" selection-start="314" selection-end="314" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/BaseView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="29" selection-start="169" selection-end="173" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="288">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/IndexForumView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="36" selection-start="137" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="234">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/decorator/ForumDetailView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="26" selection-start="220" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/views/decorator/ForumMenuView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="33" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/partForumDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="17" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="2358">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="20" selection-start="1561" selection-end="1561" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="882">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="9" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.20143884" vertical-offset="678" max-vertical-offset="1620">
+        <state line="43" column="63" selection-start="2246" selection-end="2246" vertical-scroll-proportion="0.72378516" vertical-offset="208" max-vertical-offset="1026">
           <folding />
         </state>
       </provider>

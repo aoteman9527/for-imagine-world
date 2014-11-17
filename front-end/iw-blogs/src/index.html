@@ -31,9 +31,17 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/enum.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/views/BaseView.js"></script>
+	<script type="text/javascript" src="js/views/IndexForumView.js"></script>
+	<script type="text/javascript" src="js/views/decorator/DecoratorView.js"></script>
+	<script type="text/javascript" src="js/views/decorator/ForumMenuView.js"></script>
+	<script type="text/javascript" src="js/views/decorator/ForumDetailView.js"></script>
+	<script type="text/javascript" src="js/controllers/BaseController.js"></script>
+	<script type="text/javascript" src="js/controllers/HomeController.js"></script>
+	<script type="text/javascript" src="js/controllers/ForumController.js"></script>
 </head>
 
-<body onload="controller.onLoad()">
+<body onload="javascript:var controller = new ForumController(); controller.onLoad()">
 <!--<img id="indexForum" onload="include(this,this.id+'.html')" src="img/apple-touch-icon-144-precomposed.png" >-->
 <!--<img id="indexTopic" onload="include(this,this.id+'.html')" src="img/apple-touch-icon-144-precomposed.png" >-->
 <!--<img id="indexHome" onload="include(this,this.id+'.html')" src="img/apple-touch-icon-144-precomposed.png" >-->
