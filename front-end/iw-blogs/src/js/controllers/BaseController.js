@@ -55,6 +55,28 @@ function BaseController () {
 
     }
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @param callback
+     */
+    this.login = function(email,password,callback){
+        var self =this;
+        var handler = function(data){
+            if(data instanceof Object )
+            data = data.responseText;
+            self.view.draw(data);
+        }
+        jQuery.post( IW_HOST_CONTEXT_AUTHORIZE,
+            {
+                email:email,
+                password:password
+            }
+            , handler)
+            .error(handler);
+    }
+
     this.changeController = function(newController){
         controller = newController;
     }

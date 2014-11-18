@@ -26,7 +26,8 @@ var include = function(insideElement,url){
 /**
  * After are URLs configuration
  * **/
-var IW_HOST="localhost:8080";
+var IW_HOST="http://localhost:8080";
 var IW_HOST_CONTEXT=IW_HOST+"/iw-web"
 var IW_HOST_CONTEXT_GET_TOPICS= IW_HOST_CONTEXT+"/getTopics";
+var IW_HOST_CONTEXT_AUTHORIZE= IW_HOST_CONTEXT+"/authorize";
 

@@ -7,13 +7,13 @@ function ForumDetailView(view){
 
     this.draw = function(data){
         //TODO it must draw data in view.
+        if(data instanceof TopicList){
+            var list = data.data;
+
+            var tableTopicList = jQuery("#tableTopicList");
+        }
         console.log("drawing .");
         view.draw(data);
     }
 
-    this.getInstance = function(){
-        if(this.forumMenuView == null)
-            this.forumMenuView = new ForumMenuView;
-        return this.forumMenuView;
-    }
 }

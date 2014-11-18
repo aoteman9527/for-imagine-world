@@ -11,9 +11,4 @@ function ForumMenuView(view){
         view.draw(data);
     }
 
-    this.getInstance = function(){
-        if(this.forumMenuView == null)
-            this.forumMenuView = new ForumMenuView;
-        return this.forumMenuView;
-    }
 }
