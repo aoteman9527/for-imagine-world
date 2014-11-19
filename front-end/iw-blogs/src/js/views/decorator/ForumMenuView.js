@@ -6,7 +6,7 @@ function ForumMenuView(view){
     this.baseView = view
 
     this.draw = function(data){
-        //TODO
+
         console.log("drawing .");
         view.draw(data);
     }

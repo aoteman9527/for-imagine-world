@@ -65,7 +65,10 @@ function BaseController () {
         var self =this;
         var handler = function(data){
             if(data instanceof Object )
-            data = data.responseText;
+                data = data.responseJSON;
+            else
+                data = JSON.parse(data);
+            data.originalRequest = IW_HOST_CONTEXT_AUTHORIZE
             self.view.draw(data);
         }
         jQuery.post( IW_HOST_CONTEXT_AUTHORIZE,

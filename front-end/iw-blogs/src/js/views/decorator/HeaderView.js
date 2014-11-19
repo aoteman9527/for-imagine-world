@@ -6,7 +6,9 @@ function HeaderView(view){
     this.baseView = view
 
     this.draw = function(data){
-        //TODO it must draw data in view.
+        if(data.originalRequest && data.originalRequest == IW_HOST_CONTEXT_AUTHORIZE){
+
+        }
         console.log("header drawing .");
         view.draw(data);
     }

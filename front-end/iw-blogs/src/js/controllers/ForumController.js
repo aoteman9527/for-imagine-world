@@ -12,6 +12,7 @@ function ForumController () {
         this.view = new IndexForumView();
         this.view = new ForumMenuView(this.view);
         this.view = new ForumDetailView(this.view);
+        this.view = new HeaderView(this.view);
 
     }
     this.setUpViews();
