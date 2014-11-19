@@ -115,12 +115,13 @@
                 </ul>
                 <form name="loginForm" >
                 <div  class="navbar-form navbar-right" role="login">
-
+                    <div class="form-group ">
+                        <div ng-show="loginForm.$error.email|| alertLoginFail" class=" alert alert-danger" role="alert">
+                            <strong>{{alertLoginFail||'Please input correct email format !!'}} </strong>
+                        </div>
+                    </div>
                     <div ng-class="loginForm.$error.email?'has-error':''" class="form-group ">
                         <!--<label  class="control-label" >Invalid email</label>-->
-                        <div ng-show="loginForm.$error.email" class="popover fade top in" role="tooltip"
-                             style=" display: block; left: 35%; top: -67%;">
-                            <div class="arrow" style="left: 50%;"></div><h3 class="popover-title" style="display: none;"></h3><div class="popover-content">Invalid email</div></div>
                         <input ng-model="email" type="email" class="form-control" placeholder="Email" >
                     </div>
                     <div ng-class="0<password.length && password.length<5?'has-error':''" class="form-group">

@@ -9,32 +9,26 @@ function HeaderController($scope,$http){
 
     this.login = function(){
         var self =this;
-        var handler = function(data){
-            if(data instanceof Object )
-                data = data.responseJSON;
-            else
-                data = JSON.parse(data);
-            data.originalRequest = IW_HOST_CONTEXT_AUTHORIZE
-            self.view.draw(data);
-        }
-//        jQuery.post( IW_HOST_CONTEXT_AUTHORIZE,
-//            {
-//                email:email,
-//                password:password
-//            }
-//            , handler)
-//            .error(handler);
-
         $http.post(IW_HOST_CONTEXT_AUTHORIZE,
+            "email=%s&password=%s".format($scope.email,$scope.password)
+            ,
             {
-            email:$scope.email,
-            password:$scope.password
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }
-        ).success(handler).error(handler);
+        ).success(function(){
+                $http.get(IW_HOST_CONTEXT_USER_INFO,{
+                }).success(function(userInfo){
+                    globalApp.userInfo = userInfo
+                        $scope.alertLoginFail = null;
+                });
+            }).error(function(){
+                $scope.alertLoginFail="Please try login again !!!"
+            });
     }
 
     this.validateEmail = function(){
-        console.log($scope.email);
+        $scope.alertLoginFail = null;
     }
     $scope.$watch('email',this.validateEmail);
+    $scope.$watch('password',this.validateEmail);
 }
