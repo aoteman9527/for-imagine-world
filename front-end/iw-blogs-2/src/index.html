@@ -48,10 +48,23 @@
 	<script type="text/javascript" src="js/controllers/HomeController.js"></script>
 	<script type="text/javascript" src="js/controllers/ForumController.js"></script>
 	<script type="text/javascript" src="js/controllers/HeaderController.js"></script>
+	<script type="text/javascript" src="js/controllers/ForumDetailController.js"></script>
 </head>
 
 <body ng-app="" >
-<div ng-include="'indexHome.html'" ></div>
+<div class="container">
+    <div ng-include="'partHeader.html'" ></div>
 
+    <div class="row clearfix">
+        <div ng-include="'partForumMenu.html'" ></div>
+        <!-- this is a trick for include page -->
+        <div ng-include="'partIntroduction.html'" ></div>
+        <div ng-include="'partForumDetail.html'" ></div>
+        <div ng-include="'partTopicDetail.html'" ></div>
+
+    </div>
+    <div ng-include="'partFooter.html'" ></div>
+
+</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<div ng-controller="HeaderController" class="row clearfix">
+<div ng-show="c.isDisplay('partHeader')" ng-controller="HeaderController" class="row clearfix">
     <div class="col-md-12 column">
         <div class="page-header">
             <h1>
@@ -56,87 +56,44 @@
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <!--<ul class="nav navbar-nav">-->
-                    <!--<li class="active">-->
-                        <!--<a href="#">Link</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="#">Link</a>-->
-                    <!--</li>-->
-                    <!--<li class="dropdown">-->
-                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>-->
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li>-->
-                                <!--<a href="#">Action</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#">Another action</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#">Something else here</a>-->
-                            <!--</li>-->
-                            <!--<li class="divider">-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#">Separated link</a>-->
-                            <!--</li>-->
-                            <!--<li class="divider">-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#">One more separated link</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                <!--</ul>-->
-
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#">Forgot password ...</a>
                     </li>
-                    <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                    <!--<li>-->
-                    <!--<a href="#">Action</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                    <!--<a href="#">Another action</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                    <!--<a href="#">Something else here</a>-->
-                    <!--</li>-->
-                    <!--<li class="divider">-->
-                    <!--</li>-->
-                    <!--<li>-->
-                    <!--<a href="#">Separated link</a>-->
-                    <!--</li>-->
-                    <!--</ul>-->
-                    <!--</li>-->
-                </ul>
-                <form name="loginForm" >
-                <div  class="navbar-form navbar-right" role="login">
-                    <div class="form-group ">
-                        <div ng-show="loginForm.$error.email|| alertLoginFail" class=" alert alert-danger" role="alert">
-                            <strong>{{alertLoginFail||'Please input correct email format !!'}} </strong>
-                        </div>
-                    </div>
-                    <div ng-class="loginForm.$error.email?'has-error':''" class="form-group ">
-                        <!--<label  class="control-label" >Invalid email</label>-->
-                        <input ng-model="email" type="email" class="form-control" placeholder="Email" >
-                    </div>
-                    <div ng-class="0<password.length && password.length<5?'has-error':''" class="form-group">
-                        <input ng-model="password" type="password" class="form-control" placeholder="Password" >
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember me
-                        </label>
-                    </div>
-                    <button ng-disabled="loginForm.$error.email" ng-click="c.login()"  type="button" class="btn btn-default">Login</button>
 
+                </ul>
+                <ul ng-show="c.getUserInfo()" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="">
+                            Welcome, {{c.getUserInfo().username}}
+                        </a>
+                    </li>
+                </ul>
+                <div  class="navbar-form navbar-right" role="login">
+                    <form ng-show="!c.getUserInfo()" name="loginForm" >
+                        <div class="form-group ">
+                            <!--Display status -->
+                            <span ng-show="loginForm.$error.email|| alertLoginFail" class="label label-danger">{{alertLoginFail||'Please input correct email format !!'}} </span>
+
+                        </div>
+                        <div ng-class="loginForm.$error.email?'has-error':''" class="form-group ">
+                            <!--<label  class="control-label" >Invalid email</label>-->
+                            <input ng-model="email" type="email" class="form-control" placeholder="Email" >
+                        </div>
+                        <div ng-class="0<password.length && password.length<5?'has-error':''" class="form-group">
+                            <input ng-model="password" type="password" class="form-control" placeholder="Password" >
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Remember me
+                            </label>
+                        </div>
+                        <button ng-disabled="loginForm.$error.email" ng-click="c.login()"  type="button" class="btn btn-default">Login</button>
+                    </form>
                 </div>
-                </form>
+
             </div>
+
 
         </nav>
     </div>

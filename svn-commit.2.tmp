@@ -1,0 +1,9 @@
+new test framework
+--This line, and those below, will be ignored--
+
+M    SOURCE/web/src/main/java/com/imagine/world/api/UserApis.java
+M    SOURCE/web/src/main/java/com/imagine/world/service/NoLoggedInUserService.java
+M    SOURCE/web/src/main/java/com/imagine/world/service/NormalUserService.java
+M    SOURCE/web/src/main/java/com/imagine/world/service/UserServiceI.java
+M    SOURCE/web/src/test/java/com/imagine/world/service/PostServiceTest.java
+M    SOURCE/web/src/test/java/com/imagine/world/service/UserServicesTest.java

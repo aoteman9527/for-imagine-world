@@ -2,6 +2,7 @@
  * Created by tuanlhd on 11/17/14.
  */
 function BaseController ($scope) {
+    if($scope)$scope.c=this;
     PARAM_REDIRECT = "redirect"
     this.view = null;//this is abstract variable. it will be replace by Child
     this.urlParam=function(name){
@@ -37,26 +38,11 @@ function BaseController ($scope) {
 
     }
 
-
-
-    this.changeController = function(newController){
-        controller = newController;
+    this.getUserInfo=function(){
+        return globalApp.userInfo;
     }
 
-    /**
-     * You must implement this function. cause it is getting view of each Page.
-     */
-    this.getViewHtml = function(){
-        throw new Error("this function is not support");
-    }
-
-    /**
-     * this function support for Decorator pattern.
-     * Cause we need to control many views
-     * After new constructor this function will be call immediately
-     * for setting up views.
-     */
-    this.setUpViews = function(){
-        throw new Error("This function is not support");
+    this.isDisplay=function(idPart){
+        return globalApp.allowDisplayItems.indexOf(idPart)>-1?true:false;
     }
 };
