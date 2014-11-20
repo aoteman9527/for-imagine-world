@@ -48,5 +48,5 @@ var PAGE_TOPIC_DETAIL = ["partHeader","partFooter","partForumMenu","partTopicDet
  */
 var globalApp = {
     userInfo:null,
-    allowDisplayItems:PAGE_FORUM_DETAIL//this will be update by controller.
+    allowDisplayItems:PAGE_HOME//this will be updated by controller.
 }
