@@ -41,6 +41,7 @@ var IW_HOST_CONTEXT_USER_INFO= IW_HOST_CONTEXT+"/userInfo";
 var PAGE_HOME = ["partHeader","partFooter","partForumMenu","partIntroduction"]
 var PAGE_FORUM_DETAIL = ["partHeader","partFooter","partForumMenu","partForumDetail"]
 var PAGE_TOPIC_DETAIL = ["partHeader","partFooter","partForumMenu","partTopicDetail"]
+var PAGE_TOPIC_NEW = ["partHeader","partFooter","partForumMenu","partTopicNew"]
 
 /**
  * the globalApp store all global variable
@@ -48,5 +49,5 @@ var PAGE_TOPIC_DETAIL = ["partHeader","partFooter","partForumMenu","partTopicDet
  */
 var globalApp = {
     userInfo:null,
-    allowDisplayItems:PAGE_HOME//this will be updated by controller.
+    allowDisplayItems:PAGE_TOPIC_NEW//this will be updated by controller.
 }
