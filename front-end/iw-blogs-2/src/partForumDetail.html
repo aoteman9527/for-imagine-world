@@ -10,39 +10,50 @@
             Data
         </li>
     </ul>
-    <table id="tableTopicList" class="table table-hover">
+    <div ng-show="c.isNotExistedTopic()" class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Warning!</h4>
+        <p> There are not existed any topics to display <a href="#" class="alert-link">Click here to report !</a>.</p>
+    </div>
+    <table ng-show="!c.isNotExistedTopic()" id="tableTopicList" class="table table-hover text-center">
         <thead>
-        <tr>
-            <th>
+        <tr >
+            <th class="text-center">
                 #
             </th>
-            <th>
-                Product
+            <th class="text-center">
+                Title
             </th>
-            <th>
-                Payment Taken
+            <th class="text-center">
+                Poster
             </th>
-            <th>
-                Status
+            <th class="text-center">
+                Time
+            </th>
+            <th class="text-center">
+                Controls
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                1
+        <tr ng-repeat="x in c.getTopics()" >
+            <td class="">
+                {{x.topicId}}
             </td>
-            <td>
-                TB - Monthly
+            <td >
+                {{x.topicTitle}}
             </td>
-            <td>
-                01/04/2012
+            <td >
+                {{x.topicFirstPosterName}}
             </td>
-            <td>
-                Default
+            <td >
+                {{x.topicTime + '000'| date:"MM/dd/yyyy 'at' h:mma"}}
+            </td>
+            <td >
+                <button type="button" class="close" data-dismiss="alert">×</button>
             </td>
         </tr>
-        <tr class="active">
+        <tr ng-show="false" class="active">
             <td>
                 1
             </td>
@@ -56,7 +67,7 @@
                 Approved
             </td>
         </tr>
-        <tr class="success">
+        <tr ng-show="false" class="success">
             <td>
                 2
             </td>
@@ -70,7 +81,7 @@
                 Declined
             </td>
         </tr>
-        <tr class="warning">
+        <tr ng-show="false" class="warning">
             <td>
                 3
             </td>
@@ -84,7 +95,7 @@
                 Pending
             </td>
         </tr>
-        <tr class="danger">
+        <tr ng-show="false" class="danger">
             <td>
                 4
             </td>
@@ -100,7 +111,7 @@
         </tr>
         </tbody>
     </table>
-    <ul class="pagination">
+    <ul ng-show="c.shoudDisplayPagination()" class="pagination pagination-sm pull-right ">
         <li>
             <a href="#">Prev</a>
         </li>
@@ -123,4 +134,5 @@
             <a href="#">Next</a>
         </li>
     </ul>
+    <button type="button" class="btn btn-primary" >Create new Topic</button>
 </div>

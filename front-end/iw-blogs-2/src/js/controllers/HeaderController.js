@@ -3,9 +3,10 @@
  */
 HeaderController.inheritsFrom(BaseController);
 function HeaderController($scope,$http){
+    BaseController.call(this,$scope);
     $scope.email=""
     $scope.password=""
-    $scope.c=this;
+
     this.login = function(){
         var self =this;
         $http.post(IW_HOST_CONTEXT_AUTHORIZE,

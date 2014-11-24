@@ -658,6 +658,7 @@ public abstract class BaseService implements CombineServices {
         return ImmutableMap.<String, Object>builder().
                 put("name", "Topics of forumId " + forumId).
                 put("size", topics.size()).
+                put("page",page).
                 put("topics",topics).
                 build();
     }
