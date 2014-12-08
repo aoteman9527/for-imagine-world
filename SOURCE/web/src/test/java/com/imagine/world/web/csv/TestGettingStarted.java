@@ -1,10 +1,13 @@
 package com.imagine.world.web.csv;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 import com.imagine.world.common.AvatarType;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import sun.nio.ch.ThreadPool;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -12,6 +15,9 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by letuan on 2/18/14.
@@ -84,5 +90,66 @@ public class TestGettingStarted extends TestCase{
     public void testEnum(){
 
         System.out.println(AvatarType.getType("uploaded"));
+    }
+
+
+    public void testHackChatVl() throws InterruptedException {
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(4,4,10, TimeUnit.SECONDS,new ArrayBlockingQueue<Runnable>(5000));
+
+        final String url = "http://hailm.net/view/khi-toi-pha-ca-phe";
+        for (int i=0;i<4000;i++){
+
+            threadPoolExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("start thread "+ this.toString());
+                    WebClient webClient = new WebClient();
+
+                    HtmlPage page = null;
+                    try {
+                        page = webClient.getPage(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    String pageAsXml = page.asXml();
+
+                    String pageAsText = page.asText();
+
+                    webClient.closeAllWindows();
+                    System.out.println("complete thread "+ this.toString());
+                }
+            });
+        }
+
+        threadPoolExecutor.shutdown();
+
+        while(!threadPoolExecutor.isTerminated()){
+            Thread.sleep(5000);
+            System.out.println("the system is running ");
+        }
+
+        System.out.println("Complete work view page");
+
+
+    }
+
+    public void testOneClick(){
+        final String url = "http://hailm.net/view/khi-toi-pha-ca-phe";
+
+        final WebClient webClient = new WebClient();
+
+        HtmlPage page = null;
+        try {
+            page = webClient.getPage(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        final String pageAsXml = page.asXml();
+
+        final String pageAsText = page.asText();
+
+        webClient.closeAllWindows();
     }
 }

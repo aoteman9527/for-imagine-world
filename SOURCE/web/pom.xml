@@ -178,6 +178,11 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+        </dependency>
+
     </dependencies>
 	<properties>
 		<project.http.version>1.15.0-rc</project.http.version>

@@ -141,7 +141,7 @@ public class UserApis extends BaseApi {
         );
     }
 
-    @RequestMapping(value = "/reply",method = RequestMethod.POST)
+    @RequestMapping(value = "reply",method = RequestMethod.POST)
     public void reply(
             HttpServletResponse httpServletResponse,
             @RequestParam Integer forumId,
