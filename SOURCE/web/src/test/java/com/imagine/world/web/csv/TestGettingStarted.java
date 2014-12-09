@@ -96,7 +96,7 @@ public class TestGettingStarted extends TestCase{
     public void testHackChatVl() throws InterruptedException {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(4,4,10, TimeUnit.SECONDS,new ArrayBlockingQueue<Runnable>(5000));
 
-        final String url = "http://haiivl.com/photo/32390";
+        final String url = "http://hailm.net/view/mot-po-ro-call-of-duty-head-shot-100-lan-chat";
         for (int i=0;i<4000;i++){
 
             threadPoolExecutor.execute(new Runnable() {
@@ -104,6 +104,7 @@ public class TestGettingStarted extends TestCase{
                 public void run() {
                     System.out.println("start thread "+ this.toString());
                     WebClient webClient = new WebClient();
+                    webClient.getOptions().setCssEnabled(false);
                     webClient.getOptions().setThrowExceptionOnScriptError(false);
                     HtmlPage page = null;
                     try {
@@ -120,6 +121,7 @@ public class TestGettingStarted extends TestCase{
                     System.out.println("complete thread "+ this.toString());
                 }
             });
+            Thread.sleep(1000);
         }
 
         threadPoolExecutor.shutdown();
