@@ -30,10 +30,15 @@ public class GroupChapterPage extends Page {
             System.out.println("-----------------------------");
 
             Iterator<Element> it= elements.iterator();
+            Element e;
             while(it.hasNext()){
                 if(this.pageQueue.remainingCapacity()==0){
                     Thread.sleep(1000);
                 }else{
+                    e=it.next();
+                    if(!this.isExistedChapter(e.ownText())){
+                        new ChapterPage(e.absUrl("href")).start();
+                    }
                 }
             }
         } catch (IOException e){
