@@ -4,15 +4,10 @@ import java.io.IOException;
 import java.util.*;
 
 import org.jsoup.Connection;
-import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import com.entertainment.musicpage.crawlerimplement.ChiaSeNhacCrawler;
-import com.entertainment.musicpage.daoimplement.CustomAlbumSongDAO;
-import com.entertainment.musicpage.daoimplement.CustomAlbumSongDAOImpl;
 
 import junit.framework.TestCase;
 
@@ -50,19 +45,7 @@ public class CrawlerTest extends TestCase {
 		}	
 	}
 	
-	public void testAllowPlayListLink() throws IOException{
-		String url = "http://chiasenhac.com";
-		Document doc;
-		doc = Jsoup.connect(url).get();
-		
-		ChiaSeNhacCrawler crawler = new ChiaSeNhacCrawler(url);
-		Elements links =  doc.select(crawler.getSelector());
-		for (Element l : links ) {
-            String urll =l.absUrl("href") ;
-            if(crawler.isAllowToScanInside(urll))
-                System.out.println(urll);
-		}
-	}
+
 	
 	/**
 	 * this goal of this test to make sure get correct title of song if the link crawled is one song link
