@@ -3,60 +3,35 @@ package com.entertainment.musicpage.crawler.test;
 import com.imagine.world.crawler.dao.SqliteDAO;
 import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
-import org.apache.commons.mail.EmailException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import junit.framework.TestCase;
 import org.apache.commons.mail.EmailException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tuan on 12/8/14.
  */
 public class GettingStarted extends TestCase {
-
-    public void testCrawVnSharing(){
-        String url = "http://truyentranhtuan.com/naruto/";
-        System.out.println("start thread "+ this.toString());
-        WebClient webClient = new WebClient();
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-
-        HtmlPage page = null;
-        try {
-            page = webClient.getPage(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        String pageAsXml = page.asXml();
-
-        String pageAsText = page.asText();
-        System.out.println(pageAsXml);
-        System.out.println(pageAsText);
-        webClient.closeAllWindows();
-        System.out.println("complete thread "+ this.toString());
-    }
-
     public void testCrawlerTruyenTranhTuan() throws InterruptedException {
-
         HomePage homePage = new HomePage("http://truyentranhtuan.com/");
         homePage.start();
-
-        int shutdownTime = 2*60*1000;
-        Thread.sleep(shutdownTime);
-        System.out.println("Shutdown system ");
-        Page.getThreadPoolExecutor().shutdown();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int shutdownTime = 2*60*1000;
+                try {
+                    Thread.sleep(shutdownTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Shutdown system ");
+                Page.getThreadPoolExecutor().shutdown();
+            }
+        }).start();
 
         while(!Page.getThreadPoolExecutor().isTerminated()){
-            Thread.sleep(4000);
+            Thread.sleep(2000);
             System.out.println(" the system is running , remain threads="+Page.getPageQueue().size());
         }
 
