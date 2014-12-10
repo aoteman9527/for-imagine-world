@@ -1,4 +1,4 @@
-package com.entertainment.musicpage.crawler.dao;
+package com.imagine.world.crawler.dao;
 
 import java.sql.*;
 import java.util.ArrayList;

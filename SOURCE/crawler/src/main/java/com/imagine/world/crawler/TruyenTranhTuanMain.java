@@ -1,50 +1,17 @@
-package com.entertainment.musicpage.crawler.test;
+package com.imagine.world.crawler;
 
 import com.imagine.world.crawler.dao.SqliteDAO;
 import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
 import org.apache.commons.mail.EmailException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import junit.framework.TestCase;
-import org.apache.commons.mail.EmailException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
- * Created by tuan on 12/8/14.
+ * Created by tuanlhd on 12/10/14.
  */
-public class GettingStarted extends TestCase {
-
-    public void testCrawVnSharing(){
-        String url = "http://truyentranhtuan.com/naruto/";
-        System.out.println("start thread "+ this.toString());
-        WebClient webClient = new WebClient();
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-
-        HtmlPage page = null;
-        try {
-            page = webClient.getPage(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        String pageAsXml = page.asXml();
-
-        String pageAsText = page.asText();
-        System.out.println(pageAsXml);
-        System.out.println(pageAsText);
-        webClient.closeAllWindows();
-        System.out.println("complete thread "+ this.toString());
-    }
-
+public class TruyenTranhTuanMain {
     public void testCrawlerTruyenTranhTuan() throws InterruptedException {
 
         HomePage homePage = new HomePage("http://truyentranhtuan.com/");
@@ -57,9 +24,8 @@ public class GettingStarted extends TestCase {
 
         while(!Page.getThreadPoolExecutor().isTerminated()){
             Thread.sleep(4000);
-            System.out.println(" the system is running , remain threads="+Page.getPageQueue().size());
+            System.out.println(" the system is running , remain threads=" + Page.getPageQueue().size());
         }
-
         System.out.println("Complete work view page");
     }
 

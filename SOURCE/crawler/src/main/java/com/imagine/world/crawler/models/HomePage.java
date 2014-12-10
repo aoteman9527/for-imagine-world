@@ -1,4 +1,4 @@
-package com.entertainment.musicpage.crawler.models;
+package com.imagine.world.crawler.models;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
@@ -27,21 +27,15 @@ public class HomePage extends Page {
             Document document = Jsoup.parse(pageAsXml);
 //            Elements elements = document.select("a[href]");
             Elements elements = document.select("div[id=new-chapter] span[class=manga easy-tooltip] a");
-            System.out.println(elements);
+//            System.out.println(elements);
             System.out.println("-----------------------------");
 
             Iterator<Element> it= elements.iterator();
             while(it.hasNext()){
-                if(this.pageQueue.remainingCapacity()==0){
-                    Thread.sleep(2000);
-                }else{
                     new GroupChapterPage(it.next().absUrl("href")).start();
-                }
             }
 
         } catch (IOException e){
-            e.printStackTrace();
-        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

@@ -1,4 +1,4 @@
-package com.entertainment.musicpage.crawler.models;
+package com.imagine.world.crawler.models;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
@@ -28,24 +28,18 @@ public class GroupChapterPage extends Page {
             Document document = Jsoup.parse(pageAsXml);
             Elements elements = document.select("div[id=manga-chapter] span[class=chapter-name] a");
             System.out.println(this.url);
-            System.out.println(elements);
+//            System.out.println(elements);
             System.out.println("-----------------------------");
 
             Iterator<Element> it= elements.iterator();
             Element e;
             while(it.hasNext()){
-                if(this.pageQueue.remainingCapacity()==0){
-                    Thread.sleep(1000);
-                }else{
-                    e=it.next();
-                    if(!this.isExistedChapter(e.absUrl("href"))){
-                        new ChapterPage(e.absUrl("href")).start();
-                    }
+                e=it.next();
+                if(!this.isExistedChapter(e.absUrl("href"))){
+                    new ChapterPage(e.absUrl("href")).start();
                 }
             }
-        }  catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        }  catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();

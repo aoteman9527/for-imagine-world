@@ -1,17 +1,15 @@
-package com.entertainment.musicpage.crawler.models;
+package com.imagine.world.crawler.models;
 
 import com.entertainment.musicpage.crawler.dao.SqliteDAO;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
-import org.jsoup.Jsoup;
 
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -21,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 public abstract class Page implements Runnable{
     protected String url;
     private static int corePoolSize = 4;
-    private static int maxPoolSize = 4;
-    private static long keepAliveTime = 10;
+    private static int maxPoolSize = 10;
+    private static long keepAliveTime = 2;
     protected WebClient webClient;
-    protected static final ArrayBlockingQueue<Runnable> pageQueue = new ArrayBlockingQueue<Runnable>(20);
+    protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>();
     protected static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,maxPoolSize,keepAliveTime,
             TimeUnit.SECONDS, pageQueue);;
     private static String blogFeeds;
@@ -46,6 +44,7 @@ public abstract class Page implements Runnable{
         this.url = url;
         webClient = new WebClient();
         webClient.getOptions().setCssEnabled(false);
+        webClient.getOptions().setJavaScriptEnabled(false);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
     }
 
@@ -77,5 +76,9 @@ public abstract class Page implements Runnable{
 
     public static ThreadPoolExecutor getThreadPoolExecutor() {
         return threadPoolExecutor;
+    }
+
+    public static BlockingQueue<Runnable> getPageQueue() {
+        return pageQueue;
     }
 }
