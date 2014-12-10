@@ -7,6 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.util.Iterator;
 
 /**
@@ -36,14 +38,18 @@ public class GroupChapterPage extends Page {
                     Thread.sleep(1000);
                 }else{
                     e=it.next();
-                    if(!this.isExistedChapter(e.ownText())){
+                    if(!this.isExistedChapter(e.absUrl("href"))){
                         new ChapterPage(e.absUrl("href")).start();
                     }
                 }
             }
-        } catch (IOException e){
+        }  catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

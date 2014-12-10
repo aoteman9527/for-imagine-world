@@ -15,7 +15,7 @@ public class MainRunHaiLM {
     public static void main(String[] arg) throws InterruptedException {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(4,4,10, TimeUnit.SECONDS,new ArrayBlockingQueue<Runnable>(5000));
 
-        final String url = "http://hailm.net/view/mot-po-ro-call-of-duty-head-shot-100-lan-chat";
+        final String url = arg[0];
         for (int i=0;i<4000;i++){
 
             threadPoolExecutor.execute(new Runnable() {
@@ -23,6 +23,7 @@ public class MainRunHaiLM {
                 public void run() {
                     System.out.println("start thread "+ this.toString());
                     WebClient webClient = new WebClient();
+                    webClient.getOptions().setCssEnabled(false);
                     webClient.getOptions().setCssEnabled(false);
                     webClient.getOptions().setThrowExceptionOnScriptError(false);
                     HtmlPage page = null;
@@ -34,10 +35,9 @@ public class MainRunHaiLM {
 
 //                    String pageAsXml = page.asXml();
 
-                    String pageAsText = page.asText();
-
+                    String pageTitle = page.getTitleText();
                     webClient.closeAllWindows();
-                    System.out.println("complete thread "+ this.toString());
+                    System.out.println(pageTitle+" complete thread "+ this.toString());
                 }
             });
             Thread.sleep(1000);

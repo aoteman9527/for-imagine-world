@@ -1,12 +1,18 @@
 package com.entertainment.musicpage.crawler.test;
 
+import com.entertainment.musicpage.crawler.dao.SqliteDAO;
 import com.entertainment.musicpage.crawler.models.HomePage;
 import com.entertainment.musicpage.crawler.models.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import junit.framework.TestCase;
+import org.apache.commons.mail.EmailException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -53,5 +59,21 @@ public class GettingStarted extends TestCase {
         }
 
         System.out.println("Complete work view page");
+    }
+
+    public void testSendEmail() throws EmailException {
+        HomePage homePage = new HomePage("http://truyentranhtuan.com/");
+        homePage.sendMail("TTTTT","BODDY");
+    }
+
+    public void testSqlite(){
+        SqliteDAO sqliteDAO = new SqliteDAO();
+        try {
+            sqliteDAO.insertChapter("HAHAH link","hihii title");
+            List l= sqliteDAO.findChapterByLink("HAHAH link");
+            System.out.println("l.size()="+l.size());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

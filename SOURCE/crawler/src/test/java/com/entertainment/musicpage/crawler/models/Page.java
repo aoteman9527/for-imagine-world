@@ -1,10 +1,16 @@
 package com.entertainment.musicpage.crawler.models;
 
+import com.entertainment.musicpage.crawler.dao.SqliteDAO;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +29,19 @@ public abstract class Page implements Runnable{
             TimeUnit.SECONDS, pageQueue);;
     private static String blogFeeds;
 
+    /**
+     * Properties email
+     *
+     */
+    private static String secretMail2Blogger = "tuanlhdnl.openyourlife@blogger.com ";
+    private static String SMTP_HOST = "localhost";
+    private static int SMTP_PORT = 25;
+
+    /**
+     * properties DAO
+     */
+    protected static final SqliteDAO sqliteDAO = new SqliteDAO();
+
     public Page(String url){
         this.url = url;
         webClient = new WebClient();
@@ -39,14 +58,21 @@ public abstract class Page implements Runnable{
         this.webClient.closeAllWindows();
     }
 
-    public boolean isExistedChapter(String urlChapter) throws IOException {
-        if(blogFeeds==null || blogFeeds.isEmpty()){
-            WebClient w = new WebClient();
-            HtmlPage hp =w.getPage("http://mocuacuocdoi.blogspot.com/feeds/posts/summary");
-            blogFeeds = hp.asText().toLowerCase();
-        }
+    public boolean isExistedChapter(String urlChapter) throws SQLException {
+        return !sqliteDAO.findChapterByLink(urlChapter).isEmpty();
+    }
 
-        return blogFeeds.contains(urlChapter.toLowerCase());
+    public void sendMail(String subject, String message) throws EmailException {
+        Email email = new SimpleEmail();
+        email.setHostName(SMTP_HOST);
+        email.setSmtpPort(SMTP_PORT);
+        email.setAuthenticator(new DefaultAuthenticator("tuanlhdnl@gmail.com", "sieunhan123"));
+//        email.setSSL(true);
+        email.setFrom("auto-sender@gmail.com");
+        email.setSubject(subject);
+        email.setMsg(message);
+        email.addTo(secretMail2Blogger);
+        email.send();
     }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() {
