@@ -1,7 +1,7 @@
 package com.imagine.world.crawler.models;
 
-import com.entertainment.musicpage.crawler.dao.SqliteDAO;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.imagine.world.crawler.dao.SqliteDAO;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;

@@ -35,7 +35,7 @@ public class ChapterPage extends Page {
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append(elements);
             this.sendMail(page.getTitleText(),stringBuffer.toString());
-            sqliteDAO.insertChapter(page.getTitleText(),page.getUrl().toString());
+            sqliteDAO.insertChapter(page.getUrl().toString(),page.getTitleText());
 
         } catch (IOException e){
             e.printStackTrace();
