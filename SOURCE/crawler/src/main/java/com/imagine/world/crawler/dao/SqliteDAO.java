@@ -9,19 +9,20 @@ import java.util.List;
  */
 public class SqliteDAO {
     private static Connection c = null;
+    private static final String JDBC_URL = "jdbc:sqlite:/tmp/crawler.db";// this must be a symlink
 
     public SqliteDAO(){
         Statement stmt = null;
         if(c==null)
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:/tmp/crawler.db");
+            c = DriverManager.getConnection(JDBC_URL);
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS CHAPTERS " +
                     "( ID INTEGER PRIMARY KEY ," +
-                    " link           TEXT    NOT NULL," +
+                    " link           TEXT    NOT NULL UNIQUE," +
                     " title           TEXT    NOT NULL" +
                     " )";
             stmt.executeUpdate(sql);

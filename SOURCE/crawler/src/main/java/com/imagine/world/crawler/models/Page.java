@@ -3,9 +3,8 @@ package com.imagine.world.crawler.models;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.imagine.world.crawler.dao.SqliteDAO;
 import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import org.apache.commons.mail.HtmlEmail;
 
 import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
@@ -20,9 +19,21 @@ public abstract class Page implements Runnable{
     protected String url;
     private static int corePoolSize = 4;
     private static int maxPoolSize = 10;
-    private static long keepAliveTime = 2;
+    private static long keepAliveTime = 2;//minutes
     protected WebClient webClient;
-    protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>();
+    protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>(){
+        /**
+         * override to put objects at the front of the list
+         * THIS TRICK FOR LIFO ThreadExecutor -> help DEPTH CRAWLING => haha it is perfect thing.
+         * @param runnable
+         * @throws InterruptedException
+         */
+        @Override
+        public boolean offer(Runnable runnable) {
+            super.addFirst(runnable);
+            return true;
+        }
+    };
     protected static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,maxPoolSize,keepAliveTime,
             TimeUnit.SECONDS, pageQueue);;
     private static String blogFeeds;
@@ -32,7 +43,7 @@ public abstract class Page implements Runnable{
      *
      */
     private static String secretMail2Blogger = "tuanlhdnl.openyourlife@blogger.com ";
-    private static String SMTP_HOST = "localhost";
+    private static String SMTP_HOST = "smtp.gmail.com";
     private static int SMTP_PORT = 25;
 
     /**
@@ -49,8 +60,9 @@ public abstract class Page implements Runnable{
     }
 
     public void start(){
-        if(!threadPoolExecutor.isShutdown())
+        if(!threadPoolExecutor.isShutdown()){
             threadPoolExecutor.execute(this);
+        }
     }
 
     public void completeWork(){
@@ -62,11 +74,11 @@ public abstract class Page implements Runnable{
     }
 
     public void sendMail(String subject, String message) throws EmailException {
-        Email email = new SimpleEmail();
+        HtmlEmail email = new HtmlEmail();
         email.setHostName(SMTP_HOST);
         email.setSmtpPort(SMTP_PORT);
-        email.setAuthenticator(new DefaultAuthenticator("tuanlhdnl@gmail.com", "sieunhan123"));
-//        email.setSSL(true);
+        email.setAuthenticator(new DefaultAuthenticator("dang.capchemgio3@gmail.com", "sieunhan123"));
+        email.setSSL(true);
         email.setFrom("auto-sender@gmail.com");
         email.setSubject(subject);
         email.setMsg(message);
@@ -80,5 +92,13 @@ public abstract class Page implements Runnable{
 
     public static BlockingQueue<Runnable> getPageQueue() {
         return pageQueue;
+    }
+
+    public static void setCorePoolSize(int corePoolSize) {
+        Page.corePoolSize = corePoolSize;
+    }
+
+    public static void setMaxPoolSize(int maxPoolSize) {
+        Page.maxPoolSize = maxPoolSize;
     }
 }

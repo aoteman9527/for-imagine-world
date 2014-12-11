@@ -21,15 +21,13 @@ public class HomePage extends Page {
     @Override
     public void run() {
         try {
-
+            System.out.println("Crawl homepage "+this.url);
             HtmlPage page = webClient.getPage(this.url);
             String pageAsXml = page.asXml();
             Document document = Jsoup.parse(pageAsXml);
 //            Elements elements = document.select("a[href]");
             Elements elements = document.select("div[id=new-chapter] span[class=manga easy-tooltip] a");
-//            System.out.println(elements);
             System.out.println("-----------------------------");
-
             Iterator<Element> it= elements.iterator();
             while(it.hasNext()){
                     new GroupChapterPage(it.next().absUrl("href")).start();

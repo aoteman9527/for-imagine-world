@@ -22,15 +22,13 @@ public class GroupChapterPage extends Page {
     @Override
     public void run() {
         try {
-
+            System.out.println("Crawl groupchapter "+this.url);
             HtmlPage page = webClient.getPage(this.url);
             String pageAsXml = page.asXml();
             Document document = Jsoup.parse(pageAsXml);
             Elements elements = document.select("div[id=manga-chapter] span[class=chapter-name] a");
-            System.out.println(this.url);
 //            System.out.println(elements);
             System.out.println("-----------------------------");
-
             Iterator<Element> it= elements.iterator();
             Element e;
             while(it.hasNext()){
