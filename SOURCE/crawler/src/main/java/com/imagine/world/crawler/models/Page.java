@@ -20,10 +20,19 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class Page implements Runnable{
     protected String url;
-    private static int corePoolSize = 4;
-    private static int maxPoolSize = 10;
-    private static long keepAliveTime = 2;//minutes
     protected WebClient webClient;
+
+    private static final Properties pros = new Properties();
+    static {
+        try {
+            pros.load(new FileInputStream(Page.class.getResource("/").getFile()+"crawler.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static int corePoolSize = 4;
+    private static int maxPoolSize = Integer.parseInt(pros.getProperty("thread.max.pool.size"));
+    private static long keepAliveTime = 2;//minutes
     protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>(){
         /**
          * override to put objects at the front of the list
@@ -42,15 +51,7 @@ public abstract class Page implements Runnable{
     /**
      * Properties email
      */
-    private static final Properties pros = new Properties();
-    static {
-        try {
 
-            pros.load(new FileInputStream(Page.class.getResource("/").getFile()+"crawler.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     private static final String SECRET_MAIL_2_BLOGGER = pros.getProperty("email.secret.email2blogger");
     private static final String SMTP_HOST = pros.getProperty("email.smtp.host");
     private static final int SMTP_PORT = Integer.parseInt(pros.getProperty("email.smtp.port"));
@@ -88,7 +89,7 @@ public abstract class Page implements Runnable{
         email.setHostName(SMTP_HOST);
         email.setSmtpPort(SMTP_PORT);
         email.setAuthenticator(new DefaultAuthenticator(SMTP_USERNAME, SMTP_PASSWORD));
-        email.setSSL(true);
+//        email.setSSL(true);
         email.setFrom("auto-sender@gmail.com");
         email.setSubject(subject);
         email.setMsg(message);
@@ -104,11 +105,7 @@ public abstract class Page implements Runnable{
         return pageQueue;
     }
 
-    public static void setCorePoolSize(int corePoolSize) {
-        Page.corePoolSize = corePoolSize;
-    }
-
-    public static void setMaxPoolSize(int maxPoolSize) {
-        Page.maxPoolSize = maxPoolSize;
+    public static int getShutDownTime(){
+        return Integer.parseInt(pros.getProperty("thread.shutdown.time"));
     }
 }

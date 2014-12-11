@@ -15,15 +15,13 @@ public class TruyenTranhTuanMain {
      * @throws InterruptedException
      */
     public static void main(final String[] arg) throws InterruptedException {
-        if(arg.length == 2 && arg[1]!=null){
-            Page.setMaxPoolSize(Integer.parseInt(arg[1]));
-        }
+
         HomePage homePage = new HomePage("http://truyentranhtuan.com/");
         homePage.start();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int shutdownTime = Integer.parseInt(arg[0]);
+                int shutdownTime = Page.getShutDownTime();
                 try {
                     Thread.sleep(shutdownTime);
                 } catch (InterruptedException e) {
