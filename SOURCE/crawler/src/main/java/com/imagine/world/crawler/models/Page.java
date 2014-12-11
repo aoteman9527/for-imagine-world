@@ -6,7 +6,10 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -36,16 +39,23 @@ public abstract class Page implements Runnable{
     };
     protected static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,maxPoolSize,keepAliveTime,
             TimeUnit.SECONDS, pageQueue);;
-    private static String blogFeeds;
-
     /**
      * Properties email
-     *
      */
-    private static String secretMail2Blogger = "tuanlhdnl.openyourlife@blogger.com ";
-    private static String SMTP_HOST = "smtp.gmail.com";
-    private static int SMTP_PORT = 25;
+    private static final Properties pros = new Properties();
+    static {
+        try {
 
+            pros.load(new FileInputStream(Page.class.getResource("/").getFile()+"crawler.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static final String SECRET_MAIL_2_BLOGGER = pros.getProperty("email.secret.email2blogger");
+    private static final String SMTP_HOST = pros.getProperty("email.smtp.host");
+    private static final int SMTP_PORT = Integer.parseInt(pros.getProperty("email.smtp.port"));
+    private static final String SMTP_USERNAME=pros.getProperty("email.smtp.username");
+    private static final String SMTP_PASSWORD=pros.getProperty("email.smtp.password");
     /**
      * properties DAO
      */
@@ -77,12 +87,12 @@ public abstract class Page implements Runnable{
         HtmlEmail email = new HtmlEmail();
         email.setHostName(SMTP_HOST);
         email.setSmtpPort(SMTP_PORT);
-        email.setAuthenticator(new DefaultAuthenticator("dang.capchemgio3@gmail.com", "sieunhan123"));
+        email.setAuthenticator(new DefaultAuthenticator(SMTP_USERNAME, SMTP_PASSWORD));
         email.setSSL(true);
         email.setFrom("auto-sender@gmail.com");
         email.setSubject(subject);
         email.setMsg(message);
-        email.addTo(secretMail2Blogger);
+        email.addTo(SECRET_MAIL_2_BLOGGER);
         email.send();
     }
 
