@@ -69,7 +69,7 @@ public abstract class Page implements Runnable{
         email.setSmtpPort(Configuration.i().SMTP_PORT);
         email.setAuthenticator(new DefaultAuthenticator(Configuration.i().SMTP_USERNAME, Configuration.i().SMTP_PASSWORD));
         email.setSSL(true);
-        email.setFrom("auto-sender@gmail.com");
+        email.setFrom("tuanlhdnl@gmail.com");
         email.setSubject(subject);
         email.setMsg(message);
         email.addTo(Configuration.i().SECRET_MAIL_2_BLOGGER);

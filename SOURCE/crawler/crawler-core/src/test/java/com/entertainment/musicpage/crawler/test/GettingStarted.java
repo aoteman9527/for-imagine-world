@@ -40,7 +40,7 @@ public class GettingStarted extends TestCase {
 
     public void testSendEmail() throws EmailException {
         HomePage homePage = new HomePage("http://truyentranhtuan.com/");
-        homePage.sendMail("TTTTT","BODDY");
+        homePage.sendMail("TTTTT asdsadas"," sadas das BODDY");
     }
 
     public void testSqlite(){
