@@ -24,6 +24,7 @@ public abstract class Page implements Runnable{
 
     private static final Properties pros = new Properties();
     static {
+        System.out.println(Page.class.getResource("/"));
         try {
             pros.load(new FileInputStream(Page.class.getResource("/").getFile()+"crawler.properties"));
         } catch (IOException e) {
