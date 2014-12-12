@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class SqliteDAO {
     private static Connection c = null;
-    private static final String JDBC_URL = "jdbc:sqlite:/tmp/crawler.db";// this must be a symlink
+    private static final String JDBC_URL = "jdbc:sqlite:crawler.db";// this must be a symlink
 
     public SqliteDAO(){
         Statement stmt = null;

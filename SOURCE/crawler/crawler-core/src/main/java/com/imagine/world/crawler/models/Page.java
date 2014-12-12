@@ -68,7 +68,7 @@ public abstract class Page implements Runnable{
         email.setHostName(Configuration.i().SMTP_HOST);
         email.setSmtpPort(Configuration.i().SMTP_PORT);
         email.setAuthenticator(new DefaultAuthenticator(Configuration.i().SMTP_USERNAME, Configuration.i().SMTP_PASSWORD));
-//        email.setSSL(true);
+        email.setSSL(true);
         email.setFrom("auto-sender@gmail.com");
         email.setSubject(subject);
         email.setMsg(message);
