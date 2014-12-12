@@ -1,6 +1,5 @@
 package com.imagine.world.crawler.models;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -11,7 +10,7 @@ public class Configuration {
     private static final Properties pros = new Properties();
     static {
         try {
-            pros.load(new FileInputStream(ClassLoader.getSystemResource("").getFile()+ "crawler.properties"));
+            pros.load(Configuration.class.getClassLoader().getResourceAsStream("crawler.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

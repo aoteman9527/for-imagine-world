@@ -16,7 +16,6 @@ public class TruyenTranhTuanMain {
      * @throws InterruptedException
      */
     public static void main(final String[] arg) throws InterruptedException {
-
         HomePage homePage = new HomePage("http://truyentranhtuan.com/");
         homePage.start();
         new Thread(new Runnable() {
