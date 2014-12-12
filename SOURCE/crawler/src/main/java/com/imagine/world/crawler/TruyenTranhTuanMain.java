@@ -1,5 +1,6 @@
 package com.imagine.world.crawler;
 
+import com.imagine.world.crawler.models.Configuration;
 import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
 
@@ -21,7 +22,7 @@ public class TruyenTranhTuanMain {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int shutdownTime = Page.getShutDownTime();
+                int shutdownTime = Configuration.i().getShutDownTime();
                 try {
                     Thread.sleep(shutdownTime);
                 } catch (InterruptedException e) {
