@@ -2,7 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <name>imagine-world-crawler</name>
+    <modules>
+        <module>crawler-truyen-tranh-tuan</module>
+        <module>crawler-core</module>
+    </modules>
     <artifactId>imagine-world-crawler</artifactId>
+    <!-- Output to jar format -->
+    <packaging>pom</packaging>
     <url>http://maven.apache.org</url>
     <parent>
         <groupId>imagine.world</groupId>
@@ -45,30 +51,19 @@
 		<project.oauth.version>1.15.0-rc</project.oauth.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<build>
-		<finalName>musicpage-crawler</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.entertainment.musicpage.crawlerimplement.ChiaSeNhacCrawler</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-				<version>2.3.2</version>
-			</plugin>
-		</plugins>
-	</build>
+
+    <build>
+        <finalName>${artifactId}</finalName>
+        <plugins>
+            <!-- Make this jar executable -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -11,7 +11,7 @@ public class Configuration {
     private static final Properties pros = new Properties();
     static {
         try {
-            pros.load(new FileInputStream(ClassLoader.getSystemResource("").getFile()+"crawler.properties"));
+            pros.load(new FileInputStream(ClassLoader.getSystemResource("").getFile()+ "crawler.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
