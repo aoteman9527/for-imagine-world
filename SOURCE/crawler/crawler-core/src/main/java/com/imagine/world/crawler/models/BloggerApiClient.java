@@ -1,6 +1,7 @@
 package com.imagine.world.crawler.models;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -24,6 +25,7 @@ public class BloggerApiClient {
     private final String USER_AGENT = "Mozilla/5.0";
     private CloseableHttpClient client;
     private final HttpClientBuilder builder = HttpClientBuilder.create();
+    private HashMap<String,String> accessToken;
 
     private BloggerApiClient(){
         client= builder.build();
@@ -39,18 +41,21 @@ public class BloggerApiClient {
 
     }
 
-    public String retrievingAccessToken() throws IOException {
-        List<NameValuePair> codeRequestParams = new ArrayList<>();
-        codeRequestParams.add(new BasicNameValuePair("response_type", "code"));
-        codeRequestParams.add(new BasicNameValuePair("client_id", "600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
-        codeRequestParams.add(new BasicNameValuePair("scope", "https://www.googleapis.com/auth/blogger"));
-        codeRequestParams.add(new BasicNameValuePair("state", "1131321"));
-        codeRequestParams.add(new BasicNameValuePair("access_type", "online"));
-        codeRequestParams.add(new BasicNameValuePair("include_granted_scopes", "true"));
-        codeRequestParams.add(new BasicNameValuePair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"));
-        return this.sendPost("https://accounts.google.com/o/oauth2/auth",codeRequestParams);
-
-
+    private String retrievingAccessToken() throws IOException {
+        if(accessToken == null || Long.parseLong(accessToken.get("expires_in"))<= System.currentTimeMillis()){
+            List<NameValuePair> codeRequestParams = new ArrayList<>();
+            String refreshToken = Configuration.i().GOOGLE_OAUTH_REFRESH_TOKEN;
+            codeRequestParams.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
+            codeRequestParams.add(new BasicNameValuePair("client_secret","HZ0QvZuiibNsLdzt4HPmSyJ7"));
+            codeRequestParams.add(new BasicNameValuePair("grant_type","refresh_token"));
+            codeRequestParams.add(new BasicNameValuePair("refresh_token", refreshToken));
+            accessToken = new ObjectMapper().readValue(
+                    this.sendPost("https://accounts.google.com/o/oauth2/token",codeRequestParams)
+                            .getBytes(),
+                    HashMap.class);
+            accessToken.put("expires_in",(System.currentTimeMillis()/1000L + Long.parseLong(accessToken.get("expires_in"))+""));
+        }
+        return accessToken.get("access_token");
     }
 
     private String sendPost(String endPointUrl, List<NameValuePair> postParameters) throws IOException {

@@ -36,6 +36,8 @@ public class Configuration {
      * Blogger api v3
      */
     public final String BLOGGER_API_V3_KEY =  pros.getProperty("blogger.api.v3.key");
+    public final String GOOGLE_OAUTH_REFRESH_TOKEN = pros.getProperty("google.oauth2.refresh.token");
+    public final String BLOGGER_BLOG_ID = pros.getProperty("blogger.blog.id");
 
     /**
      * Constructor
@@ -49,7 +51,7 @@ public class Configuration {
         return configuration;
     }
 
-    public static int getShutDownTime(){
+    public int getShutDownTime(){
         return Integer.parseInt(pros.getProperty("thread.shutdown.time"));
     }
 }

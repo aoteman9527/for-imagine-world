@@ -1,6 +1,6 @@
 package com.entertainment.musicpage.crawler.test;
 
-import com.gargoylesoftware.htmlunit.StringWebResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.*;
@@ -9,7 +9,6 @@ import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharSet;
 import org.apache.commons.mail.EmailException;
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
@@ -26,8 +25,6 @@ import org.jsoup.nodes.Element;
 
 import java.io.*;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -82,7 +79,7 @@ public class GettingStarted extends TestCase {
      */
     HttpClientBuilder builder = HttpClientBuilder.create();
     CloseableHttpClient client = builder.build();
-    final String USER_AGENT = "Mozilla/5.0";
+    final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Intel Mac OS X 10.6; rv:7.0.1) Gecko/20100101 Firefox/7.0.1";
 
     public void testObtainCodeToken() throws HttpException, IOException, URISyntaxException, InterruptedException {
         List<NameValuePair> pl = new ArrayList<>();
@@ -155,18 +152,54 @@ public class GettingStarted extends TestCase {
      * this test for oauth2.0
      */
     public void testObtainAccessToken() throws HttpException, IOException, URISyntaxException {
+        List<NameValuePair> pl = new ArrayList<>();
+
+        pl.add(new BasicNameValuePair("response_type","code"));
+        pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
+        pl.add(new BasicNameValuePair("redirect_uri","http://localhost"));
+        pl.add(new BasicNameValuePair("scope","https://www.googleapis.com/auth/blogger"));
+
+        String s = this.sendPost("https://accounts.google.com/o/oauth2/auth",pl);
+
+        /**
+         * get redirect
+         */
+        Document d = Jsoup.parse(s);
+        Element e = d.select("A").get(0);
+        final String redirect = e.absUrl("href");
+        System.out.println("This is the redirect Approval page, paste it to web browser and input your code here ");
+        System.out.println(redirect);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String code = reader.readLine();reader.close();
+
         /**
          * This continueing when you have a "code"
          */
-        List<NameValuePair> pl = new ArrayList<>();
-        String code = "4/Ica6BTkczS6Hi3r9nMaetJ9OJFnN7fgKfsxD93Ejooc.IoGOq_KPBZMfgrKXntQAax0GEPKYlAI";
+        pl = new ArrayList<>();
         pl.add(new BasicNameValuePair("code",code));
         pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
         pl.add(new BasicNameValuePair("client_secret","HZ0QvZuiibNsLdzt4HPmSyJ7"));
         pl.add(new BasicNameValuePair("redirect_uri","http://localhost"));
         pl.add(new BasicNameValuePair("grant_type","authorization_code"));
 
-        String s = this.sendPost("https://accounts.google.com/o/oauth2/v3/token",pl);
+        s = this.sendPost("https://accounts.google.com/o/oauth2/token",pl);
+        System.out.println(s);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        HashMap accessToken = objectMapper.readValue(s.getBytes(), HashMap.class);
+
+        /**
+         * Refresh token
+         *
+         */
+        String refreshToken = accessToken.get("refresh_token").toString();
+        pl = new ArrayList<>();
+        pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
+        pl.add(new BasicNameValuePair("client_secret","HZ0QvZuiibNsLdzt4HPmSyJ7"));
+        pl.add(new BasicNameValuePair("grant_type","refresh_token"));
+        pl.add(new BasicNameValuePair("refresh_token",refreshToken));
+
+        s = this.sendPost("https://accounts.google.com/o/oauth2/token",pl);
         System.out.println(s);
     }
 
@@ -204,5 +237,9 @@ public class GettingStarted extends TestCase {
         String s = IOUtils.toString(reader);
         reader.close();
         return s;
+    }
+
+    public static void main(String arg[]) throws URISyntaxException, IOException, HttpException {
+        new GettingStarted().testObtainAccessToken();
     }
 }
