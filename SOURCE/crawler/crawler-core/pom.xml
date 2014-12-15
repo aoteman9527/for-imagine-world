@@ -10,4 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <artifactId>crawler-core</artifactId>
+    <dependencies>
+        <!-- Apache, HTTP components for request post get to other server -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+    </dependencies>
 </project>
