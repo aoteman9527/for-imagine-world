@@ -2,7 +2,8 @@ package com.entertainment.musicpage.crawler.test;
 
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.*;
 import com.imagine.world.crawler.dao.SqliteDAO;
 import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
@@ -23,10 +24,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -79,27 +77,96 @@ public class GettingStarted extends TestCase {
     }
 
 
+    /**
+     * To use this test. must use it from debug mode. to replace "code"
+     */
     HttpClientBuilder builder = HttpClientBuilder.create();
     CloseableHttpClient client = builder.build();
     final String USER_AGENT = "Mozilla/5.0";
 
-    public void testOAuth2() throws HttpException, IOException, URISyntaxException {
+    public void testObtainCodeToken() throws HttpException, IOException, URISyntaxException, InterruptedException {
         List<NameValuePair> pl = new ArrayList<>();
-            pl.add(new BasicNameValuePair("response_type","code"));
+
+        pl.add(new BasicNameValuePair("response_type","code"));
         pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
-        pl.add(new BasicNameValuePair("redirect_uri","urn:ietf:wg:oauth:2.0:oob"));
+        pl.add(new BasicNameValuePair("redirect_uri","http://localhost"));
         pl.add(new BasicNameValuePair("scope","https://www.googleapis.com/auth/blogger"));
 
         String s = this.sendPost("https://accounts.google.com/o/oauth2/auth",pl);
         System.out.println(s);
 
+        /**
+         * get redirect
+         */
         Document d = Jsoup.parse(s);
         Element e = d.select("A").get(0);
-        String redirect = e.absUrl("href");
-        s = this.sendGet(redirect,new HashMap<String, String>());
-        WebClient w = new WebClient();
-        URL url = new URL("http://www.google.com);
-        HTMLParser.parseHtml(new StringWebResponse(s,url),w.getCurrentWindow());
+        final String redirect = e.absUrl("href");
+        final WebClient w = new WebClient();w.getOptions().setThrowExceptionOnScriptError(false);w.getOptions().setCssEnabled(false);
+
+        /**
+         * Open redirect go to login form
+         */
+        w.getOptions().setJavaScriptEnabled(false);
+        HtmlPage p = w.getPage(redirect);IOUtils.copy(new ByteArrayInputStream(p.asXml().getBytes()), new FileOutputStream(new File("/tmp/login.html")));
+        WebWindow window = p.getEnclosingWindow();
+        w.getOptions().setJavaScriptEnabled(true);
+
+        /**
+         * get login form then submit
+         */
+        HtmlForm form = p.getFormByName("");//no name are set
+        ((HtmlTextInput)form.getInputByName("Email")).setValueAttribute("tuanlhdnl@gmail.com");
+        ((HtmlPasswordInput)form.getInputByName("Passwd")).setValueAttribute("sieunhan123");
+        ((HtmlSubmitInput)form.getInputByName("signIn")).click();
+        while(window.getEnclosedPage() == p) {
+            // The page hasn't changed.
+            Thread.sleep(500);
+        }
+
+        /**
+         * Login success get Permission page
+         */
+        // This loop above will wait until the page changes.
+        p = (HtmlPage) window.getEnclosedPage();
+        IOUtils.copy(new ByteArrayInputStream(p.asXml().getBytes()), new FileOutputStream(new File("/tmp/RequirePermission.html")));
+
+        /**
+         * filter approval form and accept button. then submit
+         */
+        System.out.println("Submit login form.");
+        form = p.getFormByName("");//get approval form
+        form.getElementsByAttribute("button","id","submit_approve_access").get(0).click();
+        System.out.println("Submit approve");
+        /**
+         * Getting code form response
+         */
+        while(window.getEnclosedPage() == p) {
+            // The page hasn't changed.
+            Thread.sleep(500);
+        }
+        p = (HtmlPage) window.getEnclosedPage();
+        System.out.println(p.asText());
+        w.closeAllWindows();
+
+
+    }
+
+    /**
+     * this test for oauth2.0
+     */
+    public void testObtainAccessToken() throws HttpException, IOException, URISyntaxException {
+        /**
+         * This continueing when you have a "code"
+         */
+        List<NameValuePair> pl = new ArrayList<>();
+        String code = "4/Ica6BTkczS6Hi3r9nMaetJ9OJFnN7fgKfsxD93Ejooc.IoGOq_KPBZMfgrKXntQAax0GEPKYlAI";
+        pl.add(new BasicNameValuePair("code",code));
+        pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
+        pl.add(new BasicNameValuePair("client_secret","HZ0QvZuiibNsLdzt4HPmSyJ7"));
+        pl.add(new BasicNameValuePair("redirect_uri","http://localhost"));
+        pl.add(new BasicNameValuePair("grant_type","authorization_code"));
+
+        String s = this.sendPost("https://accounts.google.com/o/oauth2/v3/token",pl);
         System.out.println(s);
     }
 

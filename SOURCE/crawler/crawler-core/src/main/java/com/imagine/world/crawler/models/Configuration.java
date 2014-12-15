@@ -19,18 +19,23 @@ public class Configuration {
     /**
      * ThreadExecutor properties
      */
-    public static int corePoolSize = 4;
-    public static int maxPoolSize = Integer.parseInt(pros.getProperty("thread.max.pool.size"));
-    public static long keepAliveTime = 2;//minutes
+    public int corePoolSize = 4;
+    public int maxPoolSize = Integer.parseInt(pros.getProperty("thread.max.pool.size"));
+    public long keepAliveTime = 2;//minutes
 
     /**
      * email Properties
      */
-    public static final String SECRET_MAIL_2_BLOGGER = pros.getProperty("email.secret.email2blogger");
-    public static final String SMTP_HOST = pros.getProperty("email.smtp.host");
-    public static final int SMTP_PORT = Integer.parseInt(pros.getProperty("email.smtp.port"));
-    public static final String SMTP_USERNAME=pros.getProperty("email.smtp.username");
-    public static final String SMTP_PASSWORD=pros.getProperty("email.smtp.password");
+    public final String SECRET_MAIL_2_BLOGGER = pros.getProperty("email.secret.email2blogger");
+    public final String SMTP_HOST = pros.getProperty("email.smtp.host");
+    public final int SMTP_PORT = Integer.parseInt(pros.getProperty("email.smtp.port"));
+    public final String SMTP_USERNAME=pros.getProperty("email.smtp.username");
+    public final String SMTP_PASSWORD=pros.getProperty("email.smtp.password");
+
+    /**
+     * Blogger api v3
+     */
+    public final String BLOGGER_API_V3_KEY =  pros.getProperty("blogger.api.v3.key");
 
     /**
      * Constructor

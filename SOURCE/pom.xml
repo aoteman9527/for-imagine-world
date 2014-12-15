@@ -13,7 +13,7 @@
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.13</version>
+                <version>2.15</version>
             </dependency>
 
             <dependency>
@@ -193,6 +193,12 @@
                 <groupId>org.xerial</groupId>
                 <artifactId>sqlite-jdbc</artifactId>
                 <version>3.7.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.googlecode.jsontoken</groupId>
+                <artifactId>jsontoken</artifactId>
+                <version>1.0</version>
             </dependency>
 
         </dependencies>
