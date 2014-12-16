@@ -5,6 +5,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.imagine.world.crawler.dao.SqliteDAO;
+import com.imagine.world.crawler.models.BloggerApiClient;
 import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
 import junit.framework.TestCase;
@@ -177,10 +178,10 @@ public class GettingStarted extends TestCase {
          */
         pl = new ArrayList<>();
         pl.add(new BasicNameValuePair("code",code));
-        pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
+        pl.add(new BasicNameValuePair("client_id", "600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
         pl.add(new BasicNameValuePair("client_secret","HZ0QvZuiibNsLdzt4HPmSyJ7"));
         pl.add(new BasicNameValuePair("redirect_uri","http://localhost"));
-        pl.add(new BasicNameValuePair("grant_type","authorization_code"));
+        pl.add(new BasicNameValuePair("grant_type", "authorization_code"));
 
         s = this.sendPost("https://accounts.google.com/o/oauth2/token",pl);
         System.out.println(s);
@@ -195,9 +196,9 @@ public class GettingStarted extends TestCase {
         String refreshToken = accessToken.get("refresh_token").toString();
         pl = new ArrayList<>();
         pl.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));
-        pl.add(new BasicNameValuePair("client_secret","HZ0QvZuiibNsLdzt4HPmSyJ7"));
+        pl.add(new BasicNameValuePair("client_secret", "HZ0QvZuiibNsLdzt4HPmSyJ7"));
         pl.add(new BasicNameValuePair("grant_type","refresh_token"));
-        pl.add(new BasicNameValuePair("refresh_token",refreshToken));
+        pl.add(new BasicNameValuePair("refresh_token", refreshToken));
 
         s = this.sendPost("https://accounts.google.com/o/oauth2/token",pl);
         System.out.println(s);
@@ -237,6 +238,10 @@ public class GettingStarted extends TestCase {
         String s = IOUtils.toString(reader);
         reader.close();
         return s;
+    }
+
+    public void testAddingBlogPost() throws IOException {
+        BloggerApiClient.i().addingPost("THIS I TITLE,","THIS IS CONTENT");
     }
 
     public static void main(String arg[]) throws URISyntaxException, IOException, HttpException {

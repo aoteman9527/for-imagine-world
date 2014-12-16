@@ -6,6 +6,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class Page implements Runnable{
     protected String url;
     protected WebClient webClient;
+    protected BloggerApiClient bloggerApiClient = BloggerApiClient.i();
 
     protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>(){
         /**
@@ -74,6 +76,10 @@ public abstract class Page implements Runnable{
         email.setMsg(message);
         email.addTo(Configuration.i().SECRET_MAIL_2_BLOGGER);
         email.send();
+    }
+
+    public void addingPost(String title,String content) throws IOException {
+        bloggerApiClient.addingPost("THIS I TITLE,","THIS IS CONTENT");
     }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() {
