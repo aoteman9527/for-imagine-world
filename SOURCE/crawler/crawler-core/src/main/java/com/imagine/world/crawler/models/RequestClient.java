@@ -1,16 +1,15 @@
 package com.imagine.world.crawler.models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -40,7 +39,7 @@ public class RequestClient {
         HttpPost post = new HttpPost(endPointUrl);
         post.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         post.setHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessToken);
-        StringEntity params =new StringEntity(mapper.writeValueAsString(json));
+        StringEntity params =new StringEntity(mapper.writeValueAsString(json), "UTF-8");
         post.setEntity(params);
         return execute(post);
     }
@@ -63,13 +62,24 @@ public class RequestClient {
 
         HttpGet get = new HttpGet(endPointUrl);
         get.setHeader("User-Agent", USER_AGENT);
+        get.releaseConnection();
         return execute(get);
     }
 
-    public final String execute(HttpUriRequest h) throws IOException {
+    public final synchronized String execute(HttpRequestBase h) throws IOException {
         HttpResponse response = client.execute(h);
+        int code = response.getStatusLine().getStatusCode();
         Reader reader = new InputStreamReader(response.getEntity().getContent());
-        return IOUtils.toString(reader);
+        String textBody = IOUtils.toString(reader);
+        if(code != HttpStatus.SC_OK){
+            throw new IOException(textBody);
+        }
+        /**
+         * this is important
+         * We must tell HttpClient that we are done with the connection and that it can now be reused. Without doing this HttpClient will wait indefinitely for a connection to free up so that it can be reused.
+         */
+        h.releaseConnection();
+        return textBody;
     }
 
     public final static RequestClient i(){

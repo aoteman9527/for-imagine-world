@@ -1,9 +1,9 @@
 package com.entertainment.musicpage.crawler;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
+
+import java.util.concurrent.TimeUnit;
 
 public class WebScanner implements Runnable {
 	// scan all child links in currentlink and add to queue

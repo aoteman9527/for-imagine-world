@@ -38,10 +38,15 @@ public class SqliteDAO {
     public void insertChapter(String link, String title) throws SQLException {
         Statement stmt = c.createStatement();
         StringBuffer sb = new StringBuffer();
-        sb.append("INSERT INTO CHAPTERS (link,title) ");
-        sb.append(String.format("VALUES ('%s','%s')", link, title));
-        stmt.executeUpdate(sb.toString());
-        stmt.close();
+        try {
+            sb.append("INSERT INTO CHAPTERS (link,title) ");
+            sb.append(String.format("VALUES ('%s',\"%s\")", link, title));
+            stmt.executeUpdate(sb.toString());
+            stmt.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("[error] "+ sb.toString());
+        }
 
     }
 

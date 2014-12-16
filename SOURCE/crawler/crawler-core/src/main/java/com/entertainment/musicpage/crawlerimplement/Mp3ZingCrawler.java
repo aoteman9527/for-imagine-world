@@ -1,11 +1,10 @@
 package com.entertainment.musicpage.crawlerimplement;
 
-import java.util.regex.Pattern;
-
+import com.entertainment.musicpage.crawler.Crawler;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.entertainment.musicpage.crawler.Crawler;
+import java.util.regex.Pattern;
 
 public class Mp3ZingCrawler extends Crawler{
 	private final static Pattern FILTERS = Pattern

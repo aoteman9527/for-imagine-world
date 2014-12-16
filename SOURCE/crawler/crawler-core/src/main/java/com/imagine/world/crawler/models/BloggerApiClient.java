@@ -29,18 +29,18 @@ public class BloggerApiClient {
         return rq.sendGet("https://www.googleapis.com/blogger/v3/blogs/" + blogId, params);
     }
 
-    public void addingPost(String title, String content) throws IOException {
+    public String addingPost(String title, String content) throws IOException {
         HashMap params = new HashMap();
         params.put("kind","blogger#post");
         params.put("blog","{\"id\": \""+cf.BLOGGER_BLOG_ID+"\"}");
         params.put("title",title);
         params.put("content",content);
-        rq.sendPost(String.format("https://www.googleapis.com/blogger/v3/blogs/%s/posts/", cf.BLOGGER_BLOG_ID),
+        return rq.sendPost(String.format("https://www.googleapis.com/blogger/v3/blogs/%s/posts/", cf.BLOGGER_BLOG_ID),
                 this.retrievingAccessToken(), params);
     }
 
     private synchronized String retrievingAccessToken() throws IOException {
-        if(accessToken == null || Long.parseLong(accessToken.get("expires_in").toString())<= System.currentTimeMillis()){
+        if(accessToken == null || Long.parseLong(accessToken.get("expires_in").toString())<= System.currentTimeMillis()/1000L){
             List<NameValuePair> codeRequestParams = new ArrayList<>();
             String refreshToken = cf.GOOGLE_OAUTH_REFRESH_TOKEN;
             codeRequestParams.add(new BasicNameValuePair("client_id","600206105823-o5jfellgek347082t3004n8cgsel6plk.apps.googleusercontent.com"));

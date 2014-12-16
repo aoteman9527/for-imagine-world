@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class Page implements Runnable{
     protected String url;
     protected WebClient webClient;
-    protected BloggerApiClient bloggerApiClient = BloggerApiClient.i();
+    protected final static BloggerApiClient bloggerApiClient = BloggerApiClient.i();
 
     protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>(){
         /**
@@ -79,7 +79,7 @@ public abstract class Page implements Runnable{
     }
 
     public void addingPost(String title,String content) throws IOException {
-        bloggerApiClient.addingPost("THIS I TITLE,","THIS IS CONTENT");
+        String res = bloggerApiClient.addingPost(title,content);
     }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() {
