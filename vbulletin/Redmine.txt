@@ -8,4 +8,6 @@ Alias /forum "/home/tuanle/Documents/IMAGINE-WORLD/vbulletin/v5.0.1"
        Options Indexes FollowSymLinks Includes ExecCGI
        AllowOverride none
        Require all granted
+        LoadModule rewrite_module modules/mod_rewrite.so
+        AllowOverride All
 </Directory>
