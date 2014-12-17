@@ -1,0 +1,6 @@
+1. Setting up Lampp
+2. config /opt/lampp/apache2/conf/httpd.cfg ~ vbullentin setting
+3. Install wordpress
+4. install theme. Twenty Twelve
+5. Add new home page
+6. config email posting. secret
