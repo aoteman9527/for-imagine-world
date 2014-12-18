@@ -1,6 +1,7 @@
 package com.imagine.world.crawler.models;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.apache.commons.mail.EmailException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -48,13 +49,16 @@ public class ChapterPage extends Page {
             stringBuffer.append(reloadImageScript.replace("__URL_CHAPTER__",this.url));
             stringBuffer.append(elements);
             System.out.println("addingPost " + comicChapterName);
-            this.addingPost(String.format("[TRUYEN][%s][%s]", commicName, comicChapterName), stringBuffer.toString());
+//            this.addingPost(String.format("[TRUYEN][%s][%s]", commicName, comicChapterName), stringBuffer.toString());
+            this.sendMail(String.format("[TRUYEN][%s][%s]", commicName, comicChapterName), stringBuffer.toString());
             System.out.println("complete addingPost " + comicChapterName);
             sqliteDAO.insertChapter(page.getUrl().toString(),page.getTitleText());
 
         } catch (IOException e){
             e.printStackTrace();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (EmailException e) {
             e.printStackTrace();
         }
     }

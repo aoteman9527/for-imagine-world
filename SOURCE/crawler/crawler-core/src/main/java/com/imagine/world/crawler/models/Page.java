@@ -2,9 +2,7 @@ package com.imagine.world.crawler.models;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.imagine.world.crawler.dao.SqliteDAO;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 public abstract class Page implements Runnable{
     protected String url;
     protected WebClient webClient;
-    protected final static BloggerApiClient bloggerApiClient = BloggerApiClient.i();
+//    protected final static BloggerApiClient bloggerApiClient = BloggerApiClient.i();
+    protected static final Configuration cfg = Configuration.i();
 
     protected static final BlockingQueue<Runnable> pageQueue = new LinkedBlockingDeque<Runnable>(){
         /**
@@ -66,21 +65,22 @@ public abstract class Page implements Runnable{
     }
 
     public void sendMail(String subject, String message) throws EmailException {
-        HtmlEmail email = new HtmlEmail();
-        email.setHostName(Configuration.i().SMTP_HOST);
-        email.setSmtpPort(Configuration.i().SMTP_PORT);
-        email.setAuthenticator(new DefaultAuthenticator(Configuration.i().SMTP_USERNAME, Configuration.i().SMTP_PASSWORD));
-        email.setSSL(true);
+//        HtmlEmail email = new HtmlEmail();
+        Email email = new SimpleEmail();//Cause wordpress post via e-mail display text as simple
+        email.setHostName(cfg.SMTP_HOST);
+        email.setSmtpPort(cfg.SMTP_PORT);
+        email.setAuthenticator(new DefaultAuthenticator(cfg.SMTP_USERNAME, cfg.SMTP_PASSWORD));
+        email.setSSL(cfg.SMTP_SSL);
         email.setFrom("tuanlhdnl@gmail.com");
         email.setSubject(subject);
         email.setMsg(message);
-        email.addTo(Configuration.i().SECRET_MAIL_2_BLOGGER);
+        email.addTo(cfg.SECRET_MAIL_2_BLOGGER);
         email.send();
     }
 
-    public void addingPost(String title,String content) throws IOException {
-        String res = bloggerApiClient.addingPost(title,content);
-    }
+//    public void addingPost(String title,String content) throws IOException {
+//        String res = bloggerApiClient.addingPost(title,content);
+//    }
 
     public static ThreadPoolExecutor getThreadPoolExecutor() {
         return threadPoolExecutor;

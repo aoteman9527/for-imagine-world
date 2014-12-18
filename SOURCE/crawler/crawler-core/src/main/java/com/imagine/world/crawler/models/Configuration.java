@@ -29,6 +29,7 @@ public class Configuration {
     public final String SECRET_MAIL_2_BLOGGER = pros.getProperty("email.secret.email2blogger");
     public final String SMTP_HOST = pros.getProperty("email.smtp.host");
     public final int SMTP_PORT = Integer.parseInt(pros.getProperty("email.smtp.port"));
+    public final boolean SMTP_SSL = Boolean.parseBoolean(pros.getProperty("email.smtp.ssl"));
     public final String SMTP_USERNAME=pros.getProperty("email.smtp.username");
     public final String SMTP_PASSWORD=pros.getProperty("email.smtp.password");
 
