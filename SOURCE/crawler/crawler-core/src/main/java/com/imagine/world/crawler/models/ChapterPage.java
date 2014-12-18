@@ -36,9 +36,9 @@ public class ChapterPage extends Page {
             System.out.println("-----------------------------");
             StringBuffer stringBuffer = new StringBuffer();
 //            stringBuffer.append(String.format("<input type=\"hidden\" name=\"source\" value=\"%s\">",this.url));
-            String reloadImageScript= "<style type=\"text/css\"> #originalWebsite{position:absolute; z-index:-11; top:0px; left:0px;}</style>\n" +
+            String reloadImageScript= "<style type=\"text/css\"> #originalWebsite{position:absolute; z-index:-11; top:10%; visibility: hidden; }</style>\n" +
                     "\n" +
-                    "<iframe id=\"originalWebsite\" name=\"originalWebsite\" src=\"http://truyentranhtuan.com\" frameborder=\"0\" scrolling=\"yes\" height=\"100%\" width=\"100%\"></iframe>\n" +
+                    "<iframe id=\"originalWebsite\" name=\"originalWebsite\" src=\"http://truyentranhtuan.com\" frameborder=\"0\" scrolling=\"yes\" height=\"100%\" width=\"10%\"></iframe>\n" +
                     "<script>\n" +
                     "document.getElementsByName('originalWebsite')[0].onload = function() {\n" +
                     "     frames[0].location = '__URL_CHAPTER__'\n" +
