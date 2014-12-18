@@ -3,6 +3,8 @@ Copy simbol link to lampp
 enable disable debug mode
 vbulletin/v5.0.1/upload/config.php
 
+Chu' y cai nay 
+<IfModule unixd_module> => change user thanh owner
 Alias /forum "/home/tuanle/Documents/IMAGINE-WORLD/vbulletin/v5.0.1"
 <Directory />
        Options Indexes FollowSymLinks Includes ExecCGI
@@ -11,3 +13,5 @@ Alias /forum "/home/tuanle/Documents/IMAGINE-WORLD/vbulletin/v5.0.1"
         LoadModule rewrite_module modules/mod_rewrite.so
         AllowOverride All
 </Directory>
+
+    Require all granted different with all alow
