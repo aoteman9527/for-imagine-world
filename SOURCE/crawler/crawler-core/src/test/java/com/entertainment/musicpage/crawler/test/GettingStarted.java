@@ -60,7 +60,7 @@ public class GettingStarted extends TestCase {
 
     public void testSendEmail() throws EmailException {
         HomePage homePage = new HomePage("http://truyentranhtuan.com/");
-        homePage.sendMail("TTTTT Cặp Bài Trùng > Chương 5 Cặp Bài Trùng > Chương 5","<img class=\"irc_mi\" style=\"margin-top: 0px;\" src=\"http://www.mupload.nl/img/dfyjmy6ec.jpg\" width=\"524\" height=\"393\">");
+        homePage.sendMail(" Cặp Bài Trùng  Chương 5 Cặp Bài Trùng  Chương 5 4244354","<img class=\"irc_mi\" style=\"margin-top: 0px;\" src=\"http://www.mupload.nl/img/dfyjmy6ec.jpg\" width=\"524\" height=\"393\">");
     }
 
     public void testSqlite(){
