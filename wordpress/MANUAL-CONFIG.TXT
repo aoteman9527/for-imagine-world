@@ -1,5 +1,6 @@
 PLEASE USING A SNAPSHOT DATABASE 
-wordpress.sql
+wordpress.sql crawler.db
+
 
 1. Setting up Lampp
 2. make an symbolic link to /opt/lampp/htdocs 
