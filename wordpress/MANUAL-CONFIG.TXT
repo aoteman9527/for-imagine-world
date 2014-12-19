@@ -1,5 +1,6 @@
 1. Setting up Lampp
-2. config /opt/lampp/apache2/conf/httpd.cfg ~ vbullentin setting
+2. make an symbolic link to /opt/lampp/htdocs 
+2.1 set other group can access your  path to /yourWordPress/ 
 3. Install wordpress
 4. install theme. alpha trinity
 5. Add new home page
