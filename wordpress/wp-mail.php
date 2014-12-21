@@ -29,7 +29,6 @@ if ( !defined('WP_MAIL_INTERVAL') )
 	define('WP_MAIL_INTERVAL', 300); // 5 minutes
 
 $last_checked = get_transient('mailserver_last_checked');
-$last_checked = false;
 
 if ( $last_checked )
 	wp_die(__('Slow down cowboy, no need to check for new mails so often!'));
@@ -68,10 +67,7 @@ for ( $i = 1; $i <= $count; $i++ ) {
 	$post_author = 1;
 	$author_found = false;
 	$dmonths = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-	$indexLine=0;
-
 	foreach ($message as $line) {
-		$indexLine++;
 		// Body signal.
 		if ( strlen($line) < 3 )
 			$bodysignal = true;
@@ -102,12 +98,6 @@ for ( $i = 1; $i <= $count; $i++ ) {
 			if (preg_match('/Subject: /i', $line)) {
 				$subject = trim($line);
 				$subject = substr($subject, 9, strlen($subject) - 9);
-				while(preg_match('/=\?/i',$message[$indexLine])){
-					echo preg_match("/=\?/i",$message[$indexLine]);
-					$subject = $subject.$message[$indexLine];
-					$indexLine++;
-				}
-				
 				// Captures any text in the subject before $phone_delim as the subject
 				if ( function_exists('iconv_mime_decode') ) {
 					$subject = iconv_mime_decode($subject, 2, get_option('blog_charset'));
