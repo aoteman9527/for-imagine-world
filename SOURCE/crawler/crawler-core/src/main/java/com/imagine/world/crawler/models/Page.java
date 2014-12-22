@@ -33,7 +33,7 @@ public abstract class Page implements Runnable{
             return true;
         }
     };
-    protected static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(Configuration.i().corePoolSize,Configuration.i().maxPoolSize,Configuration.i().keepAliveTime,
+    protected static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(cfg.corePoolSize,cfg.maxPoolSize,cfg.keepAliveTime,
             TimeUnit.SECONDS, pageQueue);;
 
     /**

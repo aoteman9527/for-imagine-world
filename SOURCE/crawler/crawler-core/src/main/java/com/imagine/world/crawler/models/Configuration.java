@@ -19,8 +19,8 @@ public class Configuration {
     /**
      * ThreadExecutor properties
      */
-    public int corePoolSize = 4;
     public int maxPoolSize = Integer.parseInt(pros.getProperty("thread.max.pool.size"));
+    public int corePoolSize = maxPoolSize; //create a fixed thread pool size
     public long keepAliveTime = 2;//minutes
 
     /**
