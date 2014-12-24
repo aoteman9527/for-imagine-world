@@ -8,7 +8,6 @@
     <meta http-equiv=”Content-Type” content=”<?php bloginfo(‘html_type’); ?>; charset=<?php bloginfo(‘charset’); ?>” />
     <meta name=”keywords” content=”<?php $posttags = get_the_tags(); if ($posttags) { foreach($posttags as $tag) { $taglist[] = $tag->name; } echo implode(“, “, $taglist); } ?>” />
 <meta name="description" content="<?php $post = get_post(get_the_ID()); echo strip_tags(substr($post->post_title,0 , 200)); ?>">
-    <meta name=”robots” content=”INDEX,FOLLOW” />
     <link rel="profile" href="http://gmpg.org/xfn/11" />        
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />     
     <!--[if lt IE 9]>
