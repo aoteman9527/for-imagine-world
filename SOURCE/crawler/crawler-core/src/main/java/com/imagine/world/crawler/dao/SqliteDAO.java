@@ -54,7 +54,7 @@ public class SqliteDAO {
         Statement stmt = c.createStatement();
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT link FROM CHAPTERS ");
-        sb.append(String.format(" WHERE link='%s' ", link));
+        sb.append(String.format(" WHERE link like '%s' ", link));
         ResultSet rs = stmt.executeQuery(sb.toString());
         List<String> linkList = new ArrayList<String>(1);
         while (rs.next()) {
