@@ -10,6 +10,7 @@ import com.imagine.world.crawler.models.HomePage;
 import com.imagine.world.crawler.models.Page;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
@@ -56,6 +57,21 @@ public class GettingStarted extends TestCase {
         }
 
         System.out.println("Complete work view page");
+    }
+
+    public void testCrawlChapter(){
+        String reloadImageScript= "<style type=\"text/css\"> #originalWebsite{position:absolute; z-index:-11; top:10%; visibility: hidden; }</style>\n" +
+                "\n" +
+                "<iframe id=\"originalWebsite\" name=\"originalWebsite\" src=\"http://truyentranhtuan.com\" frameborder=\"0\" scrolling=\"yes\" height=\"100%\" width=\"10%\"></iframe>\n" +
+                "<script>\n" +
+                "document.getElementsByName('originalWebsite')[0].onload = function() {\n" +
+                "     frames[0].location = '__URL_CHAPTER__'\n" +
+                "     document.getElementsByName('originalWebsite')[0].onload = null;\n" +
+                "}\n" +
+                "var id=setInterval(function(){jQuery(\"img\").each(function(index){img=jQuery(this); var src=img.attr('src'); img.attr('src', src);})},3000)\n" +
+                "</script>";
+        String s= StringEscapeUtils.unescapeHtml4(reloadImageScript);
+        System.out.println(s);
     }
 
     public void testSendEmail() throws EmailException {
