@@ -12,14 +12,9 @@
 <tr><td rowspan="1" colspan="3">add-post-to-category</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/wp-admin/edit.php?s=Toriko&amp;post_status=all&amp;post_type=post&amp;action=-1&amp;m=0&amp;cat=0&amp;seo_filter&amp;paged=1&amp;mode=list&amp;action2=-1</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=post-search-input</td>
-	<td>Tate no Yuusha no Nariagari</td>
+	<td>Fairy Tail</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -44,14 +39,13 @@
 <tr>
 	<td>type</td>
 	<td>name=tax_input[post_tag]</td>
-	<td>Tate no Yuusha no Nariagari</td>
+	<td>Fairy Tail</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//label[contains(.,' Tate no Yuusha no Nariagari')]</td>
+	<td>//label[contains(.,'Fairy Tail')]</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
