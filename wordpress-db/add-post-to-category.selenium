@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://chiasetruyentranh.info/wp-admin/edit.php?s=Toukyou+Kushu&post_status=all&post_type=post&action=-1&m=0&cat=0&seo_filter&paged=1&mode=list&post_category%5B0%5D=0&post_category%5B1%5D=55&tax_input%5Bpost_tag%5D=Toukyou+Kushu&post_author=-1&comment_status&ping_status&_status=-1&sticky=-1&bulk_edit=Update&post_view=list&screen=edit-post&post%5B0%5D=1307&post%5B1%5D=1308&post%5B2%5D=1305&post%5B3%5D=1306&post%5B4%5D=1304&post%5B5%5D=1303&post%5B6%5D=1302&post%5B7%5D=1301&post%5B8%5D=1300&post%5B9%5D=1299&post%5B10%5D=1298&post%5B11%5D=1297&post%5B12%5D=1296&post%5B13%5D=1295&post%5B14%5D=1294&post%5B15%5D=1293&post%5B16%5D=1292&post%5B17%5D=1291&post%5B18%5D=1289&post%5B19%5D=1288&post%5B20%5D=1285&post%5B21%5D=1284&post%5B22%5D=1283&post%5B23%5D=1038&post%5B24%5D=1290&action2=-1" />
+<title>add-post-to-category</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">add-post-to-category</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/wp-admin/edit.php?s=Toriko&amp;post_status=all&amp;post_type=post&amp;action=-1&amp;m=0&amp;cat=0&amp;seo_filter&amp;paged=1&amp;mode=list&amp;action2=-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=post-search-input</td>
+	<td>Tate no Yuusha no Nariagari</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=search-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=bulk-action-selector-top</td>
+	<td>label=Edit</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cb-select-all-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=doaction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=tax_input[post_tag]</td>
+	<td>Tate no Yuusha no Nariagari</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//label[contains(.,' Tate no Yuusha no Nariagari')]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
