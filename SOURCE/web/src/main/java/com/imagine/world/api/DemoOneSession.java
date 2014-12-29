@@ -102,6 +102,20 @@ public class DemoOneSession extends BaseApi {
 
     }
 
+    @RequestMapping(value = "shareSessionTest/save",method = RequestMethod.GET)
+    @ResponseBody
+    public void shareSessionTestSave(
+            HttpServletResponse response
+    ) throws MyException {
+        request.getSession().setAttribute("shareSessionTest","THIS IS A TEXT");
+    }
 
+    @RequestMapping(value = "shareSessionTest/load",method = RequestMethod.GET)
+    @ResponseBody
+    public String shareSessionTestLoad(
+            HttpServletResponse response
+    ) throws MyException {
+        return request.getSession().getAttribute("shareSessionTest").toString();
+    }
 
 }
