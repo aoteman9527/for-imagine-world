@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--<import resource="classpath:my-common-context.xml"/>-->
+
+
+    <!--This bean for upload file max=100000bytes-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <property name="maxUploadSize" value="1000000"/>
+    </bean>
+    <!--this bean for map ViewJsp folder-->
+    <!--<bean id="jspViewResolver"-->
+            <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+
+        <!--<property name="viewClass"-->
+                  <!--value="org.springframework.web.servlet.view.JstlView" />-->
+        <!--<property name="prefix">-->
+            <!--<value>/WEB-INF/classes/templates/</value>-->
+        <!--</property>-->
+        <!--<property name="suffix">-->
+            <!--<value>.jsp</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--The resources for image loading other public access-->
+    <mvc:resources mapping="/images/**" location="classpath:/templates/images/" />
+    <mvc:resources mapping="/js/**" location="classpath:/templates/js" />
+    <mvc:resources mapping="/**" location="classpath:/templates/" />
+    <mvc:annotation-driven />
+
+    <!--Bean for loading properties-->
+    <context:property-placeholder location="classpath:imagine-world-web.properties" ignore-unresolvable="true"></context:property-placeholder>
+    <!--<context:component-scan base-package="com.imagine.world" />-->
+    <context:component-scan base-package="com.imagine.world" scoped-proxy="targetClass" />
+</beans>

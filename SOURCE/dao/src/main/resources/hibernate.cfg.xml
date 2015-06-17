@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="imagine_world">
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/blogs?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8]]></property>
+        <property name="connection.username">letuan</property>
+        <property name="connection.password">sieunhan</property>
+        <!-- JDBC connection pool (use the built-in) -->
+        <!--<property name="connection.pool_size">2</property>-->
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+        <!-- Disable the second-level cache -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!--Connection pool open source refer to https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/session-configuration.html-->
+        <property name="hibernate.c3p0.min_size">2</property>
+        <property name="hibernate.c3p0.max_size">3</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <!--hibernate.c3p0.min_size – Minimum number of JDBC connections in the pool. Hibernate default: 1-->
+        <!--hibernate.c3p0.max_size – Maximum number of JDBC connections in the pool. Hibernate default: 100-->
+        <!--hibernate.c3p0.timeout – When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.-->
+        <!--hibernate.c3p0.max_statements – Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable.-->
+        <!--hibernate.c3p0.idle_test_period – idle time in seconds before a connection is automatically validated. Hibernate default: 0-->
+        <!-- bean mapper -->
+        <mapping class="com.imagine.world.models.TextEntity"/>
+        <mapping class="com.imagine.world.models.MyorderEntity"/>
+        <mapping class="com.imagine.world.models.MyshoppingcartEntity"/>
+        <mapping class="com.imagine.world.models.MytagEntity"/>
+        <mapping class="com.imagine.world.models.MyproductEntity"/>
+        <mapping class="com.imagine.world.models.UsersEntity"/>
+        <mapping class="com.imagine.world.models.PhpbbUsersEntity"/>
+        <mapping class="com.imagine.world.models.SessionsEntity"/>
+        <mapping class="com.imagine.world.models.TopicsEntity"/>
+        <mapping class="com.imagine.world.models.ForumsEntity"/>
+        <mapping class="com.imagine.world.models.PostsEntity"/>
+        <!--<property name="hbm2ddl.auto">update</property>-->
+
+        <!--Use auto commit mode, it will not need begin and commit transaction-->
+        <!--<property name="connection.autocommit">true</property>-->
+
+    </session-factory>
+
+</hibernate-configuration>
