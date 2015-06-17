@@ -1,2 +1,0 @@
-[b],[b]...[/b], [b] bold text [/b]
-[u],[u]...[/u], [u] underlined text [/u]
